@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1> 代理  Proxy </h1> 
+
+<script>
+let obj = {
+    name: 'Tom',
+    age: 24
+}
+
+//处理器
+let handle = {
+    get: function(target, key ){
+        console.log('正在取值');
+        return target[key];
+    },
+    set: function(target,key ,val){
+        console.log('正在赋值....',key);
+        target[key] = val
+    }
+}
+
+let zhangsan = new Proxy(obj , handle)
+//console.log( zhangsan.name );
+//zhangsan.name = '德玛'
+
+console.log( obj.name );
+
+
+</script>
+
+</body>
+</html>

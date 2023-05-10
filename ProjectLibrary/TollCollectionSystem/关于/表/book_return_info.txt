@@ -1,0 +1,9 @@
+create table if not exists book_return_info(
+bid varchar(10) not null comment'图书编号',
+bname varchar(10) comment'图书名称',
+rid varchar(10) not null comment'读者编号',
+rname varchar(10) comment'读者姓名',
+loandate date not null comment'借出日期',
+duedate date not null comment'应还日期',
+returndate date not null comment'归还日期'
+)charset=utf8 comment'还书信息表';

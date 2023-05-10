@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<script type="text/javascript">
+    function test() {
+        var array = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20];
+        var pageSize = 5;
+        var pageIndex = 1;
+        var data = array.slice(pageSize * (pageIndex - 1),pageSize * pageIndex);
+        for (let i = 0; i < data.length;i++) {
+
+        }
+    }
+</script>
+<body>
+    <table id="tbl">
+        <tr>
+            <td>1</td>
+        </tr>
+        <tr>
+            <td>2</td>
+        </tr>
+        <tr>
+            <td>3</td>
+        </tr>
+        <tr>
+            <td>4</td>
+        </tr>
+        <tr>
+            <td>5</td>
+        </tr>
+    </table>
+    <a>上一页</a>&nbsp;&nbsp;跳到<input type="text" id="pageNumber">页<input type="button" value="go">&nbsp;&nbsp;<a>下一页</a>
+</body>
+</html>

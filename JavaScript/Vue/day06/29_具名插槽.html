@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <script src="../js/vue.js"></script>
+    <title>Document</title>
+    <style>
+     header{ background-color: pink; }
+     footer{ background-color: yellow;}
+    </style> 
+</head>
+<body>
+    <h1> 具名插槽, 就是带名字的插槽 </h1>
+    <div id="app">
+        <base-layout>
+            <!-- 为这两个p标签寻找名为header的插槽 -->
+           <template slot="header">
+                <p>你好中国</p>
+                <p>你好俄罗斯</p>
+           </template>
+           <!-- 默认是无名插槽 -->
+           <h1> 这是默认插槽</h1>
+           <template slot="footer">
+            <p>你好小日本</p>
+           </template>      
+        </base-layout> 
+    </div>
+</body>
+<script>
+//子
+Vue.component('base-layout', {
+    template:`<div>
+                <header>
+                    <!-- 为这个插槽取名为header -->
+                    <slot name='header'></slot>
+                </header>
+                <main>
+                    <!-- 默认的无名插槽 -->
+                    <slot></slot>
+                </main>
+                <footer>
+                    <slot name='footer'></slot>
+                </footer>  
+        </div>`
+}); 
+
+var vm = new Vue({
+    el: "#app"
+});
+</script>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="../js/vue.js"></script>
+	</head>
+	<body>
+		<div id="app">
+			<hello></hello>
+
+            <hello-Tom></hello-Tom>
+
+		</div>
+	</body>
+	<script>
+        /** 组件是可复用的 Vue 实例，且带有一个名字( hello )
+        注意: 1.data是个函数, 且返回{}
+        2. 模板template必须有根元素
+        3.模板最好使用模板字符串
+        */
+        
+        //全局注册组件
+        Vue.component('hello',{
+            data : function(){
+                return {
+                    msg : 'chatGPT',
+                    n : 0
+                }
+            },
+            template : `
+            <div>
+                <h1>组件测试 -- {{msg}}</h1>
+                <button @click='add()'>按钮{{n}}</button>
+            </div>
+            `,
+            methods : {
+                add(){
+                    this.n++
+                }
+            }
+
+        });
+        
+        //局部注册组件
+        var helloTom = {
+            data : function(){
+                return {
+                    msg : 'TOM'
+                }
+            },
+            template : `<h1>我是{{ msg }}</h1>`
+
+            
+        }
+
+		var vm = new Vue({
+			el : "#app", 
+			data : {
+				
+			},
+			methods : {
+				
+			},
+            //局部组件区
+            components : {
+                //组件名 : 变量名 (同名时可简写成一个组件名) 
+                // 'hello-Tom' : helloTom 
+                helloTom
+            }
+		});
+	</script>
+</html>

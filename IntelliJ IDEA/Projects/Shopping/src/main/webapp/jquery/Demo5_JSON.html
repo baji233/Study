@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+  <script src="../JQuery-1.11.1/jquery-1.11.1.min.js"></script>
+  <script type="text/javascript">
+    function showJSON() {
+      let js=JSON.parse('{"a":"Hello","b":"JS"}'); //json-->js
+      alert(js);
+      let json=JSON.stringify({'x':'Hey','y':'JSON'}); //js-->json
+      alert(json);
+    }
+
+    //jquery/Demo5_JSON.html
+    $(function () {
+      $("#btn1").click(function () {
+        $.ajax({
+          url: "jquery",
+          type: "get",
+          dataType: "json",
+            success: function (responseTxt){
+              let obj=JSON.parse(responseTxt);
+              $("#name").val(obj.name);
+              $("#age").val(obj.age);
+              $("#sex").val(obj.sex);
+
+              for(let i=0;i<responseTxt;i++){
+                  let str=responseTxt[i].name+','+responseTxt[i].age+','+responseTxt[i].sex;
+                  alert(JSON.stringify(str));
+              }
+          }
+        });
+      });
+    });
+
+  </script>
+    </head>
+<body>
+<div>
+    姓名：<input id="name" type="text"/></br>
+    年龄：<input id="age" type="text"/></br>
+    性别：<input id="sex" type="text"/></br>
+    <button id="btn1">^_^</button>
+</div>
+
+<button onclick="showJSON()">ok</button>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="../js/vue.js"></script>
+	</head>
+	<body>
+		<div id="app">
+			<!-- 双向绑定的值,会匹配单选框或者复选框内的值 -->
+			姓名 : <input type="text" v-model="name" /></br>
+			性别 : <input type="radio" v-model="sex" value="boy" />
+			<input type="radio" v-model="sex" value="girl" /></br>
+
+			爱好 : <input type="checkbox" v-model="hobby" value="book" />看书
+			<input type="checkbox" v-model="hobby" value="run" />跑步
+			<input type="checkbox" v-model="hobby" value="music" />音乐
+
+			职业 : <select v-model="job">
+				<option value="0">请选择职业...</option>
+				<option value="1">教师</option>
+				<option value="2">律师</option>
+				<option value="3">工程师</option>
+			</select></br>
+			
+			爱好 : <textarea v-model="info" cols="30" rows="10"/></textarea>
+			<button>注册</button>
+			
+		</div>
+	</body>
+	<script>
+		var vm = new Vue({
+			el: "#app",
+			data: {
+				name: 'temo',
+				sex: 'girl',
+				hobby: ['run', 'music'],
+				job: 1,
+				info : '身高185',
+				
+			},
+			methods: {
+
+			}
+		});
+	</script>
+</html>

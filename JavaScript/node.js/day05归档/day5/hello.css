@@ -1,0 +1,14 @@
+#box {
+  width: 200px;
+  height: 300px;
+  background-color: red;
+}
+header {
+  border: 1px solid blue;
+}
+header .logo {
+  background-color: yellow;
+}
+header .nav {
+  background-color: skyblue;
+}

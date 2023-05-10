@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 与java接口类建立映射 -->
+<mapper namespace="com.jiuyun.mapper.StudentMapper">
+    <!-- 匹配接口中的查询方法，id要与方法名相同，并指定返回类型 -->
+    <select id="selectAll" resultType="student">
+        select * from t_student
+    </select>
+</mapper>

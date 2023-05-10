@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title></title>
+    <script src="js/mui.min.js"></script>
+    <link href="css/mui.min.css" rel="stylesheet"/>
+    
+</head>
+<body>
+	<div id="slider" class="mui-slider" >
+	  <div class="mui-slider-group mui-slider-loop">
+		<!-- 额外增加的一个节点(循环轮播：第一个节点是最后一张轮播) -->
+		<div class="mui-slider-item mui-slider-item-duplicate">
+		  <a href="#">
+			<img src="https://img2.baidu.com/it/u=4272098107,3268821579&fm=253&fmt=auto&app=120&f=GIF?w=400&h=300">
+		  </a>
+		</div>
+		<!-- 第一张 -->
+		<div class="mui-slider-item">
+		  <a href="#">
+			<img src="https://img2.baidu.com/it/u=1215299625,863260544&fm=253&fmt=auto&app=120&f=JPEG?w=400&h=300">
+		  </a>
+		</div>
+		<!-- 第二张 -->
+		<div class="mui-slider-item">
+		  <a href="#">
+			<img src="https://img-qn.51miz.com/Element/00/81/22/11/6b4b2ec4_E812211_16ce1ab6.jpg">
+		  </a>
+		</div>
+		<!-- 第三张 -->
+		<div class="mui-slider-item">
+		  <a href="#">
+			<img src="https://hbimg.b0.upaiyun.com/cdc78278b28f1ec5d85ea3618651d01be2d0f36724525-rQMlnr_fw658">
+		  </a>
+		</div>
+		<!-- 第四张 -->
+		<div class="mui-slider-item">
+		  <a href="#">
+			<img src="http:\/\/placehold.it\/400x300">
+		  </a>
+		</div>
+		<!-- 额外增加的一个节点(循环轮播：最后一个节点是第一张轮播) -->
+		<div class="mui-slider-item mui-slider-item-duplicate">
+		  <a href="#">
+			<img src="http:\/\/placehold.it\/400x300">
+		  </a>
+		</div>
+	  </div>
+	  <div class="mui-slider-indicator">
+		<div class="mui-indicator mui-active"></div>
+		<div class="mui-indicator"></div>
+		<div class="mui-indicator"></div>
+		<div class="mui-indicator"></div>
+	  </div>
+	</div>
+	
+	<ul class="mui-table-view" id="news">
+		<li class="mui-table-view-cell mui-media" v-for="d in datas">
+			<a href="javascript:;">
+				<img class="mui-media-object mui-pull-left" v-bind:src="d.thumbnail_pic_s">
+				<div class="mui-media-body">
+					{{d.province}}
+					<p class="mui-ellipsis"></p>
+				</div>
+			</a>
+		</li>
+		
+	</ul>
+</body>
+<script src="js/vue.js"></script>
+<script type="text/javascript" charset="utf-8">
+      	mui.init();
+		
+		const { createApp } = Vue
+		
+		var vue=createApp({
+			data(){
+				return {
+					page:1,
+					page_size:6,
+					datas:[]
+				}
+			},beforeMount:function() {
+				var _this=this;
+				//ajax..通过app发送的
+				mui.ajax('http://v.juhe.cn/historyWeather/province',{
+					data:{
+						key:'70e1c44f026e800be627bfec126eeeca'
+					},
+					dataType:'json',//服务器返回json格式数据
+					type:'post',//HTTP请求类型
+					timeout:10000,//超时时间设置为10秒；
+					success:function(item){
+						console.info(item.result);
+						_this.datas=item.result;
+					},
+					error:function(xhr,type,errorThrown){
+						
+					}
+				});
+			}
+		}).mount("#news");
+		
+	
+</script>
+</html>

@@ -1,0 +1,39 @@
+官网: https://nodejs.dev/en/learn/
+
+打开cmd
+
+检查版本
+node -v
+
+包管理器
+npm -v
+
+查看包存放位置
+npm root -g
+
+设置包新位置
+npm config set prefix "D:\...\node_modules"
+
+国内的包资源位置 
+查看 npm config get registry
+
+再加个环境变量
+PATH = 新增 C:\Users\29490\AppData\Roaming\npm\node_modules
+新增 NODE_PATH = C:\Users\29490\AppData\Roaming\npm\node_modules
+
+修改
+npm config set registry https://registry.npmmirror.com
+旧的淘宝镜像仓库：
+https://registry.npm.taobao.org
+
+#测试 -g表示是全局安装
+npm install -g express 
+npm i -g express 
+
+卸载
+npm uninstall -g jquery  
+
+运行js文件,进入项目目录下的cmd, 输入指令在服务端来运行你的hello.js文件 => node hello.js 
+
+关闭服务端
+双击CTRL+C

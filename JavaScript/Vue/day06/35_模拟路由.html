@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../js/vue.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <h1> 模拟路由 </h1>
+    <div id="app">
+        <a href="#/zhuye">主页</a> 
+        <a href="#/keji">科技</a> 
+
+        <!-- 动态替换 -->
+        <component :is="comName"></component>
+    </div>
+</body>
+<script>
+// 四个组件
+var zhuye = {
+    template:'<h1>主页内容</h1>'
+};
+var keji = {
+    template:'<h1>科技板块内容</h1>'
+};
+
+var vm = new Vue({
+    el: "#app",
+    data:{
+        comName: 'keji'
+    },
+    //局部注册
+    components:{
+        zhuye, keji
+    }
+});
+
+// 地址栏 hash值变化
+window.onhashchange = function(){
+    //切割链接中的组件名
+    let name =location.hash.substring(2)
+    //动态替换
+    vm.comName = name
+}
+
+</script>
+</html>

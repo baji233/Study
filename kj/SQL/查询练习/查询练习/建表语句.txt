@@ -1,0 +1,170 @@
+-- Create table
+create table CLASSINFO
+(
+  classid     NUMBER not null,
+  classnumber VARCHAR2(20) not null,
+  cteacherid  NUMBER not null,
+  classgrade  VARCHAR2(2) not null
+)
+tablespace USERS
+  pctfree 10
+  initrans 1
+  maxtrans 255
+  storage
+  (
+    initial 64K
+    next 1M
+    minextents 1
+    maxextents unlimited
+  );
+-- Create/Recreate primary, unique and foreign key constraints 
+alter table CLASSINFO
+  add constraint PK_CLASSID primary key (CLASSID)
+  using index 
+  tablespace USERS
+  pctfree 10
+  initrans 2
+  maxtrans 255
+  storage
+  (
+    initial 64K
+    next 1M
+    minextents 1
+    maxextents unlimited
+  );
+-- Create/Recreate check constraints 
+alter table CLASSINFO
+  add constraint CK_CLASSGRADE
+  check (ClassGrade in('S1','S2','Y2'));
+
+-- Create table
+create table STUDENTEXAM
+(
+  examid      NUMBER not null,
+  examnumber  VARCHAR2(32) not null,
+  estuid      NUMBER not null,
+  examsubject VARCHAR2(20) not null,
+  examresult  NUMBER
+)
+tablespace USERS
+  pctfree 10
+  initrans 1
+  maxtrans 255
+  storage
+  (
+    initial 64K
+    next 1M
+    minextents 1
+    maxextents unlimited
+  );
+-- Create/Recreate primary, unique and foreign key constraints 
+alter table STUDENTEXAM
+  add constraint PK_EXAMID primary key (EXAMID)
+  using index 
+  tablespace USERS
+  pctfree 10
+  initrans 2
+  maxtrans 255
+  storage
+  (
+    initial 64K
+    next 1M
+    minextents 1
+    maxextents unlimited
+  );
+-- Create/Recreate check constraints 
+alter table STUDENTEXAM
+  add constraint CK_EXAMRESULT
+  check (EXAMRESULT>=0 and EXAMRESULT<=100);
+
+
+-- Create table
+create table STUDENTINFO
+(
+  stuid       NUMBER not null,
+  stunumber   VARCHAR2(10) not null,
+  stuname     VARCHAR2(32) not null,
+  stuage      NUMBER,
+  stusex      VARCHAR2(2) default '男' not null,
+  stucard     VARCHAR2(20),
+  stujointime DATE not null,
+  stuaddress  VARCHAR2(50),
+  sclassid    NUMBER
+)
+tablespace USERS
+  pctfree 10
+  initrans 1
+  maxtrans 255
+  storage
+  (
+    initial 64K
+    next 1M
+    minextents 1
+    maxextents unlimited
+  );
+-- Create/Recreate primary, unique and foreign key constraints 
+alter table STUDENTINFO
+  add constraint PK_STUID primary key (STUID)
+  using index 
+  tablespace USERS
+  pctfree 10
+  initrans 2
+  maxtrans 255
+  storage
+  (
+    initial 64K
+    next 1M
+    minextents 1
+    maxextents unlimited
+  );
+-- Create/Recreate check constraints 
+alter table STUDENTINFO
+  add constraint CK_STUAGE
+  check (StuAge>=16 and StuAge<=35);
+alter table STUDENTINFO
+  add constraint CK_STUSEX
+  check (StuSex='男' or StuSex='女');
+
+
+-- Create table
+create table TEACHERINFO
+(
+  teacherid    NUMBER not null,
+  teachername  VARCHAR2(20) not null,
+  teachertel   VARCHAR2(20),
+  teacheremail VARCHAR2(20)
+)
+tablespace USERS
+  pctfree 10
+  initrans 1
+  maxtrans 255
+  storage
+  (
+    initial 64K
+    next 1M
+    minextents 1
+    maxextents unlimited
+  );
+-- Create/Recreate primary, unique and foreign key constraints 
+alter table TEACHERINFO
+  add constraint PK_TEACHERID primary key (TEACHERID)
+  using index 
+  tablespace USERS
+  pctfree 10
+  initrans 2
+  maxtrans 255
+  storage
+  (
+    initial 64K
+    next 1M
+    minextents 1
+    maxextents unlimited
+  );
+-- Create/Recreate check constraints 
+alter table TEACHERINFO
+  add constraint CK_TEACHEREMAIL
+  check (TeacherEmail like '%@%');
+
+
+
+

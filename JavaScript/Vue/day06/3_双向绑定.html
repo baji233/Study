@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="../js/vue.js"></script>
+	</head>
+	<body>
+		<div id="app">
+			<h2>双向绑定 {{info}}</h2>
+			<!-- 双向绑定只能用在可以修改数据的标签上 -->
+			<input type="text"/ v-model="info">
+			
+			<h2>单向绑定 {{info}}</h2>
+			<input type="text"/ v-bind:value="info">
+		
+		    <h2>练习</h2>
+			<p v-bind:price="price01">华为手机</p>
+			<!-- v-bind:prive可简写为:price -->
+			<p :price="price02">华为手机</p>
+			
+		</div>
+	</body>
+	<script>
+		var vm = new Vue({
+			el : "#app",
+			data : {
+				info : "知行合一",
+				price01 : 5000,
+				price02 : 8000
+				
+			}
+		});
+	</script>
+</html>

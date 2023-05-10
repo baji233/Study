@@ -1,0 +1,76 @@
+<!DOCTYPE web-app PUBLIC
+ "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+ "http://java.sun.com/dtd/web-app_2_3.dtd" >
+
+<web-app>
+  <display-name>Archetype Created Web Application</display-name>
+
+  <servlet>
+    <servlet-name>UserServlet</servlet-name>
+    <servlet-class>com.jiuyun.servlet.UserServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>ProductServlet</servlet-name>
+    <servlet-class>com.jiuyun.servlet.ProductServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>ShoppingCarServlet</servlet-name>
+    <servlet-class>com.jiuyun.servlet.ShoppingCarServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>OrderServlet</servlet-name>
+    <servlet-class>com.jiuyun.servlet.OrderServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>HelloServlet</servlet-name>
+    <servlet-class>com.jiuyun.servlet.HelloServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>AJAXServlet</servlet-name>
+    <servlet-class>com.test.AJAXServlet</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>AJAXServlet</servlet-name>
+    <url-pattern>/jquery/*</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>HelloServlet</servlet-name>
+    <url-pattern>/hello/*</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>UserServlet</servlet-name>
+    <url-pattern>/User/*</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>ProductServlet</servlet-name>
+    <url-pattern>/Product/*</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>ShoppingCarServlet</servlet-name>
+    <url-pattern>/ShoppingCar/*</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>OrderServlet</servlet-name>
+    <url-pattern>/Order/*</url-pattern>
+  </servlet-mapping>
+  
+  <welcome-file-list>
+    <welcome-file>user/userLoginPage.jsp</welcome-file>
+  </welcome-file-list>
+</web-app>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

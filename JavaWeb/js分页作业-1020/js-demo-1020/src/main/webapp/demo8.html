@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<script type="text/javascript">
+    function test() {
+        setTimeout("openPage()", 10000);
+        setInterval("changeSec()", 1000);
+    }
+
+    function openPage() {
+        window.location = "https://www.baidu.com";
+    }
+    var num = 10;
+    function changeSec() {
+        document.getElementById("sec").innerText = num--;
+    }
+
+    function showTime() {
+        document.getElementById("txtTime").innerText = new Date().toLocaleString();
+    }
+
+    window.onload = function () {
+        setInterval("showTime()", 1000);
+    }
+
+</script>
+<body>
+    <input type="button" value="点我开始" onclick="test()"/>
+    <h1>倒计时：<span id="sec">10</span>秒！</h1>
+    <h1 id="txtTime"></h1>
+</body>
+</html>

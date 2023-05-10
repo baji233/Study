@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="../js/vue.js"></script>
+		<script src="../js/jquery.js"></script>
+	</head>
+	<body>
+		<div id="app">
+			<h1>侦听器 : {{full}}</h1>
+			
+			<input type="text" v-model.lazy="name"/>
+			<h1>{{tip}}</h1>
+			
+			<div>笑话URL : {{url}}</div>
+			数量 : <input type="text" v-model="number"/>
+			<p v-for="j in joke">{{j}}</p>
+			
+			
+		</div>
+	</body>
+	<script>
+		var vm = new Vue({
+			el : "#app", 
+			data : {
+				first : 'bill',
+				last : '盖茨',
+				full : '',
+				name : '',
+				tip : '',
+				url : 'https://autumnfish.cn./api/joke/list?num=',
+				number : '',
+				joke : [],
+			},
+			methods : {
+				checkName(v){
+					//模拟定时器
+					setTimeout(() => {
+						if(v == 'admin'){
+							console.log(this);
+							this.tip = '这个名字不可用!';
+						}else{
+							this.tip = '名字可用';
+						}
+					},2000);
+				},
+				selectjoke(v) {
+					//发送Ajax请求查找v条笑话
+					var _url = this.url + this.number +'';
+					console.log(_url);
+					$.ajax({
+						url : _url,
+						success : ret => {
+							console.log(ret);
+							vm.joke = ret.data;
+						}
+					});
+				}
+			},
+			//侦听区 : 来观察和响应Vue实例上的数据变动, 当需要在数据变化时执行异步或开销较大的操作时使用侦听器 (同步使用计算属性)
+			watch: {
+				//方法名是first 表示当this.first发生变化时,就会触发这个侦听方法 (重点是方法名要和变量名相同)
+				first() {
+					console.log('正在运算'); 
+					this.full = this.first +"-"+ this.last;
+				},
+				name(v) {
+					console.log('更新为: '+ v);
+					this.tip = '正在验证...';
+					this.checkName(v); //模拟改名
+				},
+				number(v){
+					console.log('正在寻找' +v+'条笑话...');
+					this.tip = '查找笑话中...';
+					this.selectjoke(v);
+				}
+			},
+		});
+	</script>
+</html>

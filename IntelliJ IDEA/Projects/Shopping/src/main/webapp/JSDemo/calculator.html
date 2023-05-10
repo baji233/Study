@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<script type="text/javascript">
+  //计算器
+  function myCalculator(){
+    let num1 = parseInt(document.myFunc.num1.value);
+    let num2 = parseInt(document.myFunc.num2.value);
+    let ops = document.myFunc.ops.value;
+    if(ops === '+'){
+      document.myFunc.result.value = num1 + num2;
+    }else if(ops === '-'){
+      document.myFunc.result.value = num1 - num2;
+    }else if(ops === '*'){
+      document.myFunc.result.value = num1 * num2;
+    }else if(ops === '/'){
+      document.myFunc.result.value = num1 / num2;
+    }else if(ops === '%'){
+      document.myFunc.result.value = num1 % num2;
+    }
+  }
+
+
+  //改变表每行的颜色
+  function changeColor(){
+    let tbl = document.getElementById('tbl');
+    let trs = tbl.getElementsByTagName('tr');
+    for(let i=0;i<trs.length;i++){
+      if(i % 2 === 0){
+        trs[i].setAttribute("style","background-color: yellow");
+      }else{
+        trs[i].setAttribute("style","background-color: red");
+      }
+    }
+  }
+</script>
+<body>
+<form name="myFunc">
+  <input type="number" name="num1"/>
+  <select name="ops">
+    <option value="+">+</option>
+    <option value="-">-</option>
+    <option value="*">*</option>
+    <option value="/">/</option>
+    <option value="%">%</option>
+  </select>
+  <input type="number" name="num2"/>
+  <input type="button" value="=" onclick="myCalculator()"/>
+  <input type="text" name="result"/>
+</form>
+
+<table id="tbl" border="1px" width="600px" >
+<tr>
+  <td>qwe</td>
+  <td>qew</td>
+  <td>qew</td>
+  <td>qwe</td>
+  <td>qeqw</td>
+</tr>
+  <tr>
+    <td>eqw</td>
+    <td>qwe</td>
+    <td>eqw</td>
+    <td>eqw</td>
+    <td>qewq</td>
+  </tr>
+  <tr>
+    <td>qwe</td>
+    <td>eqw</td>
+    <td>eqwfs</td>
+    <td>dfs</td>
+    <td>fsd</td>
+  </tr>
+  <tr>
+    <td>6</td>
+    <td>5</td>
+    <td>4</td>
+    <td>3</td>
+    <td>2</td>
+  </tr>
+  <tr>
+    <td>1</td>
+    <td>1</td>
+    <td>1</td>
+    <td>1</td>
+    <td>1</td>
+  </tr>
+</table>
+<input type="button" value="变色" onclick="changeColor()"/>
+<input type="button" value="重置" onclick="fun2()"/>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

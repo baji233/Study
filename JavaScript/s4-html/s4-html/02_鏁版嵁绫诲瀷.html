@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>JS 数据类型</h1>
+
+    <p>
+        基本类型（值类型） 、 对象（引用类型）
+        基本类型 6种  string,number,boolean ,null,undefined,Symbol
+        引用类型 3种  object ,function, array
+
+        100十进制  0b1010111二进制 0xab45f十六进制
+
+        1    2   3=1*100 + 2*10 +3*1
+        100  10  1
+
+        2    D  = 2*16 + 13 = 45
+        16   16^0
+
+        10110   = 16+ 4 +2 =22
+       
+    </p>
+
+<script>
+// var a = 'hello world'
+// var b = 0xff;
+// var c = false;
+// var d = null;
+// var e ;
+// var f = Symbol();
+// var f1 = Symbol();
+
+// console.log( f  );
+// console.log( f == f1 );
+
+var a = { 
+    name: 'temo',
+    age: 18
+}
+console.log( a , typeof a );
+
+var b = function(){
+    console.log('我是函数');
+}
+console.log( b , typeof b );
+
+var c =[1,2,3,4,5];
+console.log( c , typeof c );
+
+var d = new Date();
+console.log( d , typeof d );
+</script>
+</body>
+</html>

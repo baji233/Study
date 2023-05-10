@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="app">
+			<h1>{{info}}</h1>
+		</div>
+	</body>
+	<script>		
+		var nm = {
+			el:'#app',
+			data:{
+				info:'test'
+			}
+		}
+		
+		var html = document.querySelector(nm.el).innerHTML;
+		
+		//访问器属性
+		Object.defineProperty(nm.data,'_info',{
+			get:function(val){
+				
+			} ,
+			set:function(val){
+				nm.data.info = val;
+				var div = document.querySelector('#app');
+				var update = div.innerHTML.replace({{info}},val);
+				div.innerHTML = update
+			}
+		})
+	</script>
+</html>

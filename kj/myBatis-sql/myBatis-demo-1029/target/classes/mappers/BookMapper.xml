@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jiuyun.mapper.BookMapper">
+    <resultMap id="defaultMap" type="book">
+        <id property="bookId" column="id"/>
+        <result property="bookName" column="name"/>
+        <result property="type" column="type"/>
+        <result property="remark" column="remark"/>
+        <result property="state" column="state"/>
+        <!-- 一对一关系配置 -->
+        <association property="author" column="author_id" select="selectAuthorById"/>
+    </resultMap>
+
+    <resultMap id="authorMap" type="com.jiuyun.bean.Author">
+        <id property="authorId" column="id"/>
+        <result property="authorName" column="name"/>
+    </resultMap>
+
+    <select id="selectAll" resultMap="defaultMap">
+        select * from t_book
+    </select>
+
+    <select id="selectById" resultMap="defaultMap">
+        select * from t_book where id=#{bookId}
+    </select>
+
+    <select id="selectAuthorById" resultMap="authorMap">
+        select * from t_author where id=#{authorId}
+    </select>
+</mapper>

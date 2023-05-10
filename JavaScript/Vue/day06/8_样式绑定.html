@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="../js/vue.js"></script>
+		<style>
+			.active {
+				border: 10px solid blue;
+				width: 100px;
+				height: 100px;
+			}
+			.error {
+				background-color: orange;
+			}
+			.big {
+				font-size: 20px;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="app">
+			:class使用JSON绑定样式
+			<div :class="{active: k1, error: k1, big: k1}">JSON绑定</div>
+			<button @click="k1 =! k1">k1样式</button>
+			
+			<div :class="sz">数组绑定</div>
+			
+			<div :class="['big', 'error', {active: k1}]">JSON和数组混合绑定</div>
+			
+			<div>练习</div>
+		</div>
+	</body>
+	<script>
+		var vm = new Vue({
+			el : "#app", 
+			data : {
+				k1 : true,
+				k3 : false,
+				sz : ['big','error'],
+				c1 : 'active',
+				c2 : 'error',
+			},
+			methods : {
+				
+			}
+		});
+	</script>
+</html>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="../js/vue.js"></script>
+    <style>
+        .active{
+            border: 10px solid blue;
+            width: 100px;
+            height: 100px;
+        }
+        .error{
+            background-color: green;
+        }
+        .error1{
+            background-color: red;
+        }
+        .error2{
+            background-color: gray;
+        }
+
+        .big{
+            font-size: 20px;
+        }
+
+    <style>
+</head>
+<body>
+    <div id="app">
+        <div :class="{error:k1, active:k1}"> JSON </div>
+        <div :class="['active','error','big']">数组绑定</div>
+        <div :class="['big','error',{active:k3}]">数组加JSON混合</div>
+        <button @click="k1=!k1" >K1的样式<tton>
+
+        <div @click="gai(a1,a2,a3)" :class="['big','active',{error:a1,error1:a2,error2:a3}]">座位</div>
+
+    </div>
+    
+</body>
+<script>
+    var vm = new Vue({
+        el:"#app",
+        data:{
+            k1:true,
+            k3:true,
+            // c1:active,
+            // c2:error,
+            // c3:big
+            a1:true,
+            a2:false,
+            a3:false
+
+        },
+        methods:{
+            gai:function(v1,v2,v3){
+                if(v1==true){
+                    this.a2=true,
+                    this.a1=false
+                }else if(v2==true){
+                    this.a3=true,
+                    this.a2=false
+                }else {
+                    this.a3=false,
+                    this.a1=true
+                }
+            }
+
+        }
+    })
+</script>
+<ml>

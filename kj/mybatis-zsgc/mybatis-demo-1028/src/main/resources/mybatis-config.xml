@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <properties resource="db.properties"></properties>
+    <settings>
+        <!-- 打开驼峰命名法与数据库标准命名映射 -->
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+    </settings>
+    <typeAliases>
+        <!-- 取别名 -->
+<!--        <typeAlias type="com.jiuyun.bean.Student" alias="student"/>-->
+        <package name="com.jiuyun.bean"/>
+    </typeAliases>
+    <environments default="pro">
+        <environment id="test">
+            <!-- 事务管理器 -->
+            <transactionManager type="JDBC"></transactionManager>
+            <!-- 数据源配置，类型为连接池 -->
+            <dataSource type="POOLED">
+                <property name="driver" value="com.mysql.cj.jdbc.Driver"/>
+                <property name="url"
+                          value="jdbc:mysql://127.0.0.1:3306/test?useUnicode=true&amp;characterEncoding=utf8&amp;allowMultiQueries=true&amp;useSSL=false&amp;serverTimezone = GMT&amp;zeroDateTimeBehavior=convertToNull"/>
+                <property name="username" value="root"/>
+                <property name="password" value="root"/>
+            </dataSource>
+        </environment>
+        <environment id="pro">
+            <transactionManager type="JDBC"></transactionManager>
+            <!-- 数据源配置，类型为连接池 -->
+            <dataSource type="POOLED">
+                <property name="driver" value="${driver}"/>
+                <property name="url" value="${url}"/>
+                <property name="username" value="${username}"/>
+                <property name="password" value="${password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+    <mappers>
+        <!-- 映射文件配置 -->
+        <mapper resource="mappers/StudentMapper.xml"/>
+        <mapper resource="mappers/UserMapper.xml"/>
+    </mappers>
+</configuration>

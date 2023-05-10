@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>轮播图管理</title>
+    <script src="../../static/js/vue.js"></script>
+    <link rel="stylesheet" href="../../static/elementui/index.css" />
+    <script src="../../static/elementui/index.js"></script>
+    <link rel="stylesheet" href="../../static/css/style.css">
+    <script src="../../static//js/axios-0.18.0.js"></script>
+    <style>
+        .avatar-uploader .el-upload {
+          border: 1px dashed #d9d9d9;
+          border-radius: 6px;
+          cursor: pointer;
+          position: relative;
+          overflow: hidden;
+        }
+        .avatar-uploader .el-upload:hover {
+          border-color: #409EFF;
+        }
+        .avatar-uploader-icon {
+          font-size: 28px;
+          color: #8c939d;
+          width: 178px;
+          height: 178px;
+          line-height: 178px;
+          text-align: center;
+        }
+        .avatar {
+          width: 178px;
+          height: 178px;
+          display: block;
+        }
+      </style>
+</head>
+<body>
+    <div id="app">
+        <!-- 搜索列表 -->
+        <el-card shadow="never">
+            <div class="lw-box-title">
+                新增 <i class="fa fa-plus"></i>
+            </div>
+            <div>
+                <el-table :data="entity"
+                          style="width: 100%;">
+                    <el-table-column
+                            label="荣誉图片"
+                            width="400">
+                        <template slot-scope="scope">
+                            <div class="lw-image-small" style="height: 190px;width:200px;display: inline-block; vertical-align: middle;">
+                                <el-upload
+                                    class="avatar-uploader"
+                                    action="none"
+                                    :show-file-list="false"
+                                    :auto-upload="false"
+                                    :on-change="checkType">
+                                    <img v-if="imageUrl" :src="imageUrl" class="avatar">
+                                    <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+                                </el-upload>
+                            </div>
+                        </template>
+                    </el-table-column>
+                   
+                    <el-table-column width="100"
+                                     label="操作">
+                        <template slot-scope="scope">
+                            <el-button type="primary" @click="save" style="padding: 5px 10px; border-radius: 0"><i class="fa fa-plus"></i> 新增</el-button>
+                        </template>
+                    </el-table-column>
+                </el-table>
+            </div>
+        </el-card>
+
+        <!-- 表格数据 -->
+        <el-card shadow="never">
+            <div>
+                <el-table
+                        :data="tableData"
+                        style="width: 100%">
+                    <el-table-column
+                            type="index"
+                            width="300"
+                            label="序号">
+                    </el-table-column>
+                    <el-table-column
+                            prop="img"
+                            label="预览"
+                           >
+                        <template slot-scope="scope">
+                            <div class="lw-image-small" style="display: inline-block; vertical-align: middle;">
+                                <img :src="'../../images/carouseldiagram/'+scope.row.img" alt="" @click="displayOpen('../../images/carouseldiagram/'+scope.row.img)">
+                            </div>
+                        </template>
+                    </el-table-column>
+                    <el-table-column
+                            prop="sort"
+                            width="200"
+                            label="操作">
+                        <template slot-scope="scope">
+                            <el-button type="danger" size="mini" @click="handleDelete(scope.row)" style="padding: 2px 4px; border-radius: 0">
+                                <i class="fa fa-trash"></i> 删除
+                            </el-button>
+                        </template>
+                    </el-table-column>
+                </el-table>
+            </div>
+
+            <!-- 分页 -->
+            <div class="lw-fr" style="margin: 10px;">
+                <el-pagination background
+                                layout="total, prev, pager, next, sizes, jumper"
+                                :current-page.sync="page.pageNo"
+                                :page-size.sync="page.pageSize"
+                                :total="page.count"
+                                :page-sizes="[ 3, 20, 30, 40, 50, 100]"
+                                @current-change="searchPage"
+                                @size-change="searchPage">
+                </el-pagination>
+            </div>
+    
+        </el-card>
+
+        <el-dialog :visible.sync="displayVisible">
+            <img style="width: 100%;" :src="displaySrc" alt="">
+        </el-dialog>
+    </div>
+</body>
+<script>
+    var app = new Vue({
+        el:"#app",
+        data() {
+            return {
+                entity: [{
+                }],
+                page: {
+                    pageNo: 1,
+                    pageSize: 3,
+                    count: 10
+                },
+                displaySrc: "",
+                displayVisible: false,
+                tableData:[],
+                imageUrl: "",//添加图片路径
+                imageFile:{},//添加图片文件
+            }
+        },
+        created() {
+            this.getAll();
+        },
+        methods: {
+            getAll(){
+                axios.get("/home/carouseldiagram/"+this.page.pageNo+"/"+this.page.pageSize).then((res)=>{
+                    this.tableData = res.data.data.records;
+                    this.page.count = res.data.data.total
+                })
+            },
+            //分页
+            searchPage(currentPage){
+                this.page.pageNo = currentPage;
+                this.getAll();
+            },
+            //检查用户图片类型
+            checkType(file){
+                const isJPG = file.type === 'image/jpeg';
+                const isLt2M = file.size / 1024 / 1024 < 2;
+
+                if (!isLt2M) {
+                    this.$message.error('上传头像图片大小不能超过 2MB!');
+                }
+                if(isLt2M){
+                    //确定上传图片
+                    this.imageFile = file;
+                    //预览图片,赋予头像url
+                    this.imageUrl = URL.createObjectURL(this.imageFile.raw); 
+                }
+            },
+            //预览
+            displayOpen: function (src) {
+                // console.log(entity);
+                this.displaySrc = src
+                this.displayVisible = true
+            },
+            //图片保存
+            save(){
+                
+                var configs = {
+                    headers:{'Content-Type':'multipart/form-data'}
+                };
+                let formData = new FormData();
+                console.log(this.imageFile)
+                formData.append("imgs",this.imageFile.raw);
+                axios.post("/home/carouseldiagram/",formData,configs).then((res)=>{
+                    if(res.data.flag == true && res.data.data!=null){
+                        this.$message.success("添加成功");
+                    }else{
+                        this.$message.success("添加失败");
+                    }
+                }).finally(()=>{
+                    this.getAll();
+                    this.imageUrl=""
+                })
+            },
+            //点击删除
+            handleDelete(row){
+                this.$confirm("此操作永久删除当前信息，是否继续？","提示",{type:"info"}).then(()=>{
+            
+                    axios.delete("/home/carouseldiagram/"+row.cdid).then((res)=>{
+                        if(res.data.flag==true&&res.data.data!=null){
+                            this.$message.success("删除成功")
+                        }else{
+                            this.$message.error("删除失败")
+                        }
+                    }).finally(()=>{
+                        this.getAll();
+                    })
+                }).catch(()=>{
+                    this.$message.info("取消操作");
+                });
+            },
+        },
+    })
+</script>
+</html>

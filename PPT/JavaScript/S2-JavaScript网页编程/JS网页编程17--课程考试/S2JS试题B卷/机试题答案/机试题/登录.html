@@ -1,0 +1,79 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <meta charset="utf-8" />
+    <script type="text/javascript">
+        //检查用户名
+        function chk1() {
+            var exp1 = /^[A-Za-z0-9_]+$/;
+            var val = document.getElementById("t1").value;
+            if (exp1.test(val)) {
+                document.getElementById("m1").style.display = "inline";
+                document.getElementById("m2").style.display = "none";
+                document.getElementById("t1").onfocus();
+            } else {
+                document.getElementById("m2").style.display = "inline";
+                document.getElementById("m1").style.display = "none";
+                return false;
+            }
+        }
+
+        //检查邮箱
+        function chk2() {
+            var exp1 = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/;
+            var val = document.getElementById("t2").value;
+            if (exp1.test(val)) {
+                document.getElementById("m3").style.display = "inline";
+                document.getElementById("m4").style.display = "none"; 
+            } else {
+                document.getElementById("m4").style.display = "inline";
+                document.getElementById("m3").style.display = "none";
+                return false;
+            }
+        }
+
+        function ganse() {
+            var obj = document.getElementById("b1");
+            obj.className = "bgbtn";
+        }
+        function ganbian() {
+            var obj = document.getElementById("b1");
+            obj.className = "bgbtn2";
+        }
+    </script>
+    <style type="text/css">
+        .bgbtn{
+            background-image:url("images/menu1-1.gif");
+            background-repeat:no-repeat;
+        }
+         .bgbtn2{
+            background-image:none;
+           
+        }
+        img {
+            display: none;
+        }
+
+        input {
+            margin: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <form>
+            <span>用户：</span><input type="text" id="t1" onblur="chk1()" />
+            <img id="m1" src="images/dui.png" />
+            <img id="m2" src="images/cuo.png" />
+            <br />
+            <span>邮箱：</span><input type="text" id="t2" onblur="chk2()" />
+            <img id="m3" src="images/dui.png" />
+            <img id="m4" src="images/cuo.png" />
+            <br />
+            <input   style="margin-left:40px;" type="button"  onmouseover="ganse()" onmouseout="ganbian()" value="登录" id="b1" />
+        </form>
+    </div>
+</body>
+</html>

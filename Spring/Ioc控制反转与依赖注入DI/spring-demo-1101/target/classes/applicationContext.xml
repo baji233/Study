@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"
+        default-init-method="init" default-destroy-method="destroy">
+    <!-- 将StudentDAO交由Spring容器来管理 -->
+    <bean id="studentDAO" class="com.jiuyun.dao.StudentDAO" />
+    <bean id="studentService" class="com.jiuyun.service.impl.StudentServiceImpl">
+        <!-- 依赖注入（DI） -->
+        <property name="studentDAO" ref="studentDAO"/>
+    </bean>
+
+    <bean id="userDAO" class="com.jiuyun.dao.UserDAO"/>
+    <bean id="userService" class="com.jiuyun.service.impl.UserServiceImpl" autowire="byName"/>
+
+</beans>

@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>角色管理列表</title>
+    <script src="../../static/js/vue.js"></script>
+    <link rel="stylesheet" href="../../static/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../../static/elementui/index.css">
+    <link rel="stylesheet" href="../../static/css/style.css">
+    <script src="../../static/elementui/index.js"></script>
+    <script src="../../static//js/axios-0.18.0.js"></script>
+</head>
+<body>
+<div id="app">
+    <el-card shadow="never" style="margin-bottom: 20px;">
+        <div class="lw-box-title">
+            <i class="fa fa-plus"></i> 新增
+        </div>
+        <el-table :data="entity"
+                  style="width: 100%">
+            <el-table-column
+                    prop="rolename"
+                    label="角色名称"
+                    width="400">
+                <template slot-scope="scope">
+                    <el-input size="mini"
+                              v-model="scope.row.rolename">
+                    </el-input>
+                </template>
+            </el-table-column>
+            <el-table-column
+                    prop="info"
+                    label="角色描述">
+                <template slot-scope="scope">
+                    <el-input size="mini"
+                              v-model="scope.row.info">
+                    </el-input>
+                </template>
+            </el-table-column>
+            <el-table-column
+                    prop="sort"
+                    width="200"
+                    label="操作">
+                <template slot-scope="scope">
+                    <el-button type="primary" @click="resetForm" style="padding: 4px 10px; border-radius: 0">
+                        <i class="fa fa-refresh"></i>重置
+                    </el-button>
+                    <el-button type="success" @click="submitForm" style="padding: 4px 10px; border-radius: 0">
+                        <i class="fa fa-check"></i>保存
+                    </el-button>
+                </template>
+            </el-table-column>
+        </el-table>
+    </el-card>
+    <el-card shadow="never">
+        <div class="lw-box-title">列表</div>
+        <el-table
+                :data="tableData"
+                style="width: 100%">
+            <el-table-column
+                    type="index"
+                    width="50"
+                    label="序号">
+            </el-table-column>
+            <el-table-column
+                    prop="rolename"
+                    label="角色名称"
+                    width="400">
+                <template slot-scope="scope">
+                    <el-input size="mini"
+                              v-model="scope.row.rolename">
+                    </el-input>
+                </template>
+            </el-table-column>
+            <el-table-column
+                    prop="info"
+                    label="角色描述">
+                <template slot-scope="scope">
+                    <el-input size="mini"
+                              v-model="scope.row.info">
+                    </el-input>
+                </template>
+            </el-table-column>
+            <el-table-column
+                    prop="sort"
+                    width="200"
+                    label="操作">
+                <template slot-scope="scope">
+                    <el-button type="danger" size="mini" @click="deleteById(scope.row.roleid)" style="padding: 2px 4px; border-radius: 0">
+                        <i class="fa fa-trash"></i> 删除
+                    </el-button>
+                    <el-button type="success" size="mini" style="padding: 2px 4px; border-radius: 0"
+                               @click="enablePower(scope.row.roleid)">
+                        <i class="fa fa-wrench"></i> 授权
+                    </el-button>
+                    <el-button type="primary" size="mini" @click="update(scope.row)"
+                               style="padding: 2px 4px; border-radius: 0">
+                        <i class="fa fa-check"></i> 确定
+                    </el-button>
+                </template>
+            </el-table-column>
+        </el-table>
+    </el-card>
+    <el-dialog title="授权操作" width="30%" :visible.sync="treeVisible" :before-close="handleClose">
+        <!-- 树插件 -->
+        <el-tree
+                ref="tree"
+                :data="treeData"
+                node-key="menuid"
+                :default-expand-all="true"
+                :default-checked-keys="mymenus"
+                show-checkbox
+                :props="treeProp">
+            <span class="custom-tree-node" slot-scope="{ node, data }">
+                <span style="color: #2D8CF0;"><i :class="data.icon"></i> {{ data.name }}</span>
+            </span>
+        </el-tree>
+        <div slot="footer" class="dialog-footer">
+            <el-button type="primary" size="mini" plain @click="powerNo">取 消</el-button>
+            <el-button type="success" size="mini" plain @click="powerOk">确 认</el-button>
+        </div>
+    </el-dialog>
+
+    </el-dialog>
+</div>
+<script>
+    new Vue({
+        el: "#app",
+        data: {
+            mymenus: [],
+            treeProp: {
+                children: 'childList',
+                label: 'name'
+            },
+            treeVisible: false,
+            entity: [{}],
+            //角色数据
+            tableData: [],
+            //权限数据
+            treeData: [],
+            roleid: ''
+        },
+        methods: {
+            //关闭弹框
+            handleClose(){
+                this.treeVisible = false;
+                this.$refs.tree.setCheckedNodes([]);
+            },
+            //点击授权
+            enablePower(id) {
+                this.roleid = id;
+                this.treeVisible = true
+                //根据角色id查询用户权限
+                axios.get("/home/menu/"+id).then((res)=>{
+                    for(let i=0;i<res.data.data.length;i++){
+                        for(var j=0;j<res.data.data[i].childList.length;j++){
+                            if(res.data.data[i].childList[j].parentid > 0){
+                                this.mymenus.push(res.data.data[i].childList[j]);
+                            }
+                        }
+                    }
+                    console.log(this.mymenus)
+                    this.$refs.tree.setCheckedNodes(this.mymenus);
+                    this.mymenus = []
+                })
+            },
+            //取消授权
+            powerNo(){
+                this.treeVisible = false;
+                this.$refs.tree.setCheckedNodes([]);
+            },
+            //确认授权
+            powerOk() {
+                this.treeVisible = false
+                var role = this.$refs.tree.getCheckedNodes()
+                var ids = [];
+                for(let i=0;i<role.length;i++){
+                    if(role[i].parentid != 0){
+                        ids.push(role[i].menuid);
+                    }
+                }
+                console.log(ids)
+
+                axios.post("/home/role-menu/"+this.roleid+"?ids="+ids).then((res)=>{
+                    if(res.data.flag == true && res.data.data!=null){
+                        this.$message.success("授权成功")
+                    }else{
+                        this.$message.error("授权失败");
+                    }
+                })
+                
+                
+
+            },
+            //查询角色数据
+            getAll(){
+                axios.get("/home/role").then((res)=>{
+                    this.tableData = res.data.data;
+                })
+            },
+            //查询菜单数据
+            getMenu(){
+                axios.get("/home/menu").then((res)=>{
+                    if(res.data.flag==true && res.data.data!=null){
+                        this.treeData = res.data.data;
+                    }else{
+                        this.$message.error("系统错误");
+                    }
+                });
+            },
+            //保存修改
+            update(row){
+                axios.put("/home/role/",row).then((res)=>{
+                    if(res.data.flag == true && res.data.data !=null){
+                        this.$message.success("修改成功");
+                    }else{
+                        this.$message.error("修改失败");
+                    }
+                }).finally(()=>{
+                    this.getAll();
+                })
+            },
+            //重置添加表单
+            resetForm(){
+                this.entity = [{}]
+            },
+            //添加提交表单
+            submitForm(){
+                console.log(this.entity)
+                axios.post("/home/role",this.entity[0]).then((res)=>{
+                    if(res.data.flag == true && res.data.data !=null){
+                        this.$message.success("添加成功");
+                    }else{
+                        this.$message.error("添加失败");
+                    }
+                    this.entity = [{}]
+                }).finally(()=>{
+                    this.getAll();
+                })
+
+            },
+            //单条删除
+            deleteById(id){
+                this.$confirm("此操作永久删除当前信息，是否继续？","提示",{type:"info"}).then(()=>{
+                    axios.delete("/home/role/"+id).then((res)=>{
+                    if(res.data.flag == true && res.data.data !=null){
+                        this.$message.success("删除成功");
+                    }else{
+                        this.$message.error("删除失败");
+                    }
+                    }).finally(()=>{
+                        this.getAll();
+                    })
+                }).catch(()=>{
+                    this.$message.info("取消操作");
+                });
+
+            }
+            
+        },
+        created: function () {
+            this.getAll();
+            this.getMenu();
+        }
+    })
+</script>
+</body>
+</html>

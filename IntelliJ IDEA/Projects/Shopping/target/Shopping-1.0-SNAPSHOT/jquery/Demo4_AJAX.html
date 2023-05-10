@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<script src="../JQuery-1.11.1/jquery-1.11.1.min.js"></script>
+<script type="text/javascript">
+    $(function () {
+        $("#btn1").click(function () {
+            $.get("jquery/Demo4_AJAX",function (responseTxt,statusTxt,xhr) {
+                $("#msg").text(responseTxt);
+            });
+
+        $("#btn2").click(function () {
+            $.post("jquery/Demo4_AJAX",function (responseTxt,statusTxt,xhr) {
+                $("#msg").text(responseTxt);
+            })
+        });
+
+        $.ajax({
+            url: "jquery/Demo4_AJAX",
+            dataType: "text",
+            type: "get",
+            success: function (responseTxt) {
+                $("#msg").text(responseTxt);
+            }
+        });
+
+
+
+
+            // $("#div1").load("jquery/AJAXTest.txt",function (responseTxt,statusTxt,xhr){
+            //     if(statusTxt=="success"){
+            //         alert("成功");
+            //     }else if(statusTxt=="error"){
+            //         alert("失败");
+            //     }
+            // });
+        });
+    });
+
+</script>
+<body>
+<input id="btn1" type="button" value="get"/>
+<input id="btn2" type="button" value="post"/>
+<input id="btn3" type="button" value="ajax"/>
+
+<div id="msg"></div>
+</body>
+</html>

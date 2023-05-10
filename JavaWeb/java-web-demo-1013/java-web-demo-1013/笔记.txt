@@ -1,0 +1,103 @@
+会话：
+	客户向服务器发出的多次请求
+	
+Cookie		
+HttpSession	
+	request.getSession()和request.getSession(true)
+		如果没有，则会创建一个session
+		需要向session中存放数据时
+	request.getSession(false)
+		如果没有，返回null
+		当只需要从session中获取数据时
+
+JSP(Java Server Page)
+
+
+test.jsp  ——》  test_jsp.class  ——》 test_jsp.java(servlet) ——》test_jsp.class
+
+隐式对象：
+	在JSP页面中可以直接使用的对象，无需声明和创建
+	作用域对象：
+		application:应用程序，所有用户共享
+		session:会话，当前会话有效
+		pageContext:当前页面上下文，仅限当前页面
+		request:请求，仅限本次请求
+	输入输出对象
+		out:输出对象，负责向JSP页面输出内容
+		response:响应对象，对应Servlet中的response
+		request:请求对象，对应Servlet中的request
+	错误对象
+		exception：错误对象
+	其他对象
+		config:初始化对象
+		page:相当于java中的this
+
+信息管理系统（MIS）
+	学生管理系统
+	企业信息化系统
+
+网站
+	论坛
+		百度贴吧
+		天涯
+		猫扑
+	购物
+		淘宝
+		京东
+	社交
+		新浪微博
+		腾讯微博
+		微信朋友圈
+	资源（信息）发布
+		B站
+		公司首页
+
+java Web
+反射实现MVC框架
+项目
+JS
+JQuery
+Bootstrap
+框架阶段
+	MyBatis
+	Spring
+		Spring Core
+		Spring MVC
+		Spring boot
+Linux
+	会搭建java环境
+分布式
+	Nginx		负载均衡
+	Redis		缓存
+	RabbitMQ	消息队列
+微服务
+	
+项目（SSM + LayUI）
+
+购物车页面
+	商品信息	Product
+	购物项对象	ShopCarItem
+		商品
+		数量
+		总价
+	购物车		Map
+				key:商品编号
+				value:ShopCarItem对象
+
+
+商品信息页面
+购物车页面
+	
+
+
+		
+	
+	
+
+
+
+	
+
+
+
+	

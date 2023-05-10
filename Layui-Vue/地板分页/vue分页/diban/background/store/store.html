@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>店铺管理</title>
+    <script src="../../static/js/vue.js"></script>
+    <link rel="stylesheet" href="../../static/elementui/index.css" />
+    <script src="../../static/elementui/index.js"></script>
+
+    <link rel="stylesheet" href="../../static/css/style.css">
+    
+    <script src="../../static//js/axios-0.18.0.js"></script>
+    <style>
+        .avatar-uploader .el-upload {
+          border: 1px dashed #d9d9d9;
+          border-radius: 6px;
+          cursor: pointer;
+          position: relative;
+          overflow: hidden;
+        }
+        .avatar-uploader .el-upload:hover {
+          border-color: #409EFF;
+        }
+        .avatar-uploader-icon {
+          font-size: 28px;
+          color: #8c939d;
+          width: 178px;
+          height: 178px;
+          line-height: 178px;
+          text-align: center;
+        }
+        .avatar {
+          width: 178px;
+          height: 178px;
+          display: block;
+        }
+      </style>
+</head>
+<body>
+    <div id="app">
+        <el-card shadow="never">
+            <!-- 搜索列表 -->
+            <el-form :inline="true" size="small" :model="searchEntity">
+                <el-form-item label="店铺名称">
+                    <el-input v-model="searchEntity.name" clearable placeholder="店铺名称"></el-input>
+                </el-form-item>
+    
+                <el-form-item>
+                    <el-button type="danger" @click="delAll"><i class="fa fa-trash"></i> 删除选中</el-button>
+                    <el-button type="primary" @click="handleCreate"> 添加店铺</el-button>
+                    <el-button type="info" @click="resetSearch"><i class="fa fa-refresh"></i> 重置</el-button>
+                    <el-button type="success" @click="search"><i class="fa fa-search"></i> 查询</el-button>
+                </el-form-item>
+            </el-form>
+        </el-card>
+
+        <el-card shadow="never">
+            <!-- 表格数据 -->
+            <el-table
+                    :data="tableData"
+                    height="650"
+                    @selection-change="handleSelectionChange"
+                    style="width: 100%">
+
+                <el-table-column
+                        type="selection"
+                        @selection-change="handleSelectionChange"
+                        width="55">
+                </el-table-column>
+
+                <el-table-column
+                        type="index"
+                        width="150"
+                        label="序号">
+                </el-table-column>
+
+                <el-table-column
+                        prop="storename"
+                        label="专卖店名称"
+                        width="200">
+                </el-table-column>
+                <el-table-column
+                        prop="address"
+                        label="地址"
+                       >
+                </el-table-column>
+
+                <el-table-column
+                        prop="time"
+                        label="营业时间"
+                        width="210">
+                </el-table-column>
+
+                <el-table-column
+                        prop="mainimg"
+                        width="180"
+                        label="店铺主图">
+                        <template slot-scope="scope">
+                            <div class="lw-header">
+                                <img :src="'../../images/store/'+scope.row.mainimg" alt="">
+                            </div>
+                        </template>
+                </el-table-column>
+
+                <el-table-column
+                    prop="recommend"
+                    width="180"
+                    label="是否推荐">
+                    <template slot-scope="scope">
+                        <span v-if="scope.row.recommend==0">不推荐</span>
+                        <span v-else>推荐</span>
+                    </template>
+                </el-table-column>
+                <el-table-column
+                        label="操作"
+                        width="200">
+                    <template slot-scope="scope">
+                        <el-button @click="handleDelete(scope.row)" type="danger" size="mini" style="padding: 2px 4px; border-radius: 0">
+                            <i class="fa fa-trash"></i> 删 除
+                        </el-button>
+                        <el-button @click="handleUpdate(scope.row)" type="primary" size="mini"
+                                   style="padding: 2px 4px; border-radius: 0" >
+                            <i class="fa fa-pencil"></i> 编 辑
+                        </el-button>
+                    </template>
+                </el-table-column>
+            </el-table>
+            <!-- 分页 -->
+            <div class="lw-fr" style="margin: 10px;">
+                <el-pagination background
+                               layout="total, prev, pager, next, sizes, jumper"
+                               :current-page.sync="page.pageNo"
+                               :page-size.sync="page.pageSize"
+                               :total="page.count"
+                               :page-sizes="[ 10, 20, 30, 40, 50, 100]"
+                               @current-change="searchPage"
+                               @size-change="searchPage">
+                </el-pagination>
+            </div>
+        </el-card>
+
+          <!-- 店铺添加 -->
+        <el-dialog
+          title="店铺添加"
+          :visible.sync="addVisible"
+          width="90%"
+          height="100%"   
+          :before-close="handleClose"
+          >
+          <el-card shadow="naver">
+              <div class="lw-box-title">
+                  店铺信息
+              </div>
+              <el-form :model="addEntity"
+                       label-suffix=" :"
+                       label-width="100px">
+                  <el-row :span="24">
+                      <el-col :span="12">
+                          <el-form-item label="店铺名称" prop="storename">
+                              <el-input v-model="addEntity.storename" clearable></el-input>
+                          </el-form-item>
+                      </el-col>
+                      <el-col :span="12">
+                          <el-form-item label="地址" prop="address">
+                              <el-input v-model="addEntity.address" clearable></el-input>
+                          </el-form-item>
+                      </el-col>
+                  </el-row>
+      
+                  <el-row :span="24">
+                      <el-col :span="12">
+                          <el-form-item label="营业时间" prop="time">
+                              <el-input v-model="addEntity.time" clearable></el-input>
+                          </el-form-item>
+                      </el-col>
+                  </el-row>
+            
+
+                  <el-row :span="24">
+                      <el-col :span="12">
+                          <el-form-item label="上传文件" prop="mainimg">
+                              <el-upload
+                                  action="none"
+                                  :show-file-list="false"
+                                  :auto-upload="false"
+             
+                                  :on-change="checkType">
+                                  
+                                  <img v-if="imageUrl" :src="imageUrl" class="avatar">
+                                  <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+                              </el-upload>
+                          </el-form-item>
+                      </el-col>
+                  </el-row>
+
+                  
+                  <el-row :span="24">
+                      <el-col :span="12">
+                          <el-form-item label="地板多图片" prop="mainimg">
+                              <el-upload
+                                      class="upload-demo"
+                                      action="none"
+                                      :on-remove="addhandleRemove"
+                                      :auto-upload="false"
+                                      :on-change="addcheckTypes"
+                                      :file-list="addFileList"
+                                      list-type="picture">
+                              <el-button size="small" type="primary">点击上传</el-button>
+                              <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
+                            </el-upload>
+                          </el-form-item>
+                      </el-col>
+                  </el-row>
+
+
+                  <el-row :span="24">
+                      <el-col :span="12">
+                          <el-form-item label="是否推荐" prop="recommend">
+                              <el-select v-model="addEntity.recommend" placeholder="是否推荐">
+                                  <el-option label="推荐" value="1"></el-option>
+                                  <el-option label="不推荐" value="0"></el-option>
+                              </el-select>
+                          </el-form-item>
+                      </el-col>
+                  </el-row>
+
+                  <el-form-item>
+                      <el-button type="primary" @click="addsubmitForm()">立即创建</el-button>
+                      <el-button @click="addresetForm()">重置</el-button>
+                    </el-form-item>
+              </el-form>
+          </el-card>
+        </el-dialog>
+
+        <!-- 店铺修改 -->
+        <el-dialog
+        title="店铺修改"
+        :visible.sync="editVisible"
+        width="90%"
+        height="100%"
+        :before-close="handleClose"
+        >
+        <el-card shadow="naver">
+            <div class="lw-box-title">
+                店铺信息
+            </div>
+            <el-form :model="editEntity"
+                    label-suffix=" :"
+                    label-width="100px">
+                <el-row :span="24">
+                    <input type="hidden" v-model="editEntity.storeid" />
+                    <el-col :span="12">
+                        <el-form-item label="店铺名称" prop="storename">
+                            <el-input v-model="editEntity.storename" clearable></el-input>
+                        </el-form-item>
+                    </el-col>
+                    <el-col :span="12">
+                        <el-form-item label="地址" prop="address">
+                            <el-input v-model="editEntity.address" clearable></el-input>
+                        </el-form-item>
+                    </el-col>
+                </el-row>
+    
+                <el-row :span="24">
+                    <el-col :span="12">
+                        <el-form-item label="营业时间" prop="time">
+                            <el-input v-model="editEntity.time" clearable></el-input>
+                        </el-form-item>
+                    </el-col>
+                </el-row>
+        
+                
+                <el-row :span="24">
+                    <el-col :span="12">
+                        <el-form-item label="上传主图" prop="mainimg">
+                            <el-upload
+                                action="none"
+                                :show-file-list="false"
+                                :auto-upload="false"
+                                :on-change="editcheckType">
+                                
+                                <img v-if="editimageUrl" :src="editimageUrl" class="avatar">
+                                <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+                            </el-upload>
+                        </el-form-item>
+                    </el-col>
+                </el-row>
+
+                <el-row :span="24">
+                    <el-col :span="12">
+                        <el-form-item label="多图片上传" prop="img">
+                            <el-upload
+                                    class="upload-demo"
+                                    action="none"
+                                    :on-remove="edithandleRemove"
+                                    :auto-upload="false"
+                                    :on-change="editcheckTypes"
+                                    :file-list="editFileList"
+                                    list-type="picture">
+                            <el-button size="small" type="primary">点击上传</el-button>
+                            <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
+                        </el-upload>
+                        </el-form-item>
+                    </el-col>
+                </el-row>
+
+
+                <el-row :span="24">
+                    <el-col :span="12">
+                        <el-form-item label="系列" prop="recommend">
+                            <el-select v-model="editEntity.recommend" placeholder="是否推荐">
+                                <el-option label="推荐" :value="1" :key="1" ></el-option>
+                                <el-option label="不推荐" :value="0" :key="0"></el-option>
+                            </el-select>
+                        </el-form-item>
+                    </el-col>
+                </el-row>
+
+                <el-form-item>
+                    <el-button type="primary" @click="editSubmitForm()">修改</el-button>
+                    <el-button @click="editResetForm()">重置</el-button>
+                </el-form-item>
+            </el-form>
+        </el-card>
+      </el-dialog>
+    </div>
+</body>
+<script>
+    var app = new Vue({
+        el:"#app",
+        data() {
+            return {
+                tableData:[],
+                searchEntity:{
+                    name: ""
+                },
+                addVisible: false,//打开添加层
+                editVisible: false,//打开修改层
+                page: {
+                    pageNo: 1,
+                    pageSize: 10,
+                    count: 10
+                },
+                delarr:[],//存放删除的id
+                multipleSelection:[],//多选的数据
+                addEntity: {},//添加表单对象
+                imageUrl: "",//添加图片路径
+                imageFile:{},//添加图片文件
+                addFileList:[],
+                editEntity:{},//编辑表单对象
+                editimageUrl: "",//编辑图片路径
+                editimageFile:{},//编辑图片文件
+                editFileList:[]
+            }
+        },
+        methods: {
+             //查询店铺信息
+             getAll(){
+                axios.get("/home/store/"+this.page.pageNo+"/"+this.page.pageSize+"?storename="+this.searchEntity.name).then((res)=>{
+                    console.log(res)
+                    this.tableData = res.data.data.records;
+                    this.page.count = res.data.data.total
+                })
+            },
+            //查询
+            search(){
+                console.log(this.searchEntity.name)
+                this.getAll()
+            },
+            //重置
+            resetSearch(){
+                this.searchEntity.name = ""
+            },
+            //监听复选框选中
+            handleSelectionChange(val){
+                this.multipleSelection=val;
+            },
+            //分页
+            searchPage(currentPage){
+                this.page.pageNo = currentPage;
+                this.getAll();
+            },
+            //点击删除
+            handleDelete(row){
+                this.$confirm("此操作永久删除当前信息，是否继续？","提示",{type:"info"}).then(()=>{
+            
+                    axios.delete("/home/store/"+row.storeid).then((res)=>{
+                        if(res.data.flag==true&&res.data.data!=null){
+                            this.$message.success("删除成功")
+                        }else{
+                            this.$message.error("删除失败")
+                        }
+                    }).finally(()=>{
+                        this.getAll();
+                    })
+                }).catch(()=>{
+                    this.$message.info("取消操作");
+                });
+            },
+            //点击修改
+            handleUpdate(row){
+                this.editVisible = true;
+                //查询店铺数据
+                console.log(row.storeid)
+                axios.get("/home/store/"+row.storeid).then((res)=>{
+                    this.editEntity = res.data.data[0];
+                    console.log(this.editEntity.recommend)
+                    this.editimageUrl = "../../images/store/"+res.data.data[0].mainimg;
+
+                    var arr = [];
+                    
+
+                    for(let i=0;i<res.data.data[0].img.length;i++){
+                        arr.push({"url":"../../images/store/" + res.data.data[0].img[i].img})
+                    }
+                    
+                    this.editFileList = arr
+                })
+            },
+            //修改表单文件上传
+            editcheckType(file){
+                const isJPG = file.type === 'image/jpeg';
+                const isLt2M = file.size / 1024 / 1024 < 2;
+
+                if (!isLt2M) {
+                    this.$message.error('上传头像图片大小不能超过 2MB!');
+                }
+                if(isLt2M){
+                    //确定上传图片
+                    this.editimageFile = file;
+                    //预览图片,赋予头像url
+                    this.editimageUrl = URL.createObjectURL(this.editimageFile.raw); 
+                }
+            },
+            //修改图片列表移除
+            edithandleRemove(file, editFileList) {
+                this.editFileList = editFileList;
+            },
+            //修改多图片上传
+            editcheckTypes(file,editFileList){
+                this.editFileList = editFileList;
+            },
+            //修改提交
+            editSubmitForm(){
+                let formData = new FormData();
+                console.log(this.editEntity)
+                formData.append("storeid",this.editEntity.storeid);
+                formData.append("storename",this.editEntity.storename);
+                formData.append("address",this.editEntity.address);
+                formData.append("time",this.editEntity.time);
+                formData.append("recommend",this.editEntity.recommend);
+                if(this.editimageFile.raw !=null){
+                    //将文件添加
+                    formData.append("mainimgs",this.editimageFile.raw);
+                }
+
+                //多文件添加到表单
+                for(let i=0;i<this.editFileList.length;i++){
+                    if(this.editFileList[i].raw!=null){
+                        formData.append("imgs",this.editFileList[i].raw);
+                    }
+                }
+                console.log(formData);
+                axios.put("/home/store/",formData).then((res)=>{
+                    console.log(res);
+                    if(res.data.flag == true && res.data.data!=null){
+                        this.$message.success("修改成功")
+                    }else{
+                        this.$message.error("修改失败")
+                    }
+                }).finally(()=>{
+                    this.editVisible = false;
+                    this.getAll();
+                    this.editFileList = []
+                })
+            },
+            //修改重置
+            editResetForm(){
+                this.editEntity = {};
+                this.editimageUrl = "",
+                this.editimageFile = {}
+                this.editFileList = []
+            },
+
+            //显示添加弹框
+            handleCreate(){
+                this.addVisible = true;
+            },
+            //添加列表图片列表移除
+            addhandleRemove(file, addFileList) {
+                this.addFileList = addFileList;
+            },
+            //添加列表多图片上传
+            addcheckTypes(file,addFileList){
+                this.addFileList = addFileList;
+            },
+            //检查用户图片类型
+            checkType(file){
+                const isJPG = file.type === 'image/jpeg';
+                const isLt2M = file.size / 1024 / 1024 < 2;
+
+                if (!isLt2M) {
+                    this.$message.error('上传头像图片大小不能超过 2MB!');
+                }
+                if(isLt2M){
+                    //确定上传图片
+                    this.imageFile = file;
+                    //预览图片,赋予头像url
+                    this.imageUrl = URL.createObjectURL(this.imageFile.raw); 
+                }
+            },
+            //添加提交
+            addsubmitForm: function () {
+                console.log(this.addFileList);
+                console.log(this.imageFile)
+                let formData = new FormData();
+                formData.append("storename",this.addEntity.storename);
+                formData.append("address",this.addEntity.address);
+                formData.append("time",this.addEntity.time);
+                formData.append("recommend",this.addEntity.recommend);
+                //将文件添加
+                formData.append("mainimgs",this.imageFile.raw);
+                //多文件添加到表单
+                for(let i=0;i<this.addFileList.length;i++){
+                    formData.append("imgs",this.addFileList[i].raw);
+                }
+                console.log(formData);
+                axios.post("/home/store/",formData).then((res)=>{
+                    console.log(res)
+                    if(res.data.flag == true && res.data.data!=null){
+                        this.$message.success("添加成功")
+                    }else{
+                        this.$message.error("添加失败")
+                    }
+                }).finally(()=>{
+                    this.addVisible = false;
+                    this.getAll();
+                    this.addEntity = {}
+                    this.imageUrl = ""
+                    this.addFileList = []
+                })
+            },
+            //添加重置
+            addresetForm(){
+                this.addEntity = {}
+            },
+            //关闭
+            handleClose(){
+                this.addVisible = false;
+                this.editVisible = false;
+                this.addEntity = {};
+                this.editEntity = {};
+                this.addFileList = [];
+                this.editFileList = []
+            },
+             //批量删除
+             delAll(){
+                this.$confirm('是否删除选中'+this.multipleSelection.length+'行?', '提示', {
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消',
+                    type: 'warning'
+                }).then(() => {
+                    if(this.multipleSelection.length>0){
+                        //循环取出id
+                        for(let i=0;i<this.multipleSelection.length;i++){
+                            //添加到delarr
+                            this.delarr.push(this.multipleSelection[i].storeid)
+                        }
+                        console.log(this.delarr)
+                        axios.delete("/home/store?ids="+this.delarr).then((res)=>{
+                            if(res.data.flag == true && res.data.data!=null){
+                                this.$message.success("删除成功")
+                            }else{
+                                this.$message.error("删除失败")
+                            }
+                        }).finally(()=>{
+                            this.getAll();
+                        })
+                    }else{
+                        this.$message.warning("至少选中一行");
+                    }
+                    
+                }).catch(() => {
+                    this.$message({
+                        type: 'info',
+                        message: '已取消删除'
+                    });          
+                });
+                
+            },
+
+
+        },
+        created() {
+            this.getAll();
+        },
+    })
+</script>
+</html>

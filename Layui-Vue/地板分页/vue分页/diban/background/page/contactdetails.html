@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>联系方式管理</title>
+    <script src="../../static/js/vue.js"></script>
+    <link rel="stylesheet" href="../../static/elementui/index.css" />
+    <script src="../../static/elementui/index.js"></script>
+    <link rel="stylesheet" href="../../static/css/style.css">
+    <script src="../../static//js/axios-0.18.0.js"></script>
+</head>
+<body>
+    <div id="app">
+    <!-- 表格数据 -->
+    <el-card shadow="never">
+        <el-table
+                :data="tableData"
+                height="650"
+                @selection-change="handleSelectionChange"
+                style="width: 100%">
+
+            <el-table-column
+                    type="selection"
+                    @selection-change="handleSelectionChange"
+                    width="100">
+            </el-table-column>
+
+            <el-table-column
+                    type="index"
+                    width="60"
+                    label="序号">
+            </el-table-column>
+
+            <el-table-column
+                    prop="company"
+                    label="公司名称"
+                    width="220" >
+            </el-table-column>
+
+            <el-table-column
+                    prop="phone"
+                    label="联系电话"
+                    width="180" >
+            </el-table-column>
+
+            <el-table-column
+                    prop="url"
+                    label="网址"
+                    width="180" >
+            </el-table-column>
+
+            <el-table-column
+                    prop="url"
+                    label="网址"
+                    width="180" >
+            </el-table-column>
+
+            
+            <el-table-column
+                    prop="factoryaddress"
+                    label="工厂地址"
+                    width="220" >
+            </el-table-column>
+
+            <el-table-column
+                    prop="stockpileaddress"
+                    label="仓储地址"
+                     >
+            </el-table-column>
+            
+            <el-table-column
+                    label="操作"
+                    width="200">
+                <template slot-scope="scope">
+                    <el-button @click="handleUpdate(scope.row)" type="primary" size="mini"
+                                style="padding: 2px 4px; border-radius: 0" >
+                        <i class="fa fa-pencil"></i> 编 辑
+                    </el-button>
+                </template>
+            </el-table-column>
+        </el-table>
+    </el-card>
+    <!-- 联系方式修改 -->
+    <el-dialog
+    title="联系方式修改"
+        :visible.sync="editVisible"
+        width="90%"
+        height="100%"   
+        :before-close="handleClose"
+        >
+    <el-card shadow="naver">
+        <div class="lw-box-title">
+            联系方式信息
+        </div>
+        <el-form :model="editEntity"
+                label-suffix=""
+                label-width="100px">
+
+            <el-row :span="24">
+                <el-col :span="12">
+                    <el-form-item label="公司名称" prop="company">
+                        <el-input  v-model="editEntity.company" clearable></el-input>
+                    </el-form-item>
+                </el-col>
+            </el-row> 
+
+            <el-row :span="24">
+                <el-col :span="12">
+                    <el-form-item label="电话" prop="phone">
+                        <el-input  v-model="editEntity.phone" clearable></el-input>
+                    </el-form-item>
+                </el-col>
+            </el-row> 
+
+            <el-row :span="24">
+                <el-col :span="12">
+                    <el-form-item label="网址" prop="url">
+                        <el-input v-model="editEntity.url" clearable></el-input>
+                    </el-form-item>
+                </el-col>
+            </el-row> 
+
+            <el-row :span="24">
+                <el-col :span="12">
+                    <el-form-item label="工厂地址" prop="factoryaddress">
+                        <el-input v-model="editEntity.factoryaddress" clearable></el-input>
+                    </el-form-item>
+                </el-col>
+            </el-row> 
+
+            <el-row :span="24">
+                <el-col :span="12">
+                    <el-form-item label="仓储地址" prop="stockpileaddress">
+                        <el-input v-model="editEntity.stockpileaddress" clearable></el-input>
+                    </el-form-item>
+                </el-col>
+            </el-row> 
+            
+            <el-form-item>
+                <el-button type="primary" @click="editSubmitForm()">修改</el-button>
+                <el-button @click="editResetForm()">重置</el-button>
+            </el-form-item>
+        </el-form>
+    </el-card>
+    </el-dialog>
+    </div>
+</body>
+<script>
+    var app = new Vue({
+        el:"#app",
+        data() {
+            return {
+                tableData:[],
+                editVisible: false,//打开修改层
+                editEntity:{},//编辑表单对象
+            }
+        },
+        created() {
+            this.getAll();
+        },
+        methods: {
+            //查询联系方式信息
+            getAll(){
+                axios.get("/home/contactdetails/").then((res)=>{
+                    //console.log(res)
+                    this.tableData = res.data.data;
+                })
+            },
+            //点击修改
+            handleUpdate(row){
+                this.editVisible = true;
+                //查询店铺数据
+                console.log(row.cdid)
+                axios.get("/home/contactdetails/"+row.cdid).then((res)=>{
+                    console.log(res)
+                    this.editEntity = res.data.data;
+                })
+            },
+            //修改提交
+            editSubmitForm(){
+                console.log(this.editEntity);
+                axios.put("/home/contactdetails/",this.editEntity).then((res)=>{
+                    console.log(res);
+                    if(res.data.flag == true && res.data.data!=null){
+                        this.$message.success("修改成功")
+                    }else{
+                        this.$message.error("修改失败")
+                    }
+                }).finally(()=>{
+                    this.editVisible = false;
+                    this.getAll();
+                    this.editEntity = {}
+
+                })
+            },
+            //修改重置
+            editResetForm(){
+                this.editEntity = {};
+            },
+        },
+    })
+</script>
+</html>

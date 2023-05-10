@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<title>联系我们</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="stylesheet" href="css/bootstrap.min.css"/>
+
+<link rel="stylesheet" href="css/style.css"/>
+
+</head>
+
+<style>
+    .jiontj{
+        width: 395px;height: 43px;padding: 0 15px;border: 1px solid #dcdcdc;outline:none;margin-left: 5px;margin-right: 5px;margin-bottom: 20px;
+    }
+    .txt{
+        width: 805px;height: 88px;padding: 0 15px;border: 1px solid #dcdcdc;outline:none;margin-left: 5px;margin-right: 5px;margin-bottom: 20px;padding-top: 15px;
+    }
+    .but{
+        text-align: center;
+        background: #649e1d;
+        color: #FFFFFF;
+        border: none;
+        line-height: 45px;
+        font-size: 16px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+</style>
+
+<body>
+
+
+
+<header id="header">
+
+<nav class="navbar navbar-default navbar-static-top">
+
+	<div class="container">
+
+		<div class="navbar-header">			
+
+			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+
+			<span class="sr-only"></span>
+
+			<span class="icon-bar"></span>
+
+			<span class="icon-bar"></span>
+
+			<span class="icon-bar"></span>
+
+			</button>
+
+
+
+			<div class="navbar-brand">
+
+				<img src="images/logo.png" alt="" width="150px" height="" class="img-responsive"/>
+
+			</div>
+
+		</div>
+
+	  	<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" role="navigation">	  	
+
+			<ul class="nav navbar-nav navbar-right">
+
+				<li><a rel="nofollow" href="index.html">网站首页</a></li>
+
+				<li><a rel="nofollow" href="about.html">关于我们</a></li>
+
+				<li><a rel="nofollow" href="products.html">产品中心</a></li>
+				<li><a rel="nofollow" href="case.html">工程案例</a></li>
+
+				<li><a rel="nofollow" href="news.html">新闻中心</a></li>
+
+				<li><a rel="nofollow" href="sitemap.html">服务支持</a></li>
+
+				<li><a rel="nofollow" href="join.html">招商加盟</a></li>
+
+				<li><a rel="nofollow" href="contact.html" class="active">联系我们</a></li>
+
+			</ul>
+
+	    </div>
+
+	</div>
+
+</nav>
+
+</header>
+
+
+
+<section class="n_banner">
+
+	<img src="images/banc.jpg" class="img-responsive" width="1855px"/>
+
+</section>
+
+
+
+<div id="app">
+	<section class="imain">
+
+		<div class="container">
+	
+			<div class="left_con col-md-3 col-sm-12 col-xs-12">
+	
+				<div class="box">
+	
+					<h3>关于我们</h3>
+	
+					<ul class="sort">
+	
+						<li><a href="about.html">关于我们</a></li>
+	
+						<li><a href="sitemap.html">服务支持</a></li>
+	
+						<li><a href="join.html">招商加盟</a></li>
+
+						<li><a href="contact.html">联系我们</a></li>
+	
+					</ul>
+	
+				</div>
+	
+				<div class="box">
+	
+					<h3>联系我们</h3>
+	
+					<div class="n_contact">
+
+						<p style="font-size: 18px;">{{phones[0].company}}</p>
+	
+						<p>电话：{{phones[0].phone}}</p>
+	
+						<p>网址：{{phones[0].url}}</p>
+	
+						<p>工厂地址：{{phones[0].factoryaddress}}</p>
+	
+						<p>仓储地址：{{phones[0].stockpileaddress}}</p>
+	
+					</div>
+	
+				</div>
+	
+	
+			</div>
+	
+			
+	
+			<div class="right_con col-md-9 col-sm-12 col-xs-12">
+	
+				<div class="row">
+	
+					<div class="crumb clearfix">
+	
+						<h3>联系我们</h3>
+	
+						<div class="site hidden-xs">您的当前位置：<a href="index.html">首 页</a>><a href="contact.html">联系我们</a></div>
+	
+					</div>
+	
+					<div class="content" style="text-align: center;">
+	
+						<div class="sitemap">
+	
+							<h3 style="font-size: 25px;">CONTACT US</h3>
+                            <h3 style="color: red;">联系我们</h3>
+                            <div >
+                                <input class="jiontj" v-model="cname" type="text" placeholder="公司名称:">
+                                <input class="jiontj" v-model="name" type="text" placeholder="您的姓名:">
+                                <input class="jiontj" v-model="phone" type="text" placeholder="您的电话:">
+                                <input class="jiontj" v-model="address" type="text" placeholder="您的地址:">
+                                <textarea class="txt" v-model="texts" placeholder="您的需求:"></textarea>
+                                <span @click="leavesubmit" class="but">立即加盟</span>
+                            </div>
+						</div>						
+						
+					</div>	
+					<div class="content" style="text-align: center;">
+						<iframe src="map.html" height="570" width="100%" frameborder="0" scrolling="no" align="left"></iframe>
+					</div>
+					
+				</div>
+	
+			</div>		
+	
+		</div>
+	
+	</section>
+</div>
+
+
+
+<footer class="footer">
+
+	<div class="container">
+
+		<div class="row foot_in">
+
+			<div class="col-md-3 col-sm-12 col-xs-12 hidden-xs">
+
+				<img src="images/ftlogo.png" alt="" class="img-responsive"/>
+
+				<div class="tel">					
+
+					<span>服务热线：</span>
+
+					<p>10086</p>
+
+				</div>
+
+			</div>
+
+			
+
+			<div class="col-md-9 col-sm-12 col-xs-12">
+
+				<ul class="footnav">
+
+					<a href="index.html" title="网站首页" rel="nofollow">网站首页</a> | 
+
+					<a href="about.html" title="关于我们" rel="nofollow">关于我们</a> | 
+
+					<a href="products.html" title="产品中心" rel="nofollow">产品中心</a> | 
+
+					<a href="case.html" title="工程案例"   rel="nofollow">工程案例</a> | 			
+
+					<a href="news.html" title="新闻中心" rel="nofollow">新闻中心</a> | 
+
+					<a href="sitemap.html" title="服务支持"  rel="nofollow">服务支持</a> | 
+
+					<a href="join.html" title="招商加盟"  rel="nofollow">招商加盟</a>
+					
+					<a href="contact.html" title="联系我们"  rel="nofollow">联系我们</a>
+
+				</ul>
+
+				<div class="copyright">					
+
+					备案号：<a href="index.html"  target="_blank" rel="nofollow"></a></p>           	
+
+					<p>电商哪家好？供应订做多少钱？怎么样？诚信公司专业以批发价格大量现货提供cms、、、等品质优良的产品及报价，欢迎来电生产定制！</p>
+
+					<p>地址：九华创新创业中心</p>
+
+					<p>联系人：鑫&nbsp;&nbsp;10086</p>
+
+					<p>网址：www.xxxx.cn&nbsp;&nbsp;邮箱：123456789@qq.com</p>
+					
+
+				</div>
+
+			</div>	
+
+		</div>		
+
+	</div>			
+
+</footer>
+
+
+
+
+
+<script type="text/javascript" src="js/jquery.js"></script>
+
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+
+<script src="js/axios.min.js"></script>
+<script src="js/vue.js"></script>
+
+<script>
+	var app=new Vue({
+		el:"#app",
+		created() {
+			this.getPhones();
+		},
+		data() {
+			return {
+				abo:"第一印象地板，感官体验第一地板品牌，创建于2005年，是中国生产实木地板、实木三层地板、实木多层地板、强化地板的著名品牌。经过多年的发展，逐渐成为具有自主研发能力，集生产、销售、服务于一体的现代化、专业化地板企业。公司占地面积达43500平方米，年产能力达到500万平方米以上，规模居行业前列。企业成立之初，为确保产品的质量，先后从德国、意大利引进多条先进的生产线、UV淋漆线和PU淋漆线，同时引进微电子控制干燥窑等先进生产设备。2008年，公司成功携手香港恒创国际投资有限公司，为“第一印象”地板品牌拓展国际市场奠定了基础，产品远销欧美、东南亚、中国大陆地区，受到广大客户的赞誉。先后被评为中国绿色环保品牌，中国十大质量品牌等殊荣。“第一印象地板”营销网络遍布全球，拥有20多家分公司，在中国23个省份拥有400余家统一授权、统一形象的地板专卖店。",
+				phones:[{}],
+				cname:"",
+				name:"",
+				phone:"",
+				address:"",
+				texts:""
+			}
+		},methods:{
+			leavesubmit(){
+				if(this.cname!='' && this.name!='' && this.phone!='' && this.address!='' && this.texts!=''){
+					axios.post("/home/leave",{companyname:this.cname,name:this.name,phone:this.phone,address:this.address,demand:this.texts})
+					.then(res => {
+						alert("提交成功！");
+						window.location.href="contact.html";
+					})
+					.catch(err => {
+						console.error(err); 
+					})
+				}else{
+					alert("提交失败！");
+				}
+			},
+			getPhones(){
+				axios.get("/home/contactdetails")
+				.then(res => {
+					// console.log(res)
+					this.phones=res.data.data;
+				})
+				.catch(err => {
+					console.error(err); 
+				})
+			}
+		}
+	})
+</script>
+
+</body>
+
+</html>
+

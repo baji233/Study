@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<script type="text/javascript">
+    function test(num) {
+        switch (num) {
+            case 1:
+                window.prompt("请输入您的年龄！","18");
+                break;
+            case 2:
+                alert("这是一个提示框！");
+                break;
+            default:
+                confirm("是否继续？");
+        }
+    }
+</script>
+<body>
+    <input type="button" value="跳转至百度" onclick="javaScript: window.location='https://www.baidu.com'"/><br/>
+    <input type="button" value="打开百度" onclick="javaScript: window.open('https://www.baidu.com')"/><br/>
+    <input type="button" value="输入框" onclick="test(1)"/><br/>
+    <input type="button" value="提示框" onclick="test(2)"/><br/>
+    <input type="button" value="询问框" onclick="test(3)"/><br/>
+</body>
+</html>

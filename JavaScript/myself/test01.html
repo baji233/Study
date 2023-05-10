@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+	</body>
+	
+	<script>
+		//正则表达式
+		var test = 'ahello_123';
+		function checkString (str) {
+			zzbds = /^[a-z]\w{4,19}$/;
+			console.log(zzbds.test(str));
+		}
+		checkString(test);
+		
+		//计时器
+		function repeat(func, number, times) {
+			return function(v) {
+				var key = setInterval(() => {
+					console.log(number);
+					func(v);
+					number--;
+					if( number == 0 ){
+						clearInterval(key);
+					}
+				}, times);
+			}
+		}
+		var a = repeat(alert, 6, 3000);
+		a('你好!');
+		
+		//斐波那契数列
+		function fibo ( n ) {
+			var a = [0,1];
+			for(i=1; i<n; i++){
+				a[i+1] = a[i] + a[i-1]
+			}
+			var ok = a.join(',');
+			return ok;
+		}
+		console.log(fibo(99999));
+		
+		//
+											
+		
+	</script>
+</html>

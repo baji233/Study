@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>数据属性</h1>
+
+<script>
+//严格模式
+'use strict';
+
+var obj = { }   //对象
+obj.name = 'temo'
+obj.age = 18
+obj.study = function(){
+    // this  = obj 
+    console.log(this,'好好学习');
+}
+
+var _money = 90000;
+
+//访问器属性
+Object.defineProperty( obj,'money',{
+    get:function(){
+        console.log('你在查询.....');
+        return _money;
+    },
+    set:function(v){
+        console.log('修改余额.....');
+        _money+= v;
+    },
+    enumerable: true,
+    configurable: true
+})
+
+
+
+//访问器属性
+// obj.money = 500
+// console.log('余额=', obj.money );
+
+
+// var p =  Object.getOwnPropertyDescriptor(obj,'age')
+// console.log('属性=', p );
+
+// Object.defineProperty(obj,'age',{
+//     writable: false,
+//     enumerable: false,
+//     configurable: false
+// })
+
+// 修改 
+// obj.age = 28
+// //delete obj.age;  //删除属性
+// console.log( obj.name);
+// console.log( obj.age);
+
+// 所有属性可 --- 遍历  
+for(var t in obj ){
+    console.log( t ,obj[t]);
+}
+
+
+</script>
+
+</body>
+</html>

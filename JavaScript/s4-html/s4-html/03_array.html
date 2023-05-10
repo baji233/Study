@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>数组</h1>
+<script>
+
+
+
+// for(let i =0;i< a.length;i++){
+//     console.log( a[i] );
+// }
+
+// for in  , for of 
+// for(let i in a){
+//     console.log( i , a[i] );
+// }
+
+// for( let i of a ){
+//     console.log( i );
+// }
+
+// a.forEach( function(item,i){
+//     console.log( item, i );
+// } )
+
+// let newsz = a.map( function(num){
+//     return num*2;
+// })
+
+// console.log( a );
+// console.log( newsz );
+
+// 对象只能用 for in 
+// let gt = {
+//       name:"阿努比斯",
+//       age:18,
+//       addr: "湖南长沙",
+//       sr: new Date()
+// };
+
+// for(let i in gt ){
+//     console.log( i ,gt[i]);
+// }
+
+//git ----》  仓库   github.com ,gitee.com
+// push(),pop(), unshift(),shift()
+// var a = [1,2,3,4,5,6];
+// a.splice(3,2,'龙龟')
+// console.log( a );
+
+// 0-1 随机小数  0-9
+// 0-32 + 1  选6个,不能重复
+
+// while(a.length<6){
+//     let n = parseInt(Math.random()*33) + 1
+//     if(!a.includes(n)){
+//         a.push(n)
+//     }
+// }
+// a.sort(function(a,b){ return b-a});
+// console.log( a );
+
+// var t ="张三#李四#王五#赵6";
+// var sz = t.split('#')
+// console.log( sz );
+
+// a= [ 1-54 ]  洗牌，发给3个人，每人17张
+
+let p = {
+    c:1,
+    num:15
+}
+
+
+let a = [];
+for(let i =1;i<=54;i++){
+    a.push(i)
+}
+//洗牌 Colletions.shuffle()
+let i,j,t ; 
+let x=[],y=[],z=[]
+for(let k=0;k<100;k++){
+    i = parseInt(Math.random()*54)
+    j = parseInt(Math.random()*54)
+    t= a[i]
+    a[i]=a[j]
+    a[j]= t
+}
+//发牌
+for(let k=0;k<17;k++){
+    x.push( a.pop() )
+    y.push( a.pop() ) 
+    z.push( a.pop() )
+}
+console.log( a );
+console.log( x);
+console.log( y);
+console.log( z);
+
+</script>
+
+</body>
+</html>

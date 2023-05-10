@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>MY jquery</h1>
+    <h1 id="myh">hello</h1>
+    <p class="myp">你能修改吗</p>
+</body>
+
+<script>
+// $('h1').html('tiktok');
+
+(function(){
+    var jquery =  window.$ = function(obj){
+        return new jquery.prototype.init(obj);
+    }
+
+    //允许其他人给框架加功能
+    jquery.extends= function(obj){
+        for(var attr in obj){
+            this[attr]= obj[attr];
+        }
+    }
+
+    jquery.prototype = {
+        init: function(obj){
+            var arr =document.querySelectorAll(obj)
+            Array.prototype.push.apply( this , arr );
+            return this;
+        },
+        html: function(val){
+            if(val==undefined){
+                return this[0].innerHTML;
+            }
+            for(var i =0;i<this.length;i++){
+                this[i].innerHTML = val;
+            }
+        },
+        css:function(cname,val){
+            // ?????  obj.style[color] = xxx
+            for(var i =0;i<this.length;i++){
+                this[i].style[cname] = val
+            }
+            return this; //支持链式编程
+        },
+        each:function(){
+
+        },
+        attr:function(){
+
+        }
+    }
+
+     //挂载到window对象上
+     jquery.prototype.init.prototype = jquery.prototype;
+
+})();
+//使用
+$('h1').css('color','red')
+       .css('fontSize','50px')
+
+
+
+//测试
+// var o = { name: 'temo',age: 18}
+// var arr = ['hello','dema','js']
+// Array.prototype.push.apply( o , arr );
+// console.log( o );
+
+//去掉字符串两端的空格  '   hello  '
+$.extends({
+    trim:function(str){
+        return str.replace(/^\s+|\s+$/g,'');
+    }
+});
+
+var t = '   hello  '
+console.log( t ,'测试' );
+console.log(  $.trim(t) ,'测试' );
+
+</script>
+</html>

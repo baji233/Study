@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<script type="text/javascript">
+
+  window.onload=function () {
+      alert("页面加载完毕");
+  };
+
+  function down(){
+
+  }
+
+  function on(){
+
+  }
+
+  function changeColor(){
+      //获得焦点
+  }
+
+  function change() {
+      //失去焦点
+  }
+
+  function over() {
+
+  }
+
+  function leave() {
+      // document.getElementById("btn2").style=;
+  }
+
+
+  function handle(e) {
+      document.getElementById("h2").innerText=e.type;
+  }
+  // window.onload()=function () {}
+
+  function comment() {
+      let txt=document.getElementById("btn4").value;
+      let comment=document.getElementById("comment");
+      let p=document.createElement("p");
+      p.innerText=txt;
+      comment.appendChild(p);
+      document.getElementById("txt").value="";
+  }
+
+  function countComment() {
+      let div4=document.getElementById("div4");
+      alert("当前评论数为："+ div4.getElementsByTagName("p").length);
+  }
+
+  function showTime(){
+      setInterval(showTime,1000);
+  }
+
+
+
+</script>
+<body>
+<input type="button" value="获取时间" onclick="showTime()"/>
+<h1 id="txtTime"></h1>
+
+
+<input type="button" value="百度" onclick="javaScript: window.location='https://www.baidu.com'"/>
+
+
+
+<h3>留言板</h3>
+<textarea id="txt"></textarea>
+<input type="button" id="btn4" value="评论" onclick="comment()">
+<input type="button" id="btn5" value="统计" onclick="countComment()">
+<div4 id="comment"></div4>
+
+<input type="button" id="btn3" value="测试">
+<h2 id="h2"></h2>
+
+<input type="button" value="颜色" style="background-color: chartreuse" onmousedown="down()" onmouseup="on()"/>
+
+<input type="text" id="text" onfocus="changeColor()" onblur="change()">
+
+<input type="button" id="btn2" onmouseover="over()" onmouseleave="leave()">
+
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

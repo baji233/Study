@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 与java接口类建立映射 -->
+<mapper namespace="com.jiuyun.mapper.StudentMapper">
+    <sql id="columns">
+        stu_id,stu_name,major,sex,remark
+    </sql>
+
+    <!-- 匹配接口中的查询方法，id要与方法名相同，并指定返回类型 -->
+    <select id="selectAll" resultType="student">
+        select <include refid="columns"/> from t_student
+    </select>
+
+    <select id="selectById" parameterType="integer" resultType="Student">
+        select <include refid="columns"/> from t_student where stu_id=#{stuId}
+    </select>
+
+    <select id="selectSortByColumnName" resultType="student">
+        select <include refid="columns"/> from t_student order by ${columnName}
+    </select>
+
+    <select id="selectByColumnName" resultType="student">
+        select <include refid="columns"/> from t_student where ${columnName}=#{value}
+    </select>
+
+    <select id="selectByName" resultType="student">
+        select <include refid="columns"/> from t_student
+--         where stu_name like '%${stuName}%'
+        where stu_name like concat('%',#{stuName},'%')
+    </select>
+
+    <insert id="save" parameterType="student" useGeneratedKeys="true" keyColumn="stu_id" keyProperty="stuId">
+        insert into t_student (stu_name, major, sex, age, remark) values (#{stuName},#{major},#{sex},#{age},#{remark})
+    </insert>
+
+    <insert id="batchSave" parameterType="student" useGeneratedKeys="true" keyColumn="stu_id" keyProperty="stuId" >
+        insert into t_student (stu_name, major, sex, age, remark) values
+        <foreach collection="students" separator="," item="stu">
+            (#{stu.stuName}, #{stu.major}, #{stu.sex}, #{stu.age}, #{stu.remark})
+        </foreach>
+    </insert>
+
+    <delete id="delete" parameterType="integer">
+        delete from t_student where stu_id=#{stuId}
+    </delete>
+
+    <update id="update" parameterType="student">
+        update t_student set stu_name=#{stuName},major=#{major},sex=#{sex},age=#{age},remark=#{remark}
+        where stu_id=#{stuId}
+    </update>
+
+</mapper>

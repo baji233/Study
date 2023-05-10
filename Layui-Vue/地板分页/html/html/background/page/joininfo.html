@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>加盟页面内容管理</title>
+    <script src="../../static/js/vue.js"></script>
+    <link rel="stylesheet" href="../../static/elementui/index.css" />
+    <script src="../../static/elementui/index.js"></script>
+    <link rel="stylesheet" href="../../static/css/style.css">
+    <script src="../../static//js/axios-0.18.0.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!-- 搜索列表 -->
+        <el-card shadow="never">
+            <el-form :inline="true" size="small" :model="searchEntity">
+                <el-form-item label="标题">
+                    <el-input v-model="searchEntity.name" clearable placeholder="标题"></el-input>
+                </el-form-item>
+    
+                <el-form-item>
+                    <el-button type="danger" @click="delAll"><i class="fa fa-trash"></i> 删除选中</el-button>
+                    <el-button type="primary" @click="handleCreate"> 添加加盟内容</el-button>
+                    <el-button type="info" @click="resetSearch"><i class="fa fa-refresh"></i> 重置</el-button>
+                    <el-button type="success" @click="search"><i class="fa fa-search"></i> 查询</el-button>
+                </el-form-item>
+            </el-form>
+        </el-card>
+        <!-- 表格数据 -->
+        <el-card shadow="never">
+            <el-table
+                    :data="tableData"
+                    height="650"
+                    @selection-change="handleSelectionChange"
+                    style="width: 100%">
+
+                <el-table-column
+                        type="selection"
+                        @selection-change="handleSelectionChange"
+                        width="100">
+                </el-table-column>
+
+                <el-table-column
+                        type="index"
+                        width="150"
+                        label="序号">
+                </el-table-column>
+
+                <el-table-column
+                        prop="jiname"
+                        label="加盟标题"
+                        width="180" >
+                </el-table-column>
+
+                <el-table-column
+                        prop="info"
+                        label="内容" >
+                </el-table-column>
+
+                <el-table-column
+                        label="操作"
+                        width="200">
+                    <template slot-scope="scope">
+                        <el-button @click="handleDelete(scope.row)" type="danger" size="mini" style="padding: 2px 4px; border-radius: 0">
+                            <i class="fa fa-trash"></i> 删 除
+                        </el-button>
+                        <el-button @click="handleUpdate(scope.row)" type="primary" size="mini"
+                                   style="padding: 2px 4px; border-radius: 0" >
+                            <i class="fa fa-pencil"></i> 编 辑
+                        </el-button>
+                    </template>
+                </el-table-column>
+            </el-table>
+            <!-- 分页 -->
+            <div class="lw-fr" style="margin: 10px;">
+                <el-pagination background
+                               layout="total, prev, pager, next, sizes, jumper"
+                               :current-page.sync="page.pageNo"
+                               :page-size.sync="page.pageSize"
+                               :total="page.count"
+                               :page-sizes="[ 10, 20, 30, 40, 50, 100]"
+                               @current-change="searchPage"
+                               @size-change="searchPage">
+                </el-pagination>
+            </div>
+        </el-card>
+        <!-- 加盟页面内容添加-->
+        <el-dialog
+            title="加盟页面内容添加"
+            :visible.sync="addVisible"
+            width="90%"
+            height="100%"   
+            :before-close="handleClose"
+            >
+            <el-card shadow="naver">
+                <div class="lw-box-title">
+                    加盟信息
+                </div>
+                <el-form :model="addEntity"
+                        label-suffix=""
+                        label-width="100px">
+
+                    <el-row :span="24">
+                        <el-col :span="12">
+                            <el-form-item label="加盟标题" prop="jiname">
+                                <el-input v-model="addEntity.jiname" clearable></el-input>
+                            </el-form-item>
+                        </el-col>
+                    </el-row> 
+
+                    <el-row :span="24">
+                        <el-col :span="12">
+                            <el-form-item label="内容" prop="info">
+                                <el-input  type="textarea" rows="5" v-model="addEntity.info" clearable></el-input>
+                            </el-form-item>
+                        </el-col>
+                    </el-row> 
+                    
+                    <el-form-item>
+                        <el-button type="primary" @click="addsubmitForm()">立即创建</el-button>
+                        <el-button @click="addresetForm()">重置</el-button>
+                    </el-form-item>
+            </el-form>
+            </el-card>
+        </el-dialog>
+        <!-- 加盟页面内容修改 -->
+        <el-dialog
+        title="加盟页面内容修改"
+            :visible.sync="editVisible"
+            width="90%"
+            height="100%"   
+            :before-close="handleClose"
+            >
+        <el-card shadow="naver">
+            <div class="lw-box-title">
+                加盟页面信息
+            </div>
+            <el-form :model="editEntity"
+                    label-suffix=""
+                    label-width="100px">
+
+                <el-row :span="24">
+                    <el-col :span="12">
+                        <el-form-item label="加盟标题" prop="jiname">
+                            <el-input  v-model="editEntity.jiname" clearable></el-input>
+                        </el-form-item>
+                    </el-col>
+                </el-row> 
+
+                <el-row :span="24">
+                    <el-col :span="12">
+                        <el-form-item label="内容" prop="info">
+                            <el-input  type="textarea" rows="5" v-model="editEntity.info" clearable></el-input>
+                        </el-form-item>
+                    </el-col>
+                </el-row> 
+                
+                <el-form-item>
+                    <el-button type="primary" @click="editSubmitForm()">修改</el-button>
+                    <el-button @click="editResetForm()">重置</el-button>
+                </el-form-item>
+            </el-form>
+        </el-card>
+        </el-dialog>
+    </div>
+</body>
+<script>
+    var app = new Vue({
+        el:"#app",
+        data() {
+            return {
+                tableData:[],
+                searchEntity:{
+                    name: ""
+                },  
+                addVisible: false,//打开添加层
+                editVisible: false,//打开修改层
+                page: {
+                    pageNo: 1,
+                    pageSize: 10,
+                    count: 10
+                },
+                delarr:[],//存放删除的id
+                multipleSelection:[],//多选的数据
+                addEntity:{},//添加表单
+                editEntity:{},//编辑表单对象
+            }
+        },
+        created() {
+            this.getAll();
+        },
+        methods: {
+            //查询加盟页面信息
+            getAll(){
+                axios.get("/home/joininfo/"+this.page.pageNo+"/"+this.page.pageSize+"?jiname="+this.searchEntity.name).then((res)=>{
+                    //console.log(res)
+                    this.tableData = res.data.data.records;
+                    this.page.count = res.data.data.total
+                })
+            },
+            //查询
+            search(){
+                console.log(this.searchEntity.name)
+                this.getAll()
+            },
+            //重置
+            resetSearch(){
+                this.searchEntity.name = ""
+            },
+            //监听复选框选中
+            handleSelectionChange(val){
+                this.multipleSelection=val;
+            },
+            //分页
+            searchPage(currentPage){
+                this.page.pageNo = currentPage;
+                this.getAll();
+            },
+            //点击删除
+            handleDelete(row){
+                this.$confirm("此操作永久删除当前信息，是否继续？","提示",{type:"info"}).then(()=>{
+            
+                    axios.delete("/home/joininfo/"+row.jiid).then((res)=>{
+                        if(res.data.flag==true&&res.data.data!=null){
+                            this.$message.success("删除成功")
+                        }else{
+                            this.$message.error("删除失败")
+                        }
+                    }).finally(()=>{
+                        this.getAll();
+                    })
+                }).catch(()=>{
+                    this.$message.info("取消操作");
+                });
+            },
+            //点击修改
+            handleUpdate(row){
+                this.editVisible = true;
+                //查询店铺数据
+                console.log(row.jiid)
+                axios.get("/home/joininfo/"+row.jiid).then((res)=>{
+                    console.log(res)
+                    this.editEntity = res.data.data;
+                })
+            },
+            //修改提交
+            editSubmitForm(){
+                console.log(this.editEntity);
+                axios.put("/home/joininfo/",this.editEntity).then((res)=>{
+                    console.log(res);
+                    if(res.data.flag == true && res.data.data!=null){
+                        this.$message.success("修改成功")
+                    }else{
+                        this.$message.error("修改失败")
+                    }
+                }).finally(()=>{
+                    this.editVisible = false;
+                    this.getAll();
+                    this.editEntity = {}
+
+                })
+            },
+            //修改重置
+            editResetForm(){
+                this.editEntity = {};
+            },
+            //添加提交
+            addsubmitForm: function () {
+                console.log(this.addEntity);
+                axios.post("/home/joininfo/",this.addEntity).then((res)=>{
+                    console.log(res)
+                    if(res.data.flag == true && res.data.data!=null){
+                        this.$message.success("添加成功")
+                    }else{
+                        this.$message.error("添加失败")
+                    }
+                }).finally(()=>{
+                    this.addVisible = false;
+                    this.getAll();
+                    this.addEntity ={}
+                })
+            },
+            //显示添加弹框
+            handleCreate(){
+                this.addVisible = true;
+                
+            },
+            //添加重置
+            addresetForm(){
+                this.addEntity = {}
+            },
+            //关闭
+            handleClose(){
+                this.addVisible = false;
+                this.editVisible = false;
+                this.addEntity = {};
+                this.editEntity = {};
+            },
+            //批量删除
+            delAll(){
+                this.$confirm('是否删除选中'+this.multipleSelection.length+'行?', '提示', {
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消',
+                    type: 'warning'
+                }).then(() => {
+                    if(this.multipleSelection.length>0){
+                        //循环取出id
+                        for(let i=0;i<this.multipleSelection.length;i++){
+                            //添加到delarr
+                            this.delarr.push(this.multipleSelection[i].jiid)
+                        }
+                        console.log(this.delarr)
+                        axios.delete("/home/joininfo?ids="+this.delarr).then((res)=>{
+                            if(res.data.flag == true && res.data.data!=null){
+                                this.$message.success("删除成功")
+                            }else{
+                                this.$message.error("删除失败")
+                            }
+                        }).finally(()=>{
+                            this.getAll();
+                        })
+                    }else{
+                        this.$message.warning("至少选中一行");
+                    }
+                    
+                }).catch(() => {
+                    this.$message.info("取消操作");    
+                });
+                
+            },
+        },
+    })
+</script>
+</html>

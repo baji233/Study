@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+<script type="text/javascript">
+
+  //九九乘法表
+  function jiujiu(){
+      let div = document.getElementById("div2");
+      let table = document.createElement("table");
+      div.appendChild(table);
+      for(let a=1;a<=9;a++){
+          let tr = document.createElement("tr");
+          let td = document.createElement("td");
+          tr.appendChild(td);
+          table.appendChild(tr);
+          for(let b=1;b<=a;b++){
+              let text=document.createElement("text")
+              text=document.createTextNode(a + "*" + b + "=" + a * b +"  ");
+              td.appendChild(text);
+          }
+      }
+  }
+
+  //分页作业
+  function test() {
+      let array = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20];
+      let pageSize = 5;
+      let pageIndex = 1;
+      let pageCount=(date.length % pageSize==0) ? (date.length / pageSize) : (date.length / pageSize)+1;
+      function toPage(pageNum) {
+          pageNum=((pageNum > pageSize) || pageNum < 1 || pageNum==undefined) ? 1:pageNum;
+          console
+          let data = array.slice(pageSize * (pageIndex - pn),pageSize * pageIndex);
+
+      }
+      let tbl=document.getElementById("tbl");
+      //隐藏表
+      tbl.style.display="none";
+      //获取跳转页数
+      let pageNumber=document.getElementById("pageNumber");
+      let pn=pageNumber.value;
+      if(pn<=4 && pn!=0){
+          for (let i = 0; i < pageSize;i++) {
+              let td=document.getElementsByTagName("td");
+              // td.value=data[i];
+              // td.appendChild(document.createTextNode(data[i].toString()));
+          }
+      }
+  }
+
+  function goToPage() {
+
+  }
+</script>
+<body>
+<table id="tbl">
+    <tr>
+        <td value="1"></td>
+    </tr>
+    <tr>
+        <td>2</td>
+    </tr>
+    <tr>
+        <td>3</td>
+    </tr>
+    <tr>
+        <td>4</td>
+    </tr>
+    <tr>
+        <td>5</td>
+    </tr>
+</table>
+<a onclick="test()">上一页</a>&nbsp;&nbsp;跳到<input type="text" id="pageNumber">页<input type="button" value="go" onclick="goToPage()">&nbsp;&nbsp;<a onclick="test()">下一页</a>
+
+
+
+<div id="div1"></div>
+<input type="button" value="九九乘法表" onclick="jiujiu()"/>
+<div id="div2"></div>
+
+</body>
+</html>
+

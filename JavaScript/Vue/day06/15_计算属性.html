@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="../js/vue.js"></script>
+	</head>
+	<body>
+		<div id="app">
+			<h1>原始属性 : {{msg}}</h1>
+			<h1>计算属性 : {{uppermsg}}</h1></br>
+			<h1>时间戳 : {{now}}</h1>
+			<h1>年月日 : {{dateNow}}</h1>
+		</div>
+	</body>
+	<script>
+		var vm = new Vue({
+			el: "#app",
+			data: {
+				msg: 'HellO',
+				now: Date.now() //当前时间
+			},
+			methods: {
+
+			},
+			computed: {
+				//计算属性区 : 与方法区不同的是计算属性是基于它们的响应式依赖进行缓存的。(写成函数,用成变量)
+				uppermsg: function() {
+					return this.msg.toUpperCase(); //将字符串转化为大写
+				},
+				dateNow() {
+					//获取时间戳
+					var timdedetail = this.now; //假如是10位毫秒需要乘1000
+					//获取年份
+					var year = new Date(timdedetail).getFullYear();
+					//获取月份，获取的月份比实际小1，所以在使用的时候需要+1
+					var month = new Date(timdedetail).getMonth() + 1;
+					//获取日
+					var date = new Date(timdedetail).getDate();
+					//获取时
+					var hours = new Date(timdedetail).getHours();
+					//获取分
+					var minutes = new Date(timdedetail).getMinutes();
+					//获取秒
+					var seconds = new Date(timdedetail).getSeconds();
+					//组合格式为年-月-日 时：分：秒（2021-7-5 21:21:21）
+					// var time = year + "-" + month + "-" + date + " " + hours + ":" + minutes + ":" + seconds;
+					var time = `${year}年${month}月${date}日 --- ${hours}点${minutes}分${seconds}秒`;
+					return time;
+				},
+				
+			},
+		});
+	</script>
+</html>

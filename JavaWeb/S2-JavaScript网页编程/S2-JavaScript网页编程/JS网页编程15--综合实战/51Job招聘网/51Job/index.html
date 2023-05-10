@@ -1,0 +1,341 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+    <title>我的招聘网</title>
+    <link href="css/style.css" rel="stylesheet" />
+    <script language="javascript">
+        //左侧广告关闭
+        function closeadv() {
+            var mscroll = document.getElementById("mscroll");
+            if (mscroll) {
+                mscroll.style.display = "none";
+            }
+        }
+
+        //窗口的滚动事件，当页面滚动时调用move()函数
+        var initTop = 70;
+        var initLeft = 110;
+        window.onscroll = move;
+        function move() {
+            var scrolltop = document.documentElement.scrollTop || document.body.scrollTop;
+            scrolltop += initTop;
+            var scrollleft = document.documentElement.scrollLeft || document.body.scrollLeft;
+            scrollleft += initLeft;
+            var box = document.getElementById('mscroll');
+            box.style.top = scrolltop + "px";
+            box.style.length = scrollleft + "px";
+        }
+
+        //首页图片轮播
+        var nowFrame = 1;  //全局变量，用于显示默认的第一图片广告位
+        var maxFrame = 3;  //全局变量，设定最大显示图片的下标
+        window.onload = adv;
+        function adv() {
+            for (var i = 1; i <= maxFrame; i++) {
+                if (i == nowFrame) {
+                    document.getElementById("ad" + nowFrame).style.display = "block"; //设置当前广告图片显示
+                } else {
+                    document.getElementById("ad" + i).style.display = "none";
+                }
+            }
+            if (nowFrame == maxFrame) {
+                nowFrame = 1;
+            } else {
+                nowFrame++;
+            }
+        }
+        setInterval(adv, 2000);
+    </script>
+</head>
+<body>
+    <div class="main">
+        <!--带关闭按扭的随鼠标上下滚动的图片层-->
+        <div align="right" style="position:absolute;left:10px;top:100px;width:109px;background-color:#CCCCCC;z-index:2;" id="mscroll"><img src="image/close.jpg"><br><a href="javascript:closeadv();">关闭</a></div>
+        <!--随机漂浮广告开始-->
+        <!--<div id="float" style="position:absolute;z-index:3;"><img src="image/float.gif" width="80" height="52"></div>-->
+        <!--头部开始-->
+        <div id="logo"><img src="image/logo.gif"></div>
+        <div id="menu"><a href="login.html"><img src="image/menu1-2.gif"></a><a href="search.html"><img src="image/menu2-2.gif"></a><a href="intro.html"><img src="image/menu3-2.gif"></a></div>
+        <div id="menu-bg1" style="padding-top:2px;">
+            <form action="" method="post" name="myform">
+                个人会员登录 | 会员名： &nbsp;
+                <input name="username" type="text" class="index-input"> &nbsp;&nbsp;&nbsp;&nbsp;
+                密码：&nbsp;<input name="pwd" type="password" class="index-input"> &nbsp;&nbsp;&nbsp;
+                <input name="subbmit" type="submit" value="&nbsp" class="index-btn">&nbsp;&nbsp;&nbsp;
+                <input name="zddl" type="checkbox" value="1"> 自动登录&nbsp;&nbsp;&nbsp;
+                <a href="register.html" class="a-white">新会员注册</a>
+            </form>
+        </div>
+        <!--搜索、图片、近期预告-->
+        <div style="padding-top:10px;">
+            <table width="99%" border="0" cellspacing="0" cellpadding="0" align="center">
+                <tr>
+                    <td width="210">
+                        <table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
+                            <tr align="center">
+                                <td><a href="company.html"><img src="image/index-2.gif"></a></td>
+                            </tr>
+                            <tr align="center">
+                                <td><a href="company.html"><img src="image/index-3.gif" vspace="4"></a></td>
+                            </tr>
+                            <tr align="center">
+                                <td><a href="company.html"><img src="image/index-4.gif" vspace="4"></a></td>
+                            </tr>
+                        </table>
+                    </td>
+                    <form action="search.html" method="post" name="search">
+                        <td style="background-image:url(image/index-bg1.gif); background-repeat:no-repeat;padding-left:15px;padding-top:40px;" width="202" height="200">
+                            请输入关键词：<br><input name="search-key" type="text" class="register-input"><br>例如：软件工程师<br>
+                            或 项目经理 互联网<br>
+                            <div align="center" style="width:150px;"><input name="search-btn" type="submit" value="&nbsp;" class="index-btn1"></div>
+                        </td>
+                    </form>
+                    <td>
+                        <div align="center">欢迎光临招聘网</div>
+                        <div>
+                            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                <tr align="center">
+                                    <td>
+                                        <a href="company.html"><img src="image/index-7.gif" id="ad1"></a>
+                                        <a href="company.html"><img src="image/index-5.gif" id="ad2"></a>
+                                        <a href="company.html"><img src="image/index-6.gif" id="ad3"></a>
+                                    </td>
+                                </tr>
+                                <tr align="center">
+                                    <td>·<a href="company.html">深圳高新技术人才专场招聘会</a>&nbsp;&nbsp;&nbsp;&nbsp;·<a href="company.html">近期预告敬请关注</a></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </td>
+                    <td width="210" valign="top">
+                        <table width="204" border="0" cellspacing="0" cellpadding="0" align="center">
+                            <tr>
+                                <td id="menu-bg1" style="border:1 #ff7000 solid;border-bottom:0;">·近期预告</td>
+                            </tr>
+                            <tr>
+                                <td style="padding-left:10px;border:1px #ff7000 solid;border-top:0;">
+                                    <marquee direction="up" onmouseover="this.stop()" onmouseout="this.start()" height="160">
+                                        ·2017年9月无忧指数IT图解<br>
+                                        ·3G售前技术支持工程师<br>
+                                        ·3G测试工程师<br>
+                                        ·中关村急需AI系统开发工程师<br>
+                                        ·服务器开发系统工程师<br>
+                                        ·2018年12月软件行业工资位居榜首<br>
+                                        ·4G售前技术支持工程师<br>
+                                        ·5G测试工程师<br>
+                                        ·U3d游戏开发工程师<br>
+                                        ·无线开发系统工程师<br>
+                                        ·2019年1月中国IT薪水排行榜指数曲线图解
+                                    </marquee>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <!--品牌公司跑马灯-->
+        <div><img src="image/index-1.gif"></div>
+        <div style="padding-top:10px;">
+            <marquee direction="left" width="980px" height="30px" onmouseover="this.stop()" onmouseout="this.start()">
+                <a href='company.html'>武汉红孩子信息技术有限公司</a>&nbsp;&nbsp;
+                <a href='company.html'>海南优美内衣有限公司</a>&nbsp;&nbsp;
+                <a href='company.html'>武汉第三空间建筑装饰设计工程</a>&nbsp;&nbsp;
+                <a href='company.html'>武汉鑫凌铭泰汽车销售有限公司</a>&nbsp;&nbsp;
+                <a href='company.html'>武汉晟添华广告有限公司</a>&nbsp;&nbsp;
+                <a href='company.html'>华艺墙纸布艺市场有限公司</a>&nbsp;&nbsp;
+                <a href='company.html'>深圳市爱迪星电子科技有限公司武汉</a>&nbsp;&nbsp;
+                <a href='company.html'>伊莎美尔</a>&nbsp;&nbsp;
+                <a href='company.html'>武汉美苑广告印务有限公司</a>&nbsp;&nbsp;
+                <a href='company.html'>卓著装饰</a>&nbsp;&nbsp;
+                <a href='company.html'>武汉市捷强智能门控工程有限公司</a>&nbsp;&nbsp;
+                <a href='company.html'>武汉沿极建筑技术有限公司</a>&nbsp;&nbsp;
+                <a href='company.html'>武汉东云阁酒店管理有限公司</a>&nbsp;&nbsp;
+                <a href='company.html'>武汉市中创环亚建筑景观设计工程</a>&nbsp;&nbsp;
+                <a href='company.html'>法国伊丝艾拉内衣</a>&nbsp;&nbsp;
+                <a href='company.html'>达诚医药</a>&nbsp;&nbsp;
+                <a href='company.html'>ERUNER湖北分公司</a>&nbsp;&nbsp;
+                <a href='company.html'>湖北伟业房地产有限公司</a>&nbsp;&nbsp;
+                <a href='company.html'>华闻期货武昌营业部</a>&nbsp;&nbsp;
+                <a href='company.html'>武汉华城运输有限公司</a>&nbsp;&nbsp;
+                <a href='company.html'>武汉百纳装饰工程有限公司</a>&nbsp;&nbsp;
+                <a href='company.html'>星月门业</a>&nbsp;&nbsp;
+                <a href='company.html'>四合园酒店</a>&nbsp;&nbsp;
+                <a href='company.html'>锐色力奥品牌策略机构</a>&nbsp;&nbsp;
+                <a href='company.html'>武汉凯比亚电池科技有限公司</a>&nbsp;&nbsp;
+                <a href='company.html'>武汉绍兴老酒饮食有限公司</a>
+            </marquee>
+        </div>
+        <!--图片广告-->
+        <div>
+            <table width="962" border="0" cellspacing="0" cellpadding="0" align="center">
+                <tr align="center">
+                    <td><a href="company.html"><img src="image/index-ad1.gif" hspace="4" vspace="4" border="0"></a></td>
+                    <td><a href="company.html"><img src="image/index-ad2.gif" hspace="4" vspace="4" border="0"></a><br><img src="image/index-ad6.gif">
+                    <td><a href="company.html"><img src="image/index-ad4.gif" hspace="4" vspace="4" border="0"></a><br><a href="company.html"><img src="image/index-ad5.gif" hspace="4" vspace="4" border="0"></a></td>
+                </tr>
+                <tr align="center">
+                    <td>
+                        <a href="company.html"><img src="image/index-ad7.gif" hspace="4" vspace="4" border="0"></a><br>
+                        <a href="company.html"><img src="image/index-ad8.gif" hspace="4" vspace="4" border="0"></a>
+                    </td>
+                    <td><a href="company.html"><img src="image/index-ad9.gif" hspace="4" vspace="4" border="0"></a><br><img src="image/index-ad10.gif">
+                    <td><a href="company.html"><img src="image/index-ad11.gif" hspace="4" vspace="4" border="0"></a><br><a href="company.html"><img src="image/index-ad12.gif" hspace="4" vspace="4" border="0"></a></td>
+                </tr>
+            </table>
+        </div>
+        <!--最热招聘-->
+        <div>
+            <table width="962" border="0" cellspacing="0" cellpadding="0" align="center">
+                <tr>
+                    <td><img src="image/hot_top.gif"></td>
+                </tr>
+                <tr>
+                    <td>
+                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                            <tr>
+                                <td style="background-image:url(image/register-line.gif); background-repeat:repeat-y" width="3"></td>
+                                <td>
+                                    <table width="97%" border="0" cellspacing="0" cellpadding="0" align="center">
+                                        <tr>
+                                            <td><SPaN class="index-btn2"><a href="#hot1">计算机/网络/通信/电子</a></SPaN><SPaN class="index-btn2"><a href="#hot2">贸易/消费/制造/营运</a></SPaN></td>
+                                        </tr>
+                                        <tr>
+                                            <td id="hot1">
+                                                <div class="login-bold" style="padding-top:20px;"><img src="image/register-arrow.gif" width="9" height="9"> 计算机/网络/通信/电子</div>
+                                                <div>
+                                                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                                        <tr>
+                                                            <td style="border-bottom:1 #cccccc dotted;" height="25">·武汉网度信息科技有限公司</td>
+                                                            <td style="border-bottom:1 #cccccc dotted;">·北京东方中科集成科技有限公司</td>
+                                                            <td style="border-bottom:1 #cccccc dotted;">·深圳市天音美讯信息技术有限公司</td>
+                                                            <td style="border-bottom:1 #cccccc dotted;">·武汉天行健科学仪器设备有限公司</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="border-bottom:1 #cccccc dotted;" height="25">·武汉电信系统集成分公司</td>
+                                                            <td style="border-bottom:1 #cccccc dotted;">·武汉网路万通科技开发有限公司</td>
+                                                            <td style="border-bottom:1 #cccccc dotted;">·深圳市天音美讯信息技术有限公司</td>
+                                                            <td style="border-bottom:1 #cccccc dotted;">·武汉理康科技有限公司</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="border-bottom:1 #cccccc dotted;" height="25">·武汉红帽电子娱乐有限公司</td>
+                                                            <td style="border-bottom:1 #cccccc dotted;">·武汉盛铭科技有限公司</td>
+                                                            <td style="border-bottom:1 #cccccc dotted;">·武汉市一龙电气科技有限公司</td>
+                                                            <td style="border-bottom:1 #cccccc dotted;">·武汉天腾通软科技有限公司</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="border-bottom:1 #cccccc dotted;" height="25">·武汉洛比科技有限公司    </td>
+                                                            <td style="border-bottom:1 #cccccc dotted;">·武汉百捷网络服务有限公司</td>
+                                                            <td style="border-bottom:1 #cccccc dotted;">·江苏新科数字技术有限公司武汉分公司</td>
+                                                            <td style="border-bottom:1 #cccccc dotted;">·武汉市武昌区徐恒电脑服务部</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="border-bottom:1 #cccccc dotted;" height="25">·武汉网度信息科技有限公司</td>
+                                                            <td style="border-bottom:1 #cccccc dotted;">·北京东方中科集成科技有限公司</td>
+                                                            <td style="border-bottom:1 #cccccc dotted;">·深圳市天音美讯信息技术有限公司</td>
+                                                            <td style="border-bottom:1 #cccccc dotted;">·武汉天行健科学仪器设备有限公司</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="border-bottom:1 #cccccc dotted;" height="25">·武汉电信系统集成分公司</td>
+                                                            <td style="border-bottom:1 #cccccc dotted;">·武汉网路万通科技开发有限公司</td>
+                                                            <td style="border-bottom:1 #cccccc dotted;">·深圳市天音美讯信息技术有限公司</td>
+                                                            <td style="border-bottom:1 #cccccc dotted;">·武汉理康科技有限公司</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="border-bottom:1 #cccccc dotted;" height="25">·武汉红帽电子娱乐有限公司</td>
+                                                            <td style="border-bottom:1 #cccccc dotted;">·武汉盛铭科技有限公司</td>
+                                                            <td style="border-bottom:1 #cccccc dotted;">·武汉市一龙电气科技有限公司</td>
+                                                            <td style="border-bottom:1 #cccccc dotted;">·武汉天腾通软科技有限公司</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="border-bottom:1 #cccccc dotted;" height="25">·武汉洛比科技有限公司    </td>
+                                                            <td style="border-bottom:1 #cccccc dotted;">·武汉百捷网络服务有限公司</td>
+                                                            <td style="border-bottom:1 #cccccc dotted;">·江苏新科数字技术有限公司武汉分公司</td>
+                                                            <td style="border-bottom:1 #cccccc dotted;">·武汉市武昌区徐恒电脑服务部</td>
+                                                        </tr>
+                                                    </table>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td id="hot2">
+                                                <div class="login-bold" style="padding-top:20px;"><img src="image/register-arrow.gif" width="9" height="9"> 贸易/消费/制造/营运</div>
+                                                <div>
+                                                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                                        <tr>
+                                                            <td style="border-bottom:1 #cccccc dotted;" height="25">·武汉网度信息科技有限公司</td>
+                                                            <td style="border-bottom:1 #cccccc dotted;">·北京东方中科集成科技有限公司</td>
+                                                            <td style="border-bottom:1 #cccccc dotted;">·深圳市天音美讯信息技术有限公司</td>
+                                                            <td style="border-bottom:1 #cccccc dotted;">·武汉天行健科学仪器设备有限公司</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="border-bottom:1 #cccccc dotted;" height="25">·武汉电信系统集成分公司</td>
+                                                            <td style="border-bottom:1 #cccccc dotted;">·武汉网路万通科技开发有限公司</td>
+                                                            <td style="border-bottom:1 #cccccc dotted;">·深圳市天音美讯信息技术有限公司</td>
+                                                            <td style="border-bottom:1 #cccccc dotted;">·武汉理康科技有限公司</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="border-bottom:1 #cccccc dotted;" height="25">·武汉红帽电子娱乐有限公司</td>
+                                                            <td style="border-bottom:1 #cccccc dotted;">·武汉盛铭科技有限公司</td>
+                                                            <td style="border-bottom:1 #cccccc dotted;">·武汉市一龙电气科技有限公司</td>
+                                                            <td style="border-bottom:1 #cccccc dotted;">·武汉天腾通软科技有限公司</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="border-bottom:1 #cccccc dotted;" height="25">·武汉洛比科技有限公司    </td>
+                                                            <td style="border-bottom:1 #cccccc dotted;">·武汉百捷网络服务有限公司</td>
+                                                            <td style="border-bottom:1 #cccccc dotted;">·江苏新科数字技术有限公司武汉分公司</td>
+                                                            <td style="border-bottom:1 #cccccc dotted;">·武汉市武昌区徐恒电脑服务部</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="border-bottom:1 #cccccc dotted;" height="25">·武汉网度信息科技有限公司</td>
+                                                            <td style="border-bottom:1 #cccccc dotted;">·北京东方中科集成科技有限公司</td>
+                                                            <td style="border-bottom:1 #cccccc dotted;">·深圳市天音美讯信息技术有限公司</td>
+                                                            <td style="border-bottom:1 #cccccc dotted;">·武汉天行健科学仪器设备有限公司</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="border-bottom:1 #cccccc dotted;" height="25">·武汉电信系统集成分公司</td>
+                                                            <td style="border-bottom:1 #cccccc dotted;">·武汉网路万通科技开发有限公司</td>
+                                                            <td style="border-bottom:1 #cccccc dotted;">·深圳市天音美讯信息技术有限公司</td>
+                                                            <td style="border-bottom:1 #cccccc dotted;">·武汉理康科技有限公司</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="border-bottom:1 #cccccc dotted;" height="25">·武汉红帽电子娱乐有限公司</td>
+                                                            <td style="border-bottom:1 #cccccc dotted;">·武汉盛铭科技有限公司</td>
+                                                            <td style="border-bottom:1 #cccccc dotted;">·武汉市一龙电气科技有限公司</td>
+                                                            <td style="border-bottom:1 #cccccc dotted;">·武汉天腾通软科技有限公司</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="border-bottom:1 #cccccc dotted;" height="25">·武汉洛比科技有限公司    </td>
+                                                            <td style="border-bottom:1 #cccccc dotted;">·武汉百捷网络服务有限公司</td>
+                                                            <td style="border-bottom:1 #cccccc dotted;">·江苏新科数字技术有限公司武汉分公司</td>
+                                                            <td style="border-bottom:1 #cccccc dotted;">·武汉市武昌区徐恒电脑服务部</td>
+                                                        </tr>
+                                                    </table>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                                <td style="background-image:url(image/register-line.gif); background-repeat:repeat-y" width="3"></td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td><img src="image/hot_down.gif"></td>
+                </tr>
+            </table>
+
+        </div>
+    </div>
+    <div id="bottom-bg" class="bottom-bg">网站导航 | <a href="index.html" class="a-white">网站首页</a> | <a href="search.html" class="a-white">职位搜索</a> | <a href="login.html" class="a-white">Myjob</a> | <a href="register.html" class="a-white">用户注册</a> | <a href="login.html" class="a-white">用户登录</a> | <a href="intro.html" class="a-white">简历管理</a> | <a href="company.html" class="a-white">招聘公司</a></div>
+    <div id="bottom" class="bottom">
+        人才招聘 Email:hr@51job.com<br>个人求职 Email:club@51job.com　或垂询:800-820-5100
+        <br>
+        未经本招聘网站同意，不得转载本网站之所有招聘信息及作品
+        <br>
+        无忧工作网版权所有&copy;1999-2007<br>
+        <a href="http://www.miibeian.gov.cn" target="_blank"><img src="image/bottom1.gif" border="0"></a>
+    </div>
+</body>
+</html>

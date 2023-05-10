@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>商品首页</title>
+</head>
+<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+    $(function () {
+        $("#btnSearch").click(function () {
+            search();
+        });
+
+        search();
+    });
+
+    function search() {
+        var params = {};
+        params.productName = $(document.searchForm.productName).val();
+        params.typeId = $(document.searchForm.typeId).val();
+        params.price = $(document.searchForm.price).val();
+        params.description = $(document.searchForm.description).val();
+        $.ajax({
+            url: "../product/search",
+            dataType: "json",
+            data: params,
+            type: "get",
+            success: function (res) {
+                let productList = res.productList;
+                let allTypes = res.allTypes;
+                let html = "";
+                for (let i=0;i<productList.length;i++) {
+                    html += "<tr>";
+                    html += "<td>" + productList[i].productId + "</td>";
+                    html += "<td>" + productList[i].productName + "</td>";
+                    html += "<td>" + getTypeName(productList[i].typeId, allTypes) + "</td>";
+                    html += "<td>" + productList[i].description + "</td>";
+                    html += "<td>" + productList[i].price + "</td>";
+                    html += "<td>" + productList[i].remark + "</td>";
+                    html += "<td>" + productList[i].productId + "<a>加入购物车</a></td>";
+                    html += "</tr>";
+                }
+                $("#tbl_products").html(html);
+                let options = "<option value=''></option>";
+                for (let type in allTypes) {
+                    options += "<option value='" + type + "'>" + allTypes[type] + "</option>";
+                }
+                $("#typeId").html(options);
+            },
+            error: function (res) {
+                console.log("请求失败！" + res.toString());
+            }
+        });
+    }
+
+    function getTypeName(typeId, allTypes) {
+        for (let type in allTypes) {
+            console.log(type);
+            if(typeId == type) {
+                return allTypes[type];
+            }
+        }
+    }
+</script>
+<body>
+<center>
+    <h2>购物商城首页</h2>
+    <form name="searchForm" method="get">
+        <table class="table">
+            <tr>
+                <td>商品名称：</td>
+                <td><input type="text" name="productName"></td>
+                <td>类型：</td>
+                <td>
+                    <select id="typeId" name="typeId">
+
+                    </select>
+                </td>
+                <td>描述：</td>
+                <td><input type="text" name="description"></td>
+                <td>价格：</td>
+                <td><input type="text" name="price"></td>
+                <td><input id="btnSearch" type="button" value="搜索"></td>
+            </tr>
+        </table>
+    </form>
+    <table border="1px">
+        <thead>
+        <tr>
+            <th width="80px">商品编号</th>
+            <th width="160px">商品名称</th>
+            <th width="80px">商品类型</th>
+            <th width="150px">描述</th>
+            <th width="100px">价格</th>
+            <th width="180px">备注</th>
+            <th width="120px">操作</th>
+        </tr>
+        </thead>
+        <tbody id="tbl_products">
+
+        </tbody>
+    </table>
+    <a href="../homepage/shoppingCarPage.jsp">我的购物车</a>
+    <a href="">我的订单</a>
+    <a href="">退出登录</a>
+</center>
+</body>
+</html>

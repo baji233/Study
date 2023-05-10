@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <script src="../js/vue.js"></script>
+    <script src="../js/axios.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <h1>{{ title }}</h1>
+        <button @click="test01">笑话get01</button>
+        <button @click="test02">post测试</button>
+        <button @click="test03">delete测试</button>
+        <button @click="test04">put测试</button>
+
+        <h2 v-for="(item,i) in list" :key="i">{{item}}</h2>
+    </div>
+</body>
+<script>
+    //请求的基础地址
+    axios.defaults.baseURL = 'http://localhost:9099'
+
+    // 通过JWT为访问者发放token用来识别信息
+    axios.defaults.headers['token'] = 'jwtcode1237447785';
+
+    var vm = new Vue({
+        el: "#app",
+        data: {
+            title: 'Axios异步请求',
+            list: [] //所有笑话
+        },
+        methods: {
+            test01() {
+                let url = 'https://autumnfish.cn./api/joke/list'
+                axios.get(url, { params: { num: 5 } })
+                    .then((ret) => {
+                        console.log('结果', ret);
+                        this.list = ret.data.data;
+                    });
+            },
+            // 测试 POST 请求
+            async test02() {
+                let url = '/books';
+                let params = new URLSearchParams();
+                params.append("uname", "剑圣");
+                params.append("pwd", "666666");
+                let ret = await axios.post(url, params)
+                console.log(ret);
+            },
+            //DELETE请求
+            async test03() {
+                let url = '/books/1010';
+                let ret = await axios.delete(url)
+                console.log(ret);
+            },
+            //PUT请求
+            async test04() {
+            let url ='/books/999';
+            let ret = await axios.put(url,{stname:'dema',age:18})
+            console.log( ret );
+        }
+    }});
+</script>
+
+</html>

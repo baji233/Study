@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <script src="../js/vue.js"></script>
+    <style>
+        img {
+            width: 150px;
+            height: 150px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <div v-for="(item,i) in bloglist" :key="item.id">
+            <blog :title="item.title" :date="item.date" :imgs="item.imgs"></blog>
+        </div>
+    </div>
+</body>
+<script>
+    Vue.component('blog',{
+        props : ['title', 'date', 'imgs'],
+        data : function() {
+            return {
+
+            }
+        },
+        template : `
+        <h1>
+        {{title}} </br> {{date}} </br>
+        <img :src="imgs">
+        </h1>
+        `
+    })
+
+    var vm = new Vue({
+        el: "#app",
+        data: {
+            bloglist: [
+                {
+                    id: 1, title: 'apple', date: '2022-3-1', imgs: ['../img/apple.jpg']
+                },
+                {
+                    id: 2, title: 'banana', date: '2022-4-1', imgs: ['../img/banana.jpg']
+                },
+                {
+                    id: 3, title: 'orange', date: '2022-5-1', imgs: ['../img/orange.jpg']
+                }
+            ]
+        },
+        methods: {
+
+        }
+    });
+</script>
+
+</html>

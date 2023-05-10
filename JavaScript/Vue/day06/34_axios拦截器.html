@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../js/vue.js"></script>
+    <script src="../js/axios.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <h1> axios 拦截器 </h1>
+    <div id="app">
+        <button @click="test1"> Test </button>
+        <p v-for="item in list">{{item}}</p>
+    </div>
+</body>
+<script>
+// 观察每个 URL 高度相似，优化思路
+axios.defaults.baseURL='https://autumnfish.cn/api'
+
+//请求拦截器
+axios.interceptors.request.use((config)=>{
+    //拦截成功
+    console.log('进入request拦截器');
+    config.headers.token = 'jwt11112222';
+    //拦截后放行
+    return config;
+},(err)=>{
+    //拦截失败
+    console.log( err );
+})
+
+// 响应拦截器  简化返回值
+axios.interceptors.response.use((ret)=>{
+    console.log('...进入响应拦截器');
+    //拦截掉其他内容,只返回响应中的data
+    return ret.data
+},(err)=>{
+    console.log( err );
+})
+
+var vm = new Vue({
+    el:'#app',
+    data:{
+        list: []
+    },
+    methods:{
+        async test1(){
+            let url = '/joke/list'
+            let ret =await axios.get(url, { params:{ num:3}} )
+            console.log( ret );
+            this.list =  ret.data 
+        } 
+    }
+})
+</script>
+
+</html>

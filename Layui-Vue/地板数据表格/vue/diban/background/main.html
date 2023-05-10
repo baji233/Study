@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>后台管理系统</title>
+    <script src="../static/js/vue.js"></script>
+    <script src="../static/js/moment.js"></script>
+    <link rel="stylesheet" href="../static/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../static/elementui/index.css">
+    <link rel="stylesheet" href="../static/css/style.css">
+    <script src="../static/elementui/index.js"></script>
+    <script src="../static/js/echarts.min.js"></script>
+    <style>
+        .box-card {
+            margin-bottom: 20px;
+        }
+    </style>
+    <style>
+        .el-row {
+            margin-bottom: 20px;
+        }
+
+        .el-col {
+            border-radius: 4px;
+        }
+
+        .bg-purple {
+            background: #EBEEF5;
+        }
+
+        .grid-content {
+            border-radius: 4px;
+            min-height: 36px;
+            padding: 10px;
+            font-size: 13px;
+            color: #303133;
+        }
+
+        .grid-content span {
+            margin: 10px 0 0 10px;
+            display: block;
+            font-size: 32px;
+            font-weight: 100;
+            color: #67C23A;
+        }
+
+        .row-bg {
+            padding: 10px 0;
+            background-color: #f9fafc;
+        }
+    </style>
+</head>
+<body>
+
+<div id="app">
+    <el-card class="box-card">
+        <span>欢迎您: <span style="color: #F56C6C;font-weight: 700;">管理员</span>！当前时间: <span
+                v-text="nowTime"></span> </span>
+    </el-card>
+
+   
+
+    <el-card class="box-card">
+        <div slot="header" class="clearfix">
+            <span style="font-weight: 600;">站点统计</span>
+        </div>
+        <div class="text item">
+
+            <el-row :gutter="20">
+                <el-col :span="4">
+                    <div class="grid-content bg-purple">
+                        文章数
+                        <span>19</span>
+                    </div>
+                </el-col>
+                <el-col :span="4">
+                    <div class="grid-content bg-purple">
+                        用户数
+                        <span>1002</span>
+                    </div>
+                </el-col>
+                <el-col :span="4">
+                    <div class="grid-content bg-purple">
+                        留言
+                        <span>30</span>
+                    </div>
+                </el-col>
+                <el-col :span="4">
+                    <div class="grid-content bg-purple">
+                        浏览量
+                        <span>39</span>
+                    </div>
+                </el-col>
+                <el-col :span="4">
+                    <div class="grid-content bg-purple">
+                        标签数
+                        <span>21</span>
+                    </div>
+                </el-col>
+
+
+            </el-row>
+
+        </div>
+    </el-card>
+
+
+</div>
+
+<script type="text/javascript">
+    // 基于准备好的dom，初始化echarts实例
+    // app.myChart = echarts.init(document.getElementById('main'));
+
+    // 使用刚指定的配置项和数据显示图表。
+
+</script>
+
+<script>
+    const app = new Vue({
+        el: '#app',
+        data: {
+            chart1: {},
+            chart2: {},
+            chart3: {},
+            nowTime: '',
+        },
+        methods: {
+            mypage: function () {
+                window.open("http://www.kevinlu98.cn", "_blank")
+            },
+            qqcall: function () {
+                window.open("tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1628048198", "_blank")
+            },
+            vuedoc: function () {
+                window.open("https://cn.vuejs.org/", "_blank")
+            },
+            fontdoc: function () {
+                window.open("http://www.fontawesome.com.cn/faicons/", "_blank")
+            },
+            elementdoc: function () {
+                window.open("https://element.eleme.cn/2.0/#/zh-CN/component/installation", "_blank")
+            },
+            gitee: function () {
+                window.open("https://gitee.com/kevinlu98/lw-admin", "_blank");
+            },
+            github: function () {
+                window.open("https://kevinlu98.github.io/lw-admin/", "_blank");
+            }
+        },
+        created: function () {
+            let that = this
+            that.nowTime = moment().format('YYYY-MM-DD HH:mm:ss')
+            window.setInterval(function () {
+                that.nowTime = moment().format('YYYY-MM-DD HH:mm:ss')
+            }, 1000)
+
+        },
+        mounted: function () {
+            this.chart1 = echarts.init(document.getElementById('chart1'));
+            this.chart2 = echarts.init(document.getElementById('chart2'));
+            this.chart3 = echarts.init(document.getElementById('chart3'));
+
+        }
+    })
+</script>
+
+</body>
+</html>

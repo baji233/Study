@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="c58a51bf-af2d-4687-bf5d-c7d440ecc10f" name="默认的" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="FxmlFile" />
+        <option value="log4j" />
+        <option value="Class" />
+        <option value="Interface" />
+        <option value="JUnit4 Test Class" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectId" id="2GkjZOuWdxacHWRLJ3Bx7Wby0YX" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit4" />
+    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit4" value="" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="com.jiuyun.mappers" />
+      <recent name="com.jiuyun.mapper" />
+    </key>
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\App\IntelliJIDEA\idea2020\Projects\tjw_MyBatis" />
+      <recent name="D:\App\IntelliJIDEA\idea2020\Projects\MyBatis\src\main\resources\com\jiuyun\mappers" />
+    </key>
+  </component>
+  <component name="RunManager" selected="JUnit.StudentMapperTest.selectByNameIf">
+    <configuration name="BookMapperTest.selectAll" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="MyBatis" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.jiuyun.mappers.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.jiuyun.mappers" />
+      <option name="MAIN_CLASS_NAME" value="com.jiuyun.mappers.BookMapperTest" />
+      <option name="METHOD_NAME" value="selectAll" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="BookMapperTest.selectAuthorById" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="MyBatis" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.jiuyun.mappers.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.jiuyun.mappers" />
+      <option name="MAIN_CLASS_NAME" value="com.jiuyun.mappers.BookMapperTest" />
+      <option name="METHOD_NAME" value="selectAuthorById" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="BookMapperTest.selectById" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="MyBatis" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.jiuyun.mappers.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.jiuyun.mappers" />
+      <option name="MAIN_CLASS_NAME" value="com.jiuyun.mappers.BookMapperTest" />
+      <option name="METHOD_NAME" value="selectById" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="CompanyMapperTest.selectById" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="MyBatis" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.jiuyun.mappers.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.jiuyun.mappers" />
+      <option name="MAIN_CLASS_NAME" value="com.jiuyun.mappers.CompanyMapperTest" />
+      <option name="METHOD_NAME" value="selectById" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="StudentMapperTest.selectByNameIf" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="MyBatis" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.jiuyun.mappers.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.jiuyun.mappers" />
+      <option name="MAIN_CLASS_NAME" value="com.jiuyun.mappers.StudentMapperTest" />
+      <option name="METHOD_NAME" value="selectByNameIf" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.StudentMapperTest.selectByNameIf" />
+        <item itemvalue="JUnit.CompanyMapperTest.selectById" />
+        <item itemvalue="JUnit.BookMapperTest.selectById" />
+        <item itemvalue="JUnit.BookMapperTest.selectAuthorById" />
+        <item itemvalue="JUnit.BookMapperTest.selectAll" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="c58a51bf-af2d-4687-bf5d-c7d440ecc10f" name="默认的" comment="" />
+      <created>1666939530132</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1666939530132</updated>
+      <workItem from="1666939535570" duration="25774000" />
+      <workItem from="1667005892222" duration="27940000" />
+      <workItem from="1667128450983" duration="594000" />
+      <workItem from="1667219919259" duration="4374000" />
+      <workItem from="1667234436966" duration="12000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="2" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="842" y="401" key="#Notifications" timestamp="1667220883991">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="842" y="401" key="#Notifications/0.0.1920.1080@0.0.1920.1080" timestamp="1667220883991" />
+    <state x="776" y="340" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1667007477999">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="776" y="340" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1080@0.0.1920.1080" timestamp="1667007477999" />
+    <state x="765" y="255" key="#com.intellij.ide.util.MemberChooser" timestamp="1667013091137">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="765" y="255" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1080@0.0.1920.1080" timestamp="1667013091137" />
+    <state x="690" y="286" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1666967971403">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="690" y="286" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1666967971402" />
+    <state x="845" y="401" key="#通知" timestamp="1666964483613">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="845" y="401" key="#通知/0.0.1920.1080@0.0.1920.1080" timestamp="1666964483613" />
+    <state x="92" y="92" width="1736" height="896" key="DiffContextDialog" timestamp="1667050937771">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="92" y="92" width="1736" height="896" key="DiffContextDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1667050937771" />
+    <state x="740" y="294" key="FileChooserDialogImpl" timestamp="1667234175538">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="740" y="294" key="FileChooserDialogImpl/0.0.1920.1080@0.0.1920.1080" timestamp="1667234175538" />
+    <state width="1877" height="289" key="GridCell.Tab.0.bottom" timestamp="1667050937295">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state width="1877" height="289" key="GridCell.Tab.0.bottom/0.0.1920.1080@0.0.1920.1080" timestamp="1667050937295" />
+    <state width="1877" height="289" key="GridCell.Tab.0.center" timestamp="1667050937295">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state width="1877" height="289" key="GridCell.Tab.0.center/0.0.1920.1080@0.0.1920.1080" timestamp="1667050937295" />
+    <state width="1877" height="289" key="GridCell.Tab.0.left" timestamp="1667050937294">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state width="1877" height="289" key="GridCell.Tab.0.left/0.0.1920.1080@0.0.1920.1080" timestamp="1667050937294" />
+    <state width="1877" height="289" key="GridCell.Tab.0.right" timestamp="1667050937295">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state width="1877" height="289" key="GridCell.Tab.0.right/0.0.1920.1080@0.0.1920.1080" timestamp="1667050937295" />
+    <state width="1877" height="414" key="GridCell.Tab.1.bottom" timestamp="1666975185538">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state width="1877" height="414" key="GridCell.Tab.1.bottom/0.0.1920.1080@0.0.1920.1080" timestamp="1666975185538" />
+    <state width="1877" height="414" key="GridCell.Tab.1.center" timestamp="1666975185537">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state width="1877" height="414" key="GridCell.Tab.1.center/0.0.1920.1080@0.0.1920.1080" timestamp="1666975185537" />
+    <state width="1877" height="414" key="GridCell.Tab.1.left" timestamp="1666975185536">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state width="1877" height="414" key="GridCell.Tab.1.left/0.0.1920.1080@0.0.1920.1080" timestamp="1666975185536" />
+    <state width="1877" height="414" key="GridCell.Tab.1.right" timestamp="1666975185537">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state width="1877" height="414" key="GridCell.Tab.1.right/0.0.1920.1080@0.0.1920.1080" timestamp="1666975185537" />
+    <state x="484" y="135" key="SettingsEditor" timestamp="1666965125044">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="484" y="135" key="SettingsEditor/0.0.1920.1080@0.0.1920.1080" timestamp="1666965125044" />
+    <state x="326" y="145" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1667028494181">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="326" y="145" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1920.1080@0.0.1920.1080" timestamp="1667028494181" />
+    <state x="731" y="359" key="com.intellij.testIntegration.createTest.CreateTestDialog" timestamp="1667012885473">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="731" y="359" key="com.intellij.testIntegration.createTest.CreateTestDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1667012885473" />
+    <state x="551" y="200" key="new project wizard" timestamp="1667221831649">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="551" y="200" key="new project wizard/0.0.1920.1080@0.0.1920.1080" timestamp="1667221831649" />
+    <state x="616" y="250" key="run.anything.popup" timestamp="1667034089145">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="616" y="250" key="run.anything.popup/0.0.1920.1080@0.0.1920.1080" timestamp="1667034089145" />
+    <state x="623" y="235" width="672" height="678" key="search.everywhere.popup" timestamp="1667013078444">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="623" y="235" width="672" height="678" key="search.everywhere.popup/0.0.1920.1080@0.0.1920.1080" timestamp="1667013078444" />
+  </component>
+</project>

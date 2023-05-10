@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="../js/vue.js"></script>
+	</head>
+    <body>
+        <div id="app">
+            <h1>将不同长度的数组变成表格</h1>
+            <my-table :list="shapes">
+                <template slot-scope="scope">
+                    <tr>
+                        <td>{{scope.item.id}}</td>
+                        <td>{{scope.item.name}}</td>
+                        <td>{{scope.item.sides}}</td>
+                    </tr>
+                </template>
+            </my-table>
+        </div>
+
+    </body>
+	<script>
+        Vue.component('my-table', {
+            props : ['list'],
+            data : function() {
+                return {
+
+                }
+            },
+            template : `
+            <table>
+            <tr v-for="(item, i) in list" :key="i">
+                <slot :item="item"></slot>
+            </tr>
+            </table>
+            `,
+            methods : {
+
+            }
+        })
+
+		var vm = new Vue({
+			el : "#app", 
+			data : {
+				shapes : [
+                    {id : 1, name : '三角形', sides : 3},
+                    {id : 2, name : '正方形', sides : 4},
+                    {id : 3, name : '五边形', sides : 5},
+                    {id : 4, name : '六边形', sides : 6},
+                    {id : 5, name : '七边形', sides : 7},
+                    {id : 6, name : '八边形', sides : 8}
+                ]
+			},
+			methods : {
+
+			}
+		});
+	</script>
+</html>

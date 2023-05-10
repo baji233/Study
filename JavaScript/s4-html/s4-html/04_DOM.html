@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        button{
+            width: 100px;
+            height: 100px;
+            font-size: 40px;
+        }
+        .active { background-color: yellow;}
+    </style>
+</head>
+<body>
+    <h1> SPA,  DOM , BOM   </h1>
+
+    <button onclick="show(this,5)">Q</button>
+    <button>W</button> 10
+    <button>E</button> 15
+    <button>R</button> 20 
+
+    
+    <h1 price="5000">测试数据</h1>
+    <input type="text" value="测试一下">
+    <button onclick="test()">test</button>
+
+    <ul>
+        <li>商品列表</li>
+        <!-- <li class="active" price="4000">华为</li> -->
+    </ul>
+
+<script>
+let sz = [
+    {id:1, name:"华为",price:4000,sel: true},
+    {id:2, name:"小米",price:5000,sel: false},
+    {id:3, name:"vivo",price:6000,sel: false}
+]
+
+function test(){
+    let ul =document.querySelector('ul')
+
+    for(let a of sz){
+        let li = document.createElement('LI')
+        li.innerHTML = a.name
+        li.setAttribute("price", a.price )
+        if(a.sel){
+            //li.className = 'active'
+            li.style.backgroundColor = 'green'
+        }
+        li.onclick = function(){
+            console.log( this );
+            this.style.backgroundColor = 'green'
+        }
+        //添加到ul里
+        ul.appendChild(li)
+    }
+     
+}
+
+// createElement
+//    let obj = document.querySelectorAll('h1');
+//    // 得到非原生属性
+//    obj[1].innerHTML =  obj[1].getAttribute('price')
+//    obj[1].setAttribute('goods','华为手机')
+
+
+
+// function show(obj,n){
+//     console.log('....',this);
+//     let key = setInterval(function(){
+//         obj.innerText = n--
+//         if(n==-1){
+//             clearInterval(key)
+//             obj.innerText = 'Q'
+//         }
+//     },1000)
+// }
+
+</script>
+</body>
+</html>

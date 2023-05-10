@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+  <style>
+  {
+    font-weight:bold;
+    font-size:xx-large;
+  }
+  {
+    color: red;
+  }
+  </style>
+  <script src="../JQuery-1.11.1/jquery-1.11.1.min.js"></script>
+  <script type="text/javascript">
+    $(function (){
+      //返回值（无参数）
+      $("#btn1").click(function () {
+        alert($("#a1").text());
+      });
+
+      $("#btn2").click(function () {
+        alert($("#text1").val())
+      });
+
+      $("#btn3").click(function () {
+        alert($("#a1").html())
+      });
+
+      //设置值（有参数）
+      $("#btn4").click(function () {
+        $("#a1").text("我好");
+      });
+
+      //改变标签属性
+      $("#btn5").click(function() {
+        $("#text1").attr("type", "password");
+      });
+
+      $("#btn6").click(function () {
+        $("div,p").addClass();
+      });
+
+      });
+
+  </script>
+    </head>
+<body>
+<input id="btn6" type="button" value="点我">
+<div>1</div>
+<p>2</p>
+<h1>3</h1>
+
+
+<input id="text1" type="text">
+<input id="btn1" type="button" value="get text">
+<input id="btn2" type="button" value="get val">
+<input id="btn3" type="button" value="get html">
+<a id="a1"><h1>你好</h1></a>
+<input id="btn4" type="button" value="set text">
+<input id="btn5" type="button" value="set att">
+</body>
+</html>

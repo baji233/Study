@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>贪吃蛇</title>
+    <style>
+		html, body, div {
+			margin: 0;
+			padding: 0;
+		}
+	</style>
+</head>
+<body>
+    
+</body>
+<script>
+    //游戏界面的宽高
+	var w = 600;
+    var h = 400;
+    
+    //贪吃蛇的大小和每次移动的距离，食物大小
+    var moveLen = 20;
+    
+    //地图类 div
+    var Map = function(){
+        this.show = function(){
+            var div = document.createElement('div');
+			div.style.width = w +'px';
+            div.style.height = h +'px';
+            div.style.backgroundColor = 'yellow';
+			document.body.appendChild(div);
+        }
+    }
+    
+    //食物类
+    var Food = function(){
+        //位置
+        this.x = 0;
+        this.y = 0;
+        //食物在网页的div
+        this.pie = null;
+        //显示食物
+        this.show = function(){
+            if(this.pie == null){
+                var foodDiv = document.createElement('div');
+                document.body.appendChild(foodDiv);
+                foodDiv.style.width = moveLen +'px';
+                foodDiv.style.height = moveLen +'px';
+                foodDiv.style.backgroundColor = 'green';
+                foodDiv.style.position = 'absolute'; //绝对定位
+                this.pie = foodDiv;
+            }
+            //食物的随机位置, x:0-29, y:0-19
+            this.x = parseInt(w/moveLen * Math.random());
+            this.y = parseInt(h/moveLen * Math.random());
+            
+            this.pie.style.left = this.x * moveLen +'px';
+            this.pie.style.top = this.y * moveLen +'px';
+        }
+    }
+    
+    //蛇类
+    var Snake = function(){
+        //控制蛇头移动方向: 上up, 下down, 左left, 右right
+        this.direct = 'right'; //蛇头默认向右
+        
+        //默认蛇有四节 数组
+        this.body = [
+            {x:0, y:0, color:'blue', pie:null},
+            {x:1, y:0, color:'blue', pie:null},
+            {x:2, y:0, color:'blue', pie:null},
+            {x:3, y:0, color:'red', pie:null}
+            ];
+        
+        this.show = function(){
+            for(var b of this.body){
+                if(b.pie == null){
+                    var foodDiv = document.createElement('div');
+                    document.body.appendChild(foodDiv);
+                    foodDiv.style.width = moveLen +'px';
+                    foodDiv.style.height = moveLen +'px';
+                    foodDiv.style.backgroundColor = b.color;
+                    foodDiv.style.position = 'absolute'; //绝对定位
+                    b.pie = foodDiv;
+                }
+                b.pie.style.left = b.x * moveLen +'px';
+                b.pie.style.top = b.y * moveLen +'px';
+            }
+        }
+        
+        this.move = function(){
+            //蛇身和蛇尾的移动
+            var p1,p2;
+            for(var i=0;i<this.body.length-1;i++){
+                p1 = this.body[i];
+                p2 = this.body[i+1];
+                p1.x = p2.x;
+                p2.y = p2.y;
+            }
+            //蛇头的移动
+            var n = this.body.length;
+            var head = this.body[n-1];
+            if(this.direct == 'right'){
+                head.x += 1;
+            }else if(this.direct == 'left'){
+                head.x -= 1;
+            }else if(this.direct == 'up'){
+                head.y -= 1;
+            }else if(this.direct == 'down'){
+                head.y += 1;
+            }
+            this.eat(); //蛇吃食物
+            this.show(); //重新显示蛇的每一节
+        }
+        
+        this.eat = function(){
+            var n = this.body.length;
+            var head = this.body[n-1];
+            if(head.x == food.x && head.y == food.y){ //判断蛇头是否与食物重合
+                //蛇的数组增加一节
+                var p = {
+                    x: this.body[0].x,
+                    y: this.body[0].y,
+                    color:'skyblue',
+                    pie : null
+                }
+                this.body.unshift(p);
+                //重新刷新食物的位置
+                food.show();
+            }
+        }
+    }
+    
+    //启动游戏
+    var map = new Map();
+	var food = new Food();
+	var snake = new Snake();
+    map.show();
+    food.show();
+    snake.show();
+    
+    //键盘监听事件
+    document.onkeydown = function(e){
+        var kc = e.keyCode; //上下左右
+        console.log(kc);
+        if(kc == 65){
+            snake.direct = 'left';
+        }else if(kc == 87){
+            snake.direct = 'up';
+        }else if(kc == 68){
+            snake.direct = 'right';
+        }else if(kc == 83){
+            snake.direct = 'down';
+        }
+        snake.move(); //移动
+    }
+</script>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

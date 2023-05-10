@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<script type="text/javascript">
+    function test() {
+        var text = document.getElementById("txt").value;
+        alert("isNaN:" + isNaN(text));
+        alert("eval:" + eval("2 + 3 +" + text));
+    }
+</script>
+<body>
+    <input type="text" id="txt"/><input type="button" value="提交" onclick="test()">
+</body>
+</html>

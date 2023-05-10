@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<script type="text/javascript">
+    function displayUl(ulName) {
+        document.getElementById(ulName).style = "";
+    }
+</script>
+<body>
+    <div onclick="displayUl('dq')">家用电器</div>
+    <div id="dq" style="display: none">
+        <ul>
+            <li>电视</li>
+            <li>冰箱</li>
+            <li>空调</li>
+        </ul>
+    </div>
+    <div  onclick="displayUl('sm')">数码产品</div>
+    <div id="sm" style="display: none">
+        <ul>
+            <li>手机</li>
+            <li>游戏机</li>
+            <li>耳机</li>
+        </ul>
+    </div>
+    <div  onclick="displayUl('sp')">食品饮料</div>
+    <div id="sp" style="display: none">
+        <ul>
+            <li>零食</li>
+            <li>冷冻食品</li>
+            <li>生鲜</li>
+        </ul>
+    </div>
+</body>
+</html>

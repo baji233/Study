@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js">
+    </script>
+    <title>Document</title>
+</head>
+<body>
+    <h1> Promise 回调地狱问题</h1>
+    <p> Promise参数 = 函数(成功回调函数,失败的函数)</p>
+    <p> promise.then(1,2)  1,2都是函数 </p>
+    <button onclick="test()"> 测试1 </button>
+</body>
+<script>
+
+function task1(){
+    let task = new Promise( function(resolve,reject){
+        console.log('.....我');
+        // 假的ajax
+        // setTimeout(function(){
+        //     let n = Math.random();  // 0-1
+        //     console.log("promise 执行购买",n);
+        //     if(n>=0.5){
+        //         success('购买iphone成功咯');
+        //     }else{
+        //         error('余额不足失败');
+        //     }
+        // },2000);
+        let url = 'https://autumnfish.cn/api/joke/list?num=3';
+        $.ajax({
+            url:url,
+            success: function(data){
+                resolve(data);
+                
+            },
+            error: function(v){
+                reject(v);
+            }
+        });    
+
+    });
+    return task;
+}
+
+
+function test(){
+    let task=  task1();
+    task.then(function(data){
+        console.log('成功执行了ajax请求1 ---',data);
+        //第二个
+        return 'task2'
+    }, function(v){
+        console.log('ajax失败----'+ v);
+    });
+
+    console.log( info );
+}
+
+
+
+
+
+</script>
+</html>

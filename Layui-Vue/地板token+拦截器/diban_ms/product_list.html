@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<link href="layui/css/layui.css"  rel="stylesheet"/>
+		<script src="layui/layui.js"></script>
+					
+	</head>
+	<body>
+		<table id="product_table" lay-filter='test'></table>
+	</body>
+	
+	<script type="text/html" id="barDemo">
+	  <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+	  <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+	</script>
+	          
+	<script>
+		layui.use(['table','jquery'],function(){
+			var t=layui.table,
+			$=layui.$;
+			//初始化
+			t.render({
+				elem:'#product_table',
+				url:'/daili/Product/findByPage.do',
+				cols:[[
+					{title:'产品名称',field:'productname'},
+					{title:'ID',field:'productid'},
+					{title:'尺寸',field:'specifications'},
+					{title:'操作',width:'15%',toolbar:'#barDemo'}
+				]],
+				parseData:function(item){
+					return{
+						'code':item.code,
+						'count':item.count,
+						'data':item.products
+					}
+				},
+				page:true,
+				limit:5,
+				limits:[5,10,15,30]
+			});
+			
+			//触发工具条事件，调用删除或修改
+			t.on('tool(test)',function(obj){
+				console.info(obj.data.productid);//拿出触发事件行的id
+				if(obj.event=='del'){
+					
+					layer.confirm('真的删除行么', function(index){
+					        layer.close(index);
+							//发送ajax到数据里把这条数据删除
+							$.ajax({
+								url:'/daili/Product/deleteById.do',
+								type:'post',
+								data:{productid:obj.data.productid},
+								dataType:'json',
+								success:function(item){
+									console.info(item);
+									//obj.del();页面上的删除。不会动数据库=====做一个页面更新的意思
+									t.reload('product_table');//当前表格的所有数据重新加载
+								}
+							});
+					});
+					
+					
+				}else if(obj.event='edit'){
+					
+				}
+			
+				
+			});
+		});
+	</script>
+</html>

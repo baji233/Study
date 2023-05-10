@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>图书管理系统</title>
+		<style type="text/css">
+			.grid {
+			  margin: auto;
+			  width: 500px;
+			  text-align: center;
+			}
+			.grid table {
+			  width: 100%;
+			  border-collapse: collapse;
+			}
+			.grid th,td {
+			  padding: 10;
+			  border: 1px dashed orange;
+			  height: 35px;
+			  line-height: 35px;
+			}
+			.grid th {
+			  background-color: orange;
+			}
+			.grid .book {
+				padding-bottom: 10px;
+				padding-top: 5px;
+				background-color: orange;
+			}
+		  </style>
+		<script src="../js/vue.js"></script>
+	</head>
+	<body>
+		<div id="app">
+			<h1>图书管理</h1>
+			<!-- 1.显示数据 2.模糊查询 3.增加书籍 4.显示时间 5.修改和删除 -->
+		    </br>
+
+			<div>
+                <div :class="{grid : true}">
+                    编号: <input type="text" v-model="id"/>  名称: <input type="text" v-model="name"/> <button>提交</button></br>
+                    搜索: <input @change="select()" type="text" :value="search"/> </br>    
+                </div>
+            <div :class="{grid : true,book : true}">
+                <table>
+                    <tr>
+                        <th>编号</th>
+                        <th>名称</th>
+                        <th>时间</th>
+                        <th>操作</th>
+                    </tr>
+                    <tr :key="item.id" v-for="(item,i) in books">
+                        <td>{{i + 1}}</td>
+                        <td>{{item.name}}</td>
+                        <td>{{dateNow | filtNow}}</td>
+                        <td><a @click="update(i)" href="#">修改</a> | <a @click="dele(i)" href="#">删除</a></td>
+                    </tr>
+                </table>
+			</div>
+		</div>
+	</body>
+	<script>
+		var vm = new Vue({
+			el : "#app", 
+			data : {
+                id : '',
+                name : '',
+                search : '',
+				books : [{
+					id : 1,
+					name : '三国演义',
+					date : '1234.1.1'
+				},
+				{
+					id : 2,
+					name : '水浒传',
+					date : '2345.2.5'
+				},
+				{
+					id : 3,
+					name : '西游记',
+					date : '4532.7.14'
+				},
+				{
+					id : 4,
+					name : '红楼梦',
+					date : '7654.10.23'
+				}
+			]
+			},
+			methods : {
+				update(i) {
+                    this.books[i].id = vm.id;
+                    this.books[i].name = vm.name;
+                },
+                dele(i) {
+                    this.books.unshift(i);
+                },
+                select(v){
+                    
+                }
+			},
+            computed: {
+                dateNow() {
+                    //获取时间戳
+                    var timdedetail = Date.now(); //假如是10位毫秒需要乘1000
+                    //获取年份
+                    var year = new Date(timdedetail).getFullYear();
+                    //获取月份，获取的月份比实际小1，所以在使用的时候需要+1
+                    var month = new Date(timdedetail).getMonth() + 1;
+                    //获取日
+                    var date = new Date(timdedetail).getDate();
+                    //获取时
+                    var hours = new Date(timdedetail).getHours();
+                    //获取分
+                    var minutes = new Date(timdedetail).getMinutes();
+                    //获取秒
+                    var seconds = new Date(timdedetail).getSeconds();
+
+                    var now = [year, month, date, hours, minutes, seconds];
+
+                    return now;
+                }
+            },
+            filters : {
+                filtNow : function(v){
+                    if( v ){
+                        return v[0] + '年' + v[1] + '月' + v[2] + '日' + 
+                        v[3] + '点' +v[4] + '分' + v[5] + '秒'
+                    }
+                }
+            }
+		});
+	</script>
+</html>

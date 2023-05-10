@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <script src="../js/vue.js"></script>
+    <style>
+        #app {
+            display: flex;
+        }
+
+        .my-list {
+            flex: 1 1 50%;
+            font-family: Arial;
+            color: white;
+            margin: 20px;
+        }
+
+        .my-list .title {
+            background: #A93226;
+            padding: 20px;
+            font-weight: bold;
+            font-size: 22px;
+            border-top-left-radius: 4px;
+            border-top-right-radius: 4px;
+        }
+
+        .my-list .list {
+            background: #34495E;
+            padding: 20px;
+            font-size: 16px;
+            border-bottom-left-radius: 4px;
+            border-bottom-right-radius: 4px;
+        }
+
+        .my-list .list-item:not(:last-child) {
+            padding-bottom: 20px;
+        }
+
+        .swatch {
+            display: inline-block;
+            width: 15px;
+            height: 10px;
+            margin-right: 8px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <soncom>
+            <!-- 为组件添加作用域插槽, slot-scope="scope"是固定写法, 其中的scope指向组件模板插槽内单向绑定的hero -->
+            <template slot-scope="scope">
+                奔跑吧青春: {{scope.hero.nickName}} {{scope.hero.trueName}}
+            </template>
+        </soncom>
+
+
+        </br>
+
+
+        <!-- 组件之父传子 -->
+        <my-list :list="shapes">
+            <!-- 插槽之子传父 -->
+            <template slot-scope="scope">
+                <!-- 获取插槽内shapes循环item内的值 -->
+                名称 : {{scope.item.name}} || 边数 : {{scope.item.sides}}
+            </template>
+        </my-list>
+
+
+        <!-- 在不同的属性内使用作用域插槽来传值 -->
+        <my-list :list="colors">
+            <template slot-scope="scope">
+                <div class="swatch" :style="{background: scope.item.hex}">
+                </div>
+                {{scope.item.name}}
+            </template>
+        </my-list>
+
+    </div>
+</body>
+<script>
+    //组件布局 : 子传父 (使用slot-scope实现)
+    Vue.component('soncom', {
+        props: [''],
+        data() {
+            return {
+                //将组件内的hero属性传给Vue使用
+                hero: {
+                    nickName: '小杰',
+                    trueName: 'timo'
+                }
+            }
+        },
+        template: `
+            <div>
+                <p>作用域插槽 slot-scope</p>
+                <slot :hero="hero"></slot>
+            </div>
+            `,
+        methods: {
+
+        }
+    })
+
+    //列表组件
+    Vue.component('my-list', {
+        props: ['list'],
+        template: `
+            <div>
+                <div class="my-list">
+                    <!-- 接收数据 -->
+                    <div class="list" v-for="(item, i) in list" :key="i"> 
+                        <!-- 传出数据 -->
+                        <slot :item="item"></slot>
+                    </div>
+                </div>
+            </div>
+            `
+    })
+
+    var vm = new Vue({
+        el: "#app",
+        data: {
+            shapes: [
+                { name: '正方形', sides: 4 },
+                { name: '五角星', sides: 5 },
+                { name: '三角形', sides: 6 },
+            ],
+            colors : [
+                {name : '黄色', hex : '#F4D03F'},
+                {name : '绿色', hex : '#229954'},
+                {name : '粉色', hex : '#9B59B6'}, 
+            ],
+        },
+        methods: {
+
+        }
+    });
+</script>
+
+</html>

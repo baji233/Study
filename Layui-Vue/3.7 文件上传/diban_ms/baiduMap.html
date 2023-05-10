@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<title>联系我们</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="stylesheet" href="css/bootstrap.min.css"/>
+
+<link rel="stylesheet" href="css/style.css"/>
+
+	<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+	<style type="text/css">
+	
+	#allmap {
+		width: 100%;
+		height: 500px;
+		overflow: hidden;
+		margin:0;
+		margin-top: 10px;
+		font-family:"微软雅黑";}
+	
+	</style>
+	<script type="text/javascript" src="https://api.map.baidu.com/api?v=1.0&&type=webgl&ak=xRI5cyf7nA1OZvWLHbGWfVYMEywTbPBY">
+	</script>
+	
+	<title>地图展示</title>
+
+</head>
+
+<style>
+    .jiontj{
+        width: 395px;height: 43px;padding: 0 15px;border: 1px solid #dcdcdc;outline:none;margin-left: 5px;margin-right: 5px;margin-bottom: 20px;
+    }
+    .txt{
+        width: 805px;height: 88px;padding: 0 15px;border: 1px solid #dcdcdc;outline:none;margin-left: 5px;margin-right: 5px;margin-bottom: 20px;padding-top: 15px;
+    }
+    .but{
+        text-align: center;
+        background: #649e1d;
+        color: #FFFFFF;
+        border: none;
+        line-height: 45px;
+        font-size: 16px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+</style>
+
+<body>
+
+
+
+<header id="header">
+
+<nav class="navbar navbar-default navbar-static-top">
+
+	<div class="container">
+
+		<div class="navbar-header">			
+
+			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+
+			<span class="sr-only"></span>
+
+			<span class="icon-bar"></span>
+
+			<span class="icon-bar"></span>
+
+			<span class="icon-bar"></span>
+
+			</button>
+
+
+
+			<div class="navbar-brand">
+
+				<img src="images/logo.png" alt="" width="150px" height="" class="img-responsive"/>
+
+			</div>
+
+		</div>
+
+	  	<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" role="navigation">	  	
+
+			<ul class="nav navbar-nav navbar-right">
+
+				<li><a rel="nofollow" href="index.html">网站首页</a></li>
+
+				<li><a rel="nofollow" href="about.html">关于我们</a></li>
+
+				<li><a rel="nofollow" href="products.html">产品中心</a></li>
+				<li><a rel="nofollow" href="case.html">工程案例</a></li>
+
+				<li><a rel="nofollow" href="news.html">新闻中心</a></li>
+
+				<li><a rel="nofollow" href="sitemap.html">服务支持</a></li>
+
+				<li><a rel="nofollow" href="join.html">招商加盟</a></li>
+
+				<li><a rel="nofollow" href="contact.html" class="active">联系我们</a></li>
+
+			</ul>
+
+	    </div>
+
+	</div>
+
+</nav>
+
+</header>
+
+
+
+
+<section class="n_banner">
+
+	<img src="images/banc.jpg" class="img-responsive" width="1855px" height="250px"/>
+
+</section>
+
+<div id="allmap"></div>
+
+陕西华美居装饰材料有限公司
+
+联系电话
+400-026-0068
+
+
+网址
+http://www.dyyxdb.com
+
+
+地址
+工厂店：西安市太华南路东方美居建材城E-009号
+
+仓储店：西安市北三环大明宫华邦仓储配送中心
+
+
+
+<script type="text/javascript" src="js/jquery.js"></script>
+
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+
+<script src="js/axios.min.js"></script>
+<script src="js/vue.js"></script>
+
+<script type="text/javascript">
+    // GL版命名空间为BMapGL
+    // 按住鼠标右键，修改倾斜角和角度
+	var map = new BMapGL.Map("allmap");    // 创建Map实例
+	map.centerAndZoom(new BMapGL.Point(108.97883,34.29636), 20);  // 初始化地图,设置中心点坐标和地图级别
+	map.enableScrollWheelZoom(true);     //开启鼠标滚轮缩放
+	
+	var marker1 = new BMapGL.Marker(new BMapGL.Point(108.97883, 34.29636));
+	map.addOverlay(marker1);
+	
+	
+	var opts = {
+	    position: new BMapGL.Point(108.97883,34.29636), // 指定文本标注所在的地理位置
+	    offset: new BMapGL.Size(0, 0) // 设置文本偏移量
+	};
+	// // 创建文本标注对象
+	// var label = new BMapGL.Label('这就是我的家具城', opts);
+	// // 自定义文本标注样式
+	// label.setStyle({
+	// 	width:'100px',
+	//     color: 'blue',
+	//     borderRadius: '5px',
+	//     borderColor: '#ccc',
+	//     padding: '10px',
+	//     fontSize: '13px',
+	//     height: '20px',
+	//     lineHeight: '20px',
+	//     fontFamily: '微软雅黑'
+	// });
+	// map.addOverlay(label);
+</script>
+
+</body>
+
+</html>

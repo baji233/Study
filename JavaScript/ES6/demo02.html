@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>作业</title>
+	</head>
+	<body>
+	</body>
+	<script>
+		//使用ES5创建类
+		var person = function(name, age, account){
+			//共有
+			this.name = name;
+			//保护
+			var _age = age;
+			Object.defineProperty(this,"age",{
+				get:function(){
+					return _age;
+				},
+				set:function(val){
+					_age = val;
+				}
+			})
+			//私有
+			var _account = account;
+			
+			var showMoney = function(){
+				console.log('account:' + _account);
+			}
+			
+			this.showMsg = function(){
+				console.log('name:'+ this.name);
+				console.log('age:'+ this.age);
+				showMoney();
+			}
+		}
+		var test01 = new person('小明',12,3000);
+		test01.showMsg();
+		
+		//使用ES6创建类
+		class Trafic{
+			run(){}
+		}
+		class Car extends Trafic{
+			run(){
+				console.log('car.run()...');			}
+		}
+		class Bike extends Trafic{
+			run(){
+				console.log('bike.run()...');			}
+		}		
+		
+		var test02 = function(obj){
+			obj.run();
+		}
+		
+		test02(new Car());
+		test02(new Bike());
+		
+	</script>
+</html>

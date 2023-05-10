@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+<script>
+//   var zz1 = /abc/;
+//  // var zz2 = new RegExp('abc'); 
+
+//   console.log(zz1.test('123abc456')) ;  
+//   console.log(zz1.test('123ab456')) ;  
+//   console.log(zz1.test('123') ); 
+
+
+    // var reg = /^abc/   //以什么开头
+    // var reg = /abc$/   以什么结尾
+    // console.log(reg.test('abc')) ;  
+    // console.log(reg.test('123abc456')) ; 
+    // console.log(reg.test('abc456')) ;  
+    // console.log(reg.test('123abc')) ;
+    
+    //var reg = /[abc]$/;
+    // var reg = /[a-hA-Z]$/;
+    // var reg = /^14[57]$/;
+    // var reg = /^[a-zA-Z0-9_$]/;
+
+    // var reg = /^[\u4e00-\u9fa5]{2,5}$/;
+    // console.log(reg.test('坤')) ;  
+    // console.log(reg.test('阿三')) ; 
+    // console.log(reg.test('张三丰')) ;  
+    // console.log(reg.test('送到菜菜子')) ;
+
+    // 排除某些字符
+    // var reg = /^[^a-zA-Z0-9_]/;
+    // console.log( reg.test('$abc') );  
+    // console.log( reg.test('37acd') ); 
+    // console.log( reg.test('_tty') );
+    
+    // + 1次或多次  * 零次或多次  ? 0或1个
+    // var reg = /^a+$/;
+    // console.log( reg.test('') );
+    // console.log( reg.test('at') );
+    // console.log( reg.test('aaaaa') );
+
+    // var reg = /^a*$/;
+    // console.log( reg.test('') ); // t
+    // console.log( reg.test('a') ); // t
+    // console.log( reg.test('aaaaa') ); //f
+
+    // var reg = /^bo{2,5}m$/;
+    // console.log( reg.test('bom') ); // f
+    // console.log( reg.test('boom') ); // t
+    // console.log( reg.test('booooom') ); //t
+    // console.log( reg.test('boooooom') ); //t
+
+    //手机号码：  11 
+    // var reg_tel = /^(
+    //     13[0-9]
+    //     |14[01456879]
+    //     |15[0-35-9]
+    //     |16[2567]
+    //     |17[0-8]
+    //     |18[0-9]
+    //     |19[0-35-9]
+    //     )\d{8}$/;    //11位手机号码正则
+	
+
+    //帐号是否合法(字母开头，允许5-16字节，允许字母数字下划线)： 
+    //密码(长度在6~18之间，只能包含字母、 数字和下划线)： 
+    //QQ号
+    // email 验证
+
+    //密码(以字母开头，长度在6~18之间，只能包含字母、数字和下划线)：  
+    //var reg = /^[a-zA-Z]\w{5,17}$/
+
+    //  \d  \w  ( | )   \s
+
+   // /t /r /n /f  = /s 任何空白字符，包括空格、制表符、换页符
+
+    // var reg =/^\s$/;
+    // console.log( reg.test(" ") );
+    // console.log( reg.test("\n") );
+    // console.log( reg.test("\t") );
+    // console.log( reg.test("\r") );
+    // console.log( reg.test("\f") );
+
+    // var reg = /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/
+
+    // console.log( reg.test('406972@qq.com') );
+
+
+    // var t ="卧 槽今天真T M D的冷,TMD,tmd";
+    // var reg = /TMD|卧槽/gi;
+    // var ok =  t.replace(reg,"**");
+    // console.log( ok );
+
+    // var t ="中国移动:10086,中国联通:10010,中国电信:10000";
+    // var sz =  t.match(/\d{5}/g);
+    // console.log( sz);
+
+    // var d = `于平2005-10-13 
+    //          李亮2000-10-13
+    //          李贝林2002-12-12`
+    // var sz =  d.match(/(\d{4})-(\d{2})-(\d{2})/g);
+    // console.log( sz );
+
+    var html = `<ul class="equipment-list">
+         <li class="list-item"><div class="equipment-item"><div class="prop-box"><img src="https://game.gtimg.cn/images/lol/act/img/item/1001.png" alt="鞋子"></div> <p class="prop-name">鞋子</p> <div class="price"><i class="icon-gold"></i> <span>300</span></div></div></li>
+         <li class="list-item"><div class="equipment-item"><div class="prop-box"><img src="https://game.gtimg.cn/images/lol/act/img/item/1004.png" alt="仙女护符"></div> <p class="prop-name">仙女护符</p> <div class="price"><i class="icon-gold"></i> <span>250</span></div></div></li>
+         <li class="list-item"><div class="equipment-item"><div class="prop-box"><img src="https://game.gtimg.cn/images/lol/act/img/item/1006.png" alt="治疗宝珠"></div> <p class="prop-name">治疗宝珠</p> <div class="price"><i class="icon-gold"></i> <span>150</span></div></div></li>
+         <li class="list-item"><div class="equipment-item"><div class="prop-box"><img src="https://game.gtimg.cn/images/lol/act/img/item/1011.png" alt="巨人腰带"></div> <p class="prop-name">巨人腰带</p> <div class="price"><i class="icon-gold"></i> <span>900</span></div></div></li>
+         <li class="list-item"><div class="equipment-item"><div class="prop-box"><img src="https://game.gtimg.cn/images/lol/act/img/item/1018.png" alt="灵巧披风"></div> <p class="prop-name">灵巧披风</p> <div class="price"><i class="icon-gold"></i> <span>600</span></div></div></li>`
+
+    //var reg =/(https?:\/\/.*\.(?:png|jpg))/gi;
+
+    var reg = /<img src="([^"]*)" alt="([^"]*)">/gi
+    var sz =  html.match(reg);
+    console.log( sz);
+    for(var t of sz){
+        console.log( t ,RegExp.$1);
+    }
+     
+  
+
+</script>
+</body>
+</html>

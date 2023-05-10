@@ -1,0 +1,40 @@
+	
+	Servlet
+	
+	
+	HttpServletRequest request
+	
+		-- 参数
+		//获取浏览器提交过来的参数，
+		一般为form表单的数据。
+		//获取单个参数值
+		request.getParameter("参数名");
+		
+		//获取指定参数名的多个值
+		request.getParameterValues("参数名");
+		
+		//获取所有的参数名
+		request.getParameterNames();
+		
+		
+		
+		--- 属性
+		//属性用于在方法、转发的Servlet间传递数据
+		//属性在request中是以HashMap来存放的。
+		
+		//添加属性
+		request.setAttribute("属性名", 属性值);
+		
+		//获取属性
+		request.getAttribute("属性名");
+		
+		//移除属性
+		request.removeAttribute("属性名");
+		
+		//获取所有的属性名
+		request.getAttributeNames()
+		
+		
+		//-- 转发
+		request.getRequestDispatcher("目标url")
+			.forward(request, response);

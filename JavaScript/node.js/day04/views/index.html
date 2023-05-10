@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>laravel</title>
+    <!-- Bootstrap CSS 文件 -->
+    <link rel="stylesheet" href="/public/css/bootstrap.min.css">
+    <!-- 首页单独样式 -->
+    <link rel="stylesheet" href="/public/css/index.css">
+</head>
+<body>
+<div class="navbar navbar-default">
+    <div class="container">
+        <div class="navbar-header">
+            <a href="/" class="navbar-brand">首页</a>
+             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#menu" aria-expanded="false">
+            <span class="sr-only">菜单折叠</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+
+        </div>
+        <div class="collapse navbar-collapse" id="menu">
+          <ul class="nav navbar-nav">
+           <li class="active"><a href="/">开发</a></li> 
+            <li><a href="#">列表</a></li>
+            <li><a href="#">头条</a></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">资讯 <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="#">学习一</a></li>
+                <li><a href="#">学习二</a></li>
+                <li class="divider"></li>
+                <li><a href="#">技术学习</a></li>
+                <li class="divider"></li>
+                <li><a href="#">jq学习</a></li>
+              </ul>
+            </li>
+          </ul>
+          <form class="navbar-form navbar-left">
+            <div class="form-group">
+              <input type="text" class="form-control" placeholder="Search...">
+            </div>
+            <button type="submit" class="btn btn-default">搜索</button>
+          </form>
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="./login.html">登录</a></li>
+            <li><a href="./register.html">注册</a></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">相关<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="#">系列一</a></li>
+                <li class="divider"></li>
+                <li><a href="#">系列二</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+    </div>
+</div>
+<!-- 头部 -->
+<div class="jumbotron jump">
+    <div class="container">
+        <h2>中国大学管理-之首页</h2>
+
+        <p> 玩转- express</p>
+    </div>
+</div>
+
+<!-- 中间内容区局 -->
+<div class="container">
+    <div class="row">
+
+        <!-- 左侧菜单区域   -->
+        <div class="col-md-3">
+            <div class="list-group">
+                <a href="#" class="list-group-item active">学生列表</a>
+                <a href="/stu/create" class="list-group-item">新增学生</a>
+            </div>
+        </div>
+
+        <!-- 右侧内容区域 -->
+        <div class="col-md-9">
+
+            <!-- 成功提示框 -->
+            <div class="alert alert-success alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <strong>成功!</strong> 操作成功提示！
+            </div>
+
+            <!-- 失败提示框 -->
+            <div class="alert alert-danger alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <strong>失败!</strong> 操作失败提示！
+            </div>
+
+            <!-- 自定义内容区域 -->
+            <div class="panel panel-default">
+                <div class="panel-heading">大学列表</div>
+                <div>
+                    <!-- <span>共 </span> -->
+                    <!-- {{each count c index}} -->
+                    <!-- <span id="count">{{c}}</span> -->
+                    <!-- {{/each}} -->
+                    <!-- <span> 条</span> -->
+                </div>
+                <table class="table table-striped table-hover table-responsive">
+                    <thead>
+                    <tr>
+                        <th>编号</th>
+                        <th>学校名</th>
+                        <th>省份</th>
+                        <th>排名</th>
+                        <th width="120">操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {{each items t index}}
+                    <tr>
+                        <th scope="row">{{t.universityNo}}</th>
+                        <td>{{t.schoolName}}</td>
+                        <td>{{t.province}}</td>
+                        <td>{{t.ranking}}</td>
+                        <td>
+                            <a href="/edit/{{t.universityNo}}">修改</a>
+                            <a href="/del/{{t.universityNo}}">删除</a>
+                        </td>
+                    </tr>
+                    {{/each}}
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- 分页  -->
+            <div>
+                <ul class="pagination pull-right">
+                    <li>
+                        <a id="up" href="#" aria-label="Previous">
+                            <!-- <span onclick="up()" aria-hidden="true">&laquo;</span> -->
+                            <button id="btn_up" onclick="up()">上一页</button>
+                        </a>
+                    </li>
+                    <li><a id="1">{{page}}</a></li>
+                    <li><a id="2"></a></li>
+                    <li><a id="3"></a></li>
+                    <li><a id="4"></a></li>
+                    <li><a id="5"></a></li>
+                    <li>
+                        <a id="next" href="#" aria-label="Next">
+                            <!-- <span onclick="next()" aria-hidden="true">&raquo;</span> -->
+                            <button id="btn_next" onclick="next()">下一页</button>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- 尾部 -->
+<div class="jumbotron" style="margin:0;">
+    <div class="container">
+        <span>@2017 laravel</span>
+    </div>
+</div>
+
+<!-- jQuery 文件 -->
+<script src="/public/js/jquery.min.js"></script>
+<!-- Bootstrap JavaScript 文件 -->
+<script src="/public/js/bootstrap.min.js"></script>
+
+</body>
+<script>
+    var count = 1050; //目前写死了
+    var a01 = document.getElementById('1');
+    console.log('page: ',a01.innerText);
+    var page = a01.innerText; //当前页码
+    // var count = document.getElementById('count').innerText;
+    // console.log(count);
+    if(page == 1){
+        document.getElementById('btn_up').disabled=true; //禁用上一页的按钮
+    }else if(page >= count / 10){
+        // console.log('总条数: ',count);
+        document.getElementById('btn_next').disabled=true; //禁用上一页的按钮
+        document.getElementById('2').display=none;
+        document.getElementById('3').display=none;
+        document.getElementById('4').display=none; //none隐藏, block显示
+        document.getElementById('5').display=none;
+    }
+    for(let i =2; i<6;i++){
+        let a = document.getElementById(i);
+        a.innerHTML = ++page;
+        a.href="/page/"+page;
+        console.log(a.href);
+    }
+
+    function up() {
+        console.log(1111);
+        let p = --a01.innerText;
+        a01.innerHTML = p;
+        a01.href = "/page/"+p;
+        var pag = a01.innerText;
+        for(let i =2; i<6;i++){
+        let a = document.getElementById(i);
+        a.innerHTML = --pag;
+        a.href="/page/"+(pag+4);
+        console.log(a.href);
+        window.location.href=a.href;
+        }
+    }
+
+    function next() {
+        console.log(2222);
+        let p = ++a01.innerText;
+        console.log(p);
+        a01.innerHTML = p;
+        a01.href = "/page/"+p;
+        var pag = a01.innerText;
+        for(let i =2; i<6;i++){
+        let a = document.getElementById(i);
+        a.innerHTML = ++pag;
+        a.href="/page/"+(pag-4);
+        console.log(a.href);
+        window.location.href=a.href;
+    }
+}
+
+
+</script>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="../js/vue.js"></script>
+	</head>
+	<body>
+		<div id="app">
+			{{name}}
+			{{age}}
+			{{info}}
+			
+			<div v-html="info">123</div>
+			<div v-text="info">123</div>
+			<p v-pre>{{name}}</p>
+			<p v-once>{{age}}</p>
+		</div>
+	</body>
+	<script>
+		var vm = new Vue({
+			el : "#app",
+			data : {
+				name : "timo",
+				age : "12",
+				info : "<h1>知行合一</h1>"
+			}
+		});
+		
+	</script>
+</html>

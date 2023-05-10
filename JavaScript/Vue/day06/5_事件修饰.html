@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="../js/vue.js"></script>
+	</head>
+	<body>
+		<div id="app">
+			<div @click="show('父')">
+				父盒子
+				<div @click.stop="show('子')">
+					<!-- .stop阻止冒泡 -->
+					子盒子
+				</div>
+			</div>
+			
+			<div @click.once="show2()">
+				<!-- .once事件只执行一次 -->
+				<button>A</button>
+				<button>B</button>
+				<button>C</button>
+			</div>
+			
+			<!-- 组织链接默认行为 -->
+			<a @click.prevent="handle()" href="http://baidu.com">百度</a>
+		</div>
+		
+	</body>
+	<script>
+		var vm = new Vue({
+			//将挂载在id为app的标签上
+			el : "#app", 
+			data : {
+							
+			},
+			methods : {
+				show : function(v) {
+					console.log(v);
+				},
+				show2 : function() {
+					console.log(event.target);
+				},
+				handle : function() {
+					console.log('handle');
+				}
+			}
+		});
+	</script>
+</html>

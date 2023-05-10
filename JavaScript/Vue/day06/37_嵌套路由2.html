@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="../js/vue.js"></script>
+        <script src="../js/vue-router_3.0.2.js"></script>
+
+	</head>
+	<body>
+		<div id="app">
+            <a href="#/index/12">主页</a>  |
+            <a href="#/user">用户</a>
+
+			<router-view></router-view>
+
+            
+		</div>
+	</body>
+	<script>
+        //父组件
+        var index = {
+            props: ['id'],
+            template: `
+            <div>
+                <h1>主页 - {{id}}</h1>
+                <router-link to="/login">登录</router-link>
+                <router-view></router-view>
+            </div>
+            
+            `
+
+        }
+        var user = { 
+            template: `
+            <div>
+                <h1>用户</h1>
+                <router-link to="/info">信息</router-link>
+                <router-view></router-view>
+            </div>
+            
+            `
+
+        }
+
+        //子组件
+        var login = {
+            template: `
+            <div>
+                <h1>登录</h1>
+                <button @click="exit">返回</button>
+            </div>
+            
+            `,
+            methods: {
+                exit() {
+                    this.$router.go(-1)
+                }
+            }
+        }
+        
+        var info = {
+            template: `
+            <div>
+                <h1>信息</h1>
+            </div>
+            
+            `    
+        
+        }
+
+        var router = new VueRouter({
+            routes: [
+                {path: '/index/:id', component: index, props: true},
+                {path: '/user/', component: user, props: false,
+                children: [
+                    {path: '/login', component: login},
+                    {path: '/info', component: info}
+                ]
+            },
+
+            ]
+        })
+
+
+		var vm = new Vue({
+			el : "#app", 
+			data : {
+				
+			},
+			methods : {
+				
+			},
+            router
+		});
+	</script>
+</html>

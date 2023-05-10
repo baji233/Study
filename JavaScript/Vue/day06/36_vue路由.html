@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../js/vue.js"></script>
+    <script src="../js/vue-router_3.0.2.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <h1>  Vue 路由 </h1>
+    <div id="app">
+        <a href="#/zhuye">主页_链接</a>  | 
+        <a href="#/keji">科技_链接</a> 
+        <hr>
+        <!-- 切换组件的超链接 -->
+        <router-link to="/zhuye">主页_路由</router-link>  |
+        <router-link to="/keji">科技_路由</router-link>
+
+        <!-- 路由占位符, 组件内容会展示在这 -->
+        <router-view></router-view>
+    </div>
+</body>
+<script>
+// 四个组件
+var zhuye = {
+    template:'<h1>Vue 主页内容</h1>'
+};
+var keji = {
+    template:'<h1> Vue 科技板块内容</h1>'
+};
+
+//路由对象  配置
+var router = new VueRouter({
+    routes:[
+        {path: '/' , redirect: '/zhuye'},
+        {path:'/zhuye' , component:zhuye},
+        {path:'/keji' , component:keji}
+    ]
+});
+
+var vm = new Vue({
+    el: "#app",
+    data:{
+       
+    },
+    router
+});
+ 
+
+</script>
+</html>

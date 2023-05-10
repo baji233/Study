@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<script>
+var df ;
+(function(){
+    // constructor 指向类
+    function Stu(na,age){
+        this.name = na;
+        this.age = age;
+        this.hi = function(){
+            console.log("我叫"+this.name +"年龄"+this.age);
+        }
+    }
+    df = new Stu("邓峰",18);
+})();
+df.hi();
+// 给邓峰加个玩游戏的方法？？？
+df.game();
+console.log( Stu );
+
+
+</script>
+</body>
+</html>

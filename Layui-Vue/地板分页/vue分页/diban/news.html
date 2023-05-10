@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<title>新闻中心</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="stylesheet" href="css/bootstrap.min.css"/>
+
+<link rel="stylesheet" href="css/style.css"/>
+
+</head>
+
+
+
+<body>
+
+
+
+
+<header id="header">
+
+<nav class="navbar navbar-default navbar-static-top">
+
+	<div class="container">
+
+		<div class="navbar-header">			
+
+			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+
+			<span class="sr-only"></span>
+
+			<span class="icon-bar"></span>
+
+			<span class="icon-bar"></span>
+
+			<span class="icon-bar"></span>
+
+			</button>
+
+
+
+			<div class="navbar-brand">
+
+				<img src="images/logo.png" alt="" width="150px" height="" class="img-responsive"/>
+
+			</div>
+
+		</div>
+
+	  	<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" role="navigation">	  	
+
+			<ul class="nav navbar-nav navbar-right">
+
+				<li><a rel="nofollow" href="index.html">网站首页</a></li>
+
+				<li><a rel="nofollow" href="about.html">关于我们</a></li>
+
+				<li><a rel="nofollow" href="products.html">产品中心</a></li>
+				<li><a rel="nofollow" href="case.html">工程案例</a></li>
+
+				<li><a rel="nofollow" href="news.html" class="active">新闻中心</a></li>
+
+				<li><a rel="nofollow" href="sitemap.html">服务支持</a></li>
+
+				<li><a rel="nofollow" href="join.html">招商加盟</a></li>
+
+				<li><a rel="nofollow" href="contact.html">联系我们</a></li>
+
+
+			</ul>
+
+	    </div>
+
+	</div>
+
+</nav>
+
+</header>
+
+
+
+<section class="n_banner">
+
+	<img src="images/banc.jpg" class="img-responsive" width="1855px"/>
+
+</section>
+
+<div id="app">
+	<section class="imain">
+
+		<div class="container">
+	
+			<div class="left_con col-md-3 col-sm-12 col-xs-12">
+	
+				<div class="box">
+	
+					<h3>新闻分类</h3>
+	
+					<ul class="sort">
+	
+						<li @click="getnhid(nl.nhid)" v-for="(nl,index) in newslines"><a>{{nl.nhname}}</a></li>
+	
+					</ul>
+	
+				</div>
+	
+	
+				<div class="box">
+
+					<h3>联系我们</h3>
+	
+					<div class="n_contact">
+	
+						<p>电话：{{phones[0].phone}}</p>
+	
+						<p>网址：{{phones[0].url}}</p>
+	
+						<p>工厂地址：{{phones[0].factoryaddress}}</p>
+	
+						<p>仓储地址：{{phones[0].stockpileaddress}}</p>
+	
+					</div>
+	
+				</div>
+	
+			</div>
+	
+			
+	
+			<div class="right_con col-md-9 col-sm-12 col-xs-12">
+	
+				<div class="row">
+	
+					<div class="crumb clearfix">
+	
+						<h3>新闻资讯</h3>
+	
+						<div class="site hidden-xs">您的当前位置：<a href="index.html">首 页</a>><a href="news.html">新闻资讯</a></div>
+	
+					</div>
+	
+					<div class="content">
+	
+						<ul class="news_list clearfix">
+	
+							<li v-for="(n,index) in news" v-if="index < i">
+	
+							  <h3><a @click="setnewsid(n.newsid)" title=""><i class="glyphicon glyphicon-forward"></i>{{n.newsname}}</a></h3>
+	
+							  <span>{{n.time}}</span>						  
+	
+							</li>
+	
+						</ul>
+	
+					</div>				
+	
+				</div>
+	
+			</div>		
+	
+		</div>
+	
+	</section>
+	
+	
+</div>
+
+<footer class="footer">
+
+	<div class="container">
+
+		<div class="row foot_in">
+
+			<div class="col-md-3 col-sm-12 col-xs-12 hidden-xs">
+
+				<img src="images/ftlogo.png" alt="" class="img-responsive"/>
+
+				<div class="tel">					
+
+					<span>服务热线：</span>
+
+					<p>10086</p>
+
+				</div>
+
+			</div>
+
+			
+
+			<div class="col-md-9 col-sm-12 col-xs-12">
+
+				<ul class="footnav">
+
+					<a href="index.html" title="网站首页" rel="nofollow">网站首页</a> | 
+
+					<a href="about.html" title="关于我们" rel="nofollow">关于我们</a> | 
+
+					<a href="products.html" title="产品中心" rel="nofollow">产品中心</a> | 
+
+					<a href="case.html" title="工程案例"   rel="nofollow">工程案例</a> | 			
+
+					<a href="news.html" title="新闻中心" rel="nofollow">新闻中心</a> | 
+
+					<a href="sitemap.html" title="服务支持"  rel="nofollow">服务支持</a> | 
+
+					<a href="join.html" title="招商加盟"  rel="nofollow">招商加盟</a>
+					
+					<a href="contact.html" title="联系我们"  rel="nofollow">联系我们</a>
+
+				</ul>
+
+				<div class="copyright">					
+
+					备案号：<a href="index.html"  target="_blank" rel="nofollow"></a></p>           	
+
+					<p>电商哪家好？供应订做多少钱？怎么样？诚信公司专业以批发价格大量现货提供cms、、、等品质优良的产品及报价，欢迎来电生产定制！</p>
+
+					<p>地址：九华创新创业中心</p>
+
+					<p>联系人：鑫&nbsp;&nbsp;10086</p>
+
+					<p>网址：www.xxxx.cn&nbsp;&nbsp;邮箱：123456789@qq.com</p>
+					
+
+				</div>
+
+			</div>	
+
+		</div>		
+
+	</div>			
+
+</footer>
+
+
+
+
+<script type="text/javascript" src="js/jquery.js"></script>
+
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+
+<script src="js/axios.min.js"></script>
+<script src="js/vue.js"></script>
+<script>
+  var sock=72;
+  var app=new Vue({
+    el:"#app",
+    created() {
+		this.newslinesLoad();   
+		this.getnhid();
+		this.getPhones();
+    },
+    data() {
+      return {
+		newslines:[],
+		phones:[{}],
+		news:[],
+		i:5
+      }
+    },
+    methods: {
+		getnhid(nhid){
+			var id=localStorage.getItem("nhid");
+			if(id!=null && id!=''){
+				this.getnews(id);
+				localStorage.removeItem("nhid");
+			}else{
+				this.getnews(nhid);
+			}
+		},
+		setnewsid(newsid){
+			localStorage.setItem("newsid",newsid);
+			window.location.href="news_article.html";
+		},
+		getnews(nhid){
+			if(nhid==null){
+				nhid='';
+			}
+			axios.get("/home/news?state=0&nhid="+nhid)
+			.then(res => {
+				// console.log(res)
+				this.news=res.data.data;
+			})
+			.catch(err => {
+				console.error(err); 
+			})
+		},
+		newslinesLoad(){
+			axios.get("/home/newsheadlines")
+			.then(res => {
+				// console.log(res.data.data);
+				this.newslines=res.data.data;
+			})
+			.catch(err => {
+				console.error(err); 
+			})
+		},
+		getPhones(){
+			axios.get("/home/contactdetails")
+			.then(res => {
+				// console.log(res)
+				this.phones=res.data.data;
+			})
+			.catch(err => {
+				console.error(err); 
+			})
+		}
+    }
+  })
+  $(document).ready(function (){
+        $(window).scroll(function (){
+            //console.info($(window).scrollTop())
+            if($(window).scrollTop()>=sock){
+				if(app.i==5){
+					app.i+=5;
+					sock+=77;
+				}else{
+					app.i+=5;
+					sock+=180;
+				}			
+            }
+        })
+    })
+</script>
+
+</body>
+
+</html>
+

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../js/vue.js"></script>
+    <script src="../js/vue-router_3.0.2.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <h1>  Vue 路由守卫 (未登录无法进入首页) </h1>
+    <div id="app">
+        <a href="#/zhuye">主页</a> 
+        <a href="#/keji">科技</a> 
+        <hr>
+        <!-- 切换组件的超链接 -->
+        <router-link to="/zhuye">主页</router-link>
+        <router-link to="/keji">科技</router-link>
+        <router-link to="/login">登录</router-link>
+
+        <!-- 路由占位符 -->
+        <router-view></router-view>
+    </div>
+</body>
+<script>
+// 四个组件
+var zhuye = {
+    template:'<h1>Vue 主页内容</h1>'
+};
+var keji = {
+    template:'<h1>Vue 重要内容</h1>'
+};
+var login = {
+    template : `
+    <div>
+    <h1>登录页面</h1>    
+    <input type="text" v-model="name"/>
+    <input type="passsword" v-model=pwd"/>
+    <button @click="handle">Login</button>
+    </div>
+    `,
+    data() {
+        return {
+            name : 'admin',
+            pwd : '8888'
+        }
+    },
+    methods : {
+        handle() {
+            //本地存储
+            sessionStorage.setItem('LOGIN', this.name); //存入LOGIN钥匙和用户名,sessionStorage保存钥匙的时间是一次会话的时长
+            // localStorage.setItem('LOGIN', this.name); //localStorage保存钥匙的时间是永久的
+
+            alert('登录成功！');
+        }
+    }
+}
+
+//路由对象  配置
+var router = new VueRouter({
+    routes:[
+        {path: '/' , redirect: '/login'},
+        {path:'/zhuye' , component:zhuye},
+        {path:'/keji' , component:keji},
+        {path:'/login', component:login}
+    ]
+});
+
+// 守卫
+router.beforeEach((to, from, next) => {
+    console.log('进入守卫', to);
+    // 如果不next(), 进去了就不出来了
+    var obj = sessionStorage.getItem('LOGIN'); // 获取LOGIN钥匙, 并验证
+    if(to.path == '/login' || obj){
+        next() //放行
+    }else {
+        next('/login')
+    }
+    
+})
+
+var vm = new Vue({
+    el: "#app",
+    data:{
+       
+    },
+    router
+});
+ 
+
+</script>
+</html>

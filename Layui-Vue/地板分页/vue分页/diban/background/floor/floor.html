@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>产品列表管理</title>
+    <script src="../../static/js/vue.js"></script>
+    <!-- 引入样式 -->
+    <!-- <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css"> -->
+    <!-- 引入组件库 -->
+    <!-- <script src="https://unpkg.com/element-ui/lib/index.js"></script> -->
+    
+    <link rel="stylesheet" href="../../static/elementui/index.css" />
+    <script src="../../static/elementui/index.js"></script>
+
+    <link rel="stylesheet" href="../../static/css/style.css">
+    <script src="../../static/js/axios-0.18.0.js"></script>
+    <style>
+        .avatar-uploader .el-upload {
+          border: 1px dashed #d9d9d9;
+          border-radius: 6px;
+          cursor: pointer;
+          position: relative;
+          overflow: hidden;
+        }
+        .avatar-uploader .el-upload:hover {
+          border-color: #409EFF;
+        }
+        .avatar-uploader-icon {
+          font-size: 28px;
+          color: #8c939d;
+          width: 178px;
+          height: 178px;
+          line-height: 178px;
+          text-align: center;
+        }
+        .avatar {
+          width: 178px;
+          height: 178px;
+          display: block;
+        }
+      </style>
+</head>
+<body>
+    <div id="app">
+        <el-card shadow="never">
+            <!-- 搜索列表 -->
+            <el-form :inline="true" size="small" :model="searchEntity">
+                <el-form-item label="地板名称">
+                    <el-input v-model="searchEntity.name" clearable placeholder="地板名称"></el-input>
+                </el-form-item>
+    
+                <el-form-item>
+                    <el-button type="danger" @click="delAll"><i class="fa fa-trash"></i> 删除选中</el-button>
+                    <el-button type="primary" @click="handleCreate"> 添加产品</el-button>
+                    <el-button type="info" @click="resetSearch"><i class="fa fa-refresh"></i> 重置</el-button>
+                    <el-button type="success" @click="search"><i class="fa fa-search"></i> 查询</el-button>
+                </el-form-item>
+            </el-form>
+        </el-card>
+        <el-card shadow="never">
+            <!-- 表格数据 -->
+            <el-table
+                    :data="tableData"
+                    height="650"
+                    @selection-change="handleSelectionChange"
+                    style="width: 100%">
+                <el-table-column
+                        type="selection"
+                        @selection-change="handleSelectionChange"
+                        width="55">
+                </el-table-column>
+                <el-table-column
+                        type="index"
+                        width="50"
+                        label="序号">
+                </el-table-column>
+                <el-table-column
+                        prop="floorname"
+                        label="地板名称">
+                </el-table-column>
+                <el-table-column
+                        prop="model"
+                        label="地板型号"
+                        width="180">
+                </el-table-column>
+                <el-table-column
+                        prop="type"
+                        label="地板类型"
+                        width="210">
+                </el-table-column>
+                <el-table-column
+                        prop="mainimg"
+                        width="180"
+                        label="地板图片">
+                        <template slot-scope="scope">
+                            <div class="lw-header">
+                                <img :src="'../../images/floor/'+scope.row.mainimg" alt="">
+                            </div>
+                        </template>
+                </el-table-column>
+                <el-table-column
+                    prop="series.seriesname"
+                    width="180"
+                    label="地板系列">
+                </el-table-column>
+                <el-table-column
+                        label="操作"
+                        width="200">
+                    <template slot-scope="scope">
+                        <el-button @click="handleDelete(scope.row)" type="danger" size="mini" style="padding: 2px 4px; border-radius: 0">
+                            <i class="fa fa-trash"></i> 删 除
+                        </el-button>
+                        <el-button @click="handleUpdate(scope.row)" type="primary" size="mini"
+                                   style="padding: 2px 4px; border-radius: 0" >
+                            <i class="fa fa-pencil"></i> 编 辑
+                        </el-button>
+                    </template>
+                </el-table-column>
+            </el-table>
+            <!-- 分页 -->
+            <div class="lw-fr" style="margin: 10px;">
+                <el-pagination background
+                               layout="total, prev, pager, next, sizes, jumper"
+                               :current-page.sync="page.pageNo"
+                               :page-size.sync="page.pageSize"
+                               :total="page.count"
+                               :page-sizes="[ 10, 20, 30, 40, 50, 100]"
+                               @current-change="searchPage"
+                               @size-change="searchPage">
+                </el-pagination>
+            </div>
+        </el-card>
+        <!-- 添加产品 -->
+        <el-dialog
+            title="产品添加"
+            :visible.sync="addVisible"
+            width="90%"
+            height="100%"   
+            :before-close="handleClose"
+            >
+            <el-card shadow="naver">
+                <div class="lw-box-title">
+                    地板信息
+                </div>
+                <el-form :model="addEntity"
+                         label-suffix=" :"
+                         label-width="100px">
+                    <el-row :span="24">
+                        <el-col :span="12">
+                            <el-form-item label="地板名称" prop="floorname">
+                                <el-input v-model="addEntity.floorname" clearable></el-input>
+                            </el-form-item>
+                        </el-col>
+                        <el-col :span="12">
+                            <el-form-item label="地板型号" prop="model">
+                                <el-input v-model="addEntity.model" clearable></el-input>
+                            </el-form-item>
+                        </el-col>
+                    </el-row>
+        
+                    <el-row :span="24">
+                        <el-col :span="12">
+                            <el-form-item label="地板类型" prop="type">
+                                <el-input v-model="addEntity.type" clearable></el-input>
+                            </el-form-item>
+                        </el-col>
+                        <el-col :span="12">
+                            <el-form-item label="地板规格" prop="specifications">
+                                <el-input v-model="addEntity.specifications" clearable></el-input>
+                            </el-form-item>
+                        </el-col>
+                    </el-row>
+              
+                    <el-row :span="24">
+                        <el-col :span="12">
+                            <el-form-item label="地板等级" prop="level">
+                                <el-input v-model="addEntity.level" clearable></el-input>
+                            </el-form-item>
+                        </el-col>
+                        <el-col :span="12">
+                            <el-form-item label="地热" prop="geothermal">
+                                <el-input v-model="addEntity.geothermal" clearable></el-input>
+                            </el-form-item>
+                        </el-col>
+                    </el-row>
+                    <el-row :span="24">
+                        <el-col :span="12">
+                            <el-form-item label="产地" prop="place">
+                                <el-input v-model="addEntity.place" clearable></el-input>
+                            </el-form-item>
+                        </el-col>
+                        <el-col :span="12">
+                            <el-form-item label="特点" prop="characteristics">
+                                <el-input v-model="addEntity.characteristics" clearable></el-input>
+                            </el-form-item>
+                        </el-col>
+                    </el-row>
+
+                    <el-row :span="24">
+                        <el-col :span="12">
+                            <el-form-item label="系列" prop="seriesid">
+                                <el-select v-model="addEntity.seriesid" placeholder="请选择地板系列">
+                                    <el-option v-for="item in seriesList" :label="item.seriesname" :value="item.seriesid"></el-option>
+                                </el-select>
+                            </el-form-item>
+                        </el-col>
+                    </el-row>
+
+                    <el-row :span="24">
+                        <el-col :span="12">
+                            <el-form-item label="上传文件" prop="mainimg">
+                                <el-upload
+                                    action="none"
+                                    :show-file-list="false"
+                                    :auto-upload="false"
+                                    :on-change="checkType">
+                                    
+                                    <img v-if="imageUrl" :src="imageUrl" class="avatar">
+                                    <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+                                </el-upload>
+                            </el-form-item>
+                        </el-col>
+                    </el-row>
+
+                    
+                    <el-row :span="24">
+                        <el-col :span="12">
+                            <el-form-item label="地板多图片" prop="mainimg">
+                                <el-upload
+                                        class="upload-demo"
+                                        action="none"
+                                        :on-remove="addhandleRemove"
+                                        :auto-upload="false"
+                                        :on-change="addcheckTypes"
+                                        :file-list="addFileList"
+                                        list-type="picture">
+                                <el-button size="small" type="primary">点击上传</el-button>
+                                <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
+                              </el-upload>
+                            </el-form-item>
+                        </el-col>
+                    </el-row>
+
+
+                    <el-row :span="24">
+                        <el-col :span="12">
+                            <el-form-item label="是否推荐" prop="recommend">
+                                <el-select v-model="addEntity.recommend" placeholder="是否推荐">
+                                    <el-option label="推荐" value="1"></el-option>
+                                    <el-option label="不推荐" value="0"></el-option>
+                                </el-select>
+                            </el-form-item>
+                        </el-col>
+                    </el-row>
+
+                    <el-form-item>
+                        <el-button type="primary" @click="addsubmitForm()">立即创建</el-button>
+                        <el-button @click="addresetForm()">重置</el-button>
+                      </el-form-item>
+                </el-form>
+            </el-card>
+        </el-dialog>
+        <!-- 修改产品 -->
+        <el-dialog
+            title="产品修改"
+            :visible.sync="editVisible"
+            width="90%"
+            height="100%"
+            :before-close="handleClose"
+            >
+            <el-card shadow="naver">
+                <div class="lw-box-title">
+                    地板信息
+                </div>
+                <el-form :model="editEntity"
+                         label-suffix=" :"
+                         label-width="100px">
+                    <el-row :span="24">
+                        <input type="hidden" v-model="editEntity.floorid" />
+                        <el-col :span="12">
+                            <el-form-item label="地板名称" prop="floorname">
+                                <el-input v-model="editEntity.floorname" clearable></el-input>
+                            </el-form-item>
+                        </el-col>
+                        <el-col :span="12">
+                            <el-form-item label="地板型号" prop="model">
+                                <el-input v-model="editEntity.model" clearable></el-input>
+                            </el-form-item>
+                        </el-col>
+                    </el-row>
+        
+                    <el-row :span="24">
+                        <el-col :span="12">
+                            <el-form-item label="地板类型" prop="type">
+                                <el-input v-model="editEntity.type" clearable></el-input>
+                            </el-form-item>
+                        </el-col>
+                        <el-col :span="12">
+                            <el-form-item label="地板规格" prop="specifications">
+                                <el-input v-model="editEntity.specifications" clearable></el-input>
+                            </el-form-item>
+                        </el-col>
+                    </el-row>
+              
+                    <el-row :span="24">
+                        <el-col :span="12">
+                            <el-form-item label="地板等级" prop="level">
+                                <el-input v-model="editEntity.level" clearable></el-input>
+                            </el-form-item>
+                        </el-col>
+                        <el-col :span="12">
+                            <el-form-item label="地热" prop="geothermal">
+                                <el-input v-model="editEntity.geothermal" clearable></el-input>
+                            </el-form-item>
+                        </el-col>
+                    </el-row>
+                    <el-row :span="24">
+                        <el-col :span="12">
+                            <el-form-item label="产地" prop="place">
+                                <el-input v-model="editEntity.place" clearable></el-input>
+                            </el-form-item>
+                        </el-col>
+                        <el-col :span="12">
+                            <el-form-item label="特点" prop="characteristics">
+                                <el-input v-model="editEntity.characteristics" clearable></el-input>
+                            </el-form-item>
+                        </el-col>
+                    </el-row>
+
+                    <el-row :span="24">
+                        <el-col :span="12">
+                            <el-form-item label="系列" prop="seriesid">
+                                <el-select v-model="editEntity.seriesid" placeholder="请选择地板系列">
+                                    <el-option v-for="item in seriesList" :label="item.seriesname" :key="item.seriesid" :value="item.seriesid"></el-option>
+                                </el-select>
+                            </el-form-item>
+                        </el-col>
+                    </el-row>
+
+                    <el-row :span="24">
+                        <el-col :span="12">
+                            <el-form-item label="上传文件" prop="mainimg">
+                                <el-upload
+                                    action="none"
+                                    :show-file-list="false"
+                                    :auto-upload="false"
+                                    :on-change="editcheckType">
+                                    
+                                    <img v-if="editimageUrl" :src="editimageUrl" class="avatar">
+                                    <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+                                </el-upload>
+                            </el-form-item>
+                        </el-col>
+                    </el-row>
+
+                    <el-row :span="24">
+                        <el-col :span="12">
+                            <el-form-item label="地板多图片" prop="img">
+                                <el-upload
+                                        class="upload-demo"
+                                        action="none"
+                                        :on-remove="edithandleRemove"
+                                        :auto-upload="false"
+                                        :on-change="editcheckTypes"
+                                        :file-list="editFileList"
+                                        list-type="picture">
+                                <el-button size="small" type="primary">点击上传</el-button>
+                                <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
+                              </el-upload>
+                            </el-form-item>
+                        </el-col>
+                    </el-row>
+
+
+                    <el-row :span="24">
+                        <el-col :span="12">
+                            <el-form-item label="系列" prop="recommend">
+                                <el-select v-model="editEntity.recommend" placeholder="是否推荐">
+                                    <el-option label="推荐" :value="1" :key="1" ></el-option>
+                                    <el-option label="不推荐" :value="0" :key="0"></el-option>
+                                </el-select>
+                            </el-form-item>
+                        </el-col>
+                    </el-row>
+
+                    <el-form-item>
+                        <el-button type="primary" @click="editSubmitForm()">修改</el-button>
+                        <el-button @click="editResetForm()">重置</el-button>
+                      </el-form-item>
+                </el-form>
+            </el-card>
+        </el-dialog>
+    </div>
+</body>
+<script>
+    var app = new Vue({
+        el:"#app",
+        data() {
+            return {
+                tableData:[],
+                searchEntity:{
+                    name: ""
+                },
+                addVisible: false,//打开添加层
+                editVisible: false,//打开修改层
+                page: {
+                    pageNo: 1,
+                    pageSize: 10,
+                    count: 10
+                },
+                delarr:[],//存放删除的id
+                multipleSelection:[],//多选的数据
+                addEntity: {},//添加表单对象
+                imageUrl: "",//添加图片路径
+                imageFile:{},//添加图片文件
+                editEntity:{},//编辑表单对象
+                editimageUrl: "",//编辑图片路径
+                editimageFile:{},//编辑图片文件
+                seriesList:[],//系列数据
+                addFileList:[],
+                editFileList:[]
+
+
+            }
+        },
+        methods: {
+            //添加列表图片列表移除
+            addhandleRemove(file, addFileList) {
+                this.addFileList = addFileList;
+            },
+            //添加列表多图片上传
+            addcheckTypes(file,addFileList){
+                this.addFileList = addFileList;
+            },
+            //修改图片列表移除
+            edithandleRemove(file, editFileList) {
+                this.editFileList = editFileList;
+            },
+            //修改多图片上传
+            editcheckTypes(file,editFileList){
+                this.editFileList = editFileList;
+            },
+            //查询地板信息
+            getAll(){
+                axios.get("/home/floor/"+this.page.pageNo+"/"+this.page.pageSize+"?floorname="+this.searchEntity.name).then((res)=>{
+                    console.log(res)
+                    this.tableData = res.data.data.records;
+                    this.page.count = res.data.data.total
+                })
+            },
+            //批量删除
+            delAll(){
+                this.$confirm('是否删除选中'+this.multipleSelection.length+'行?', '提示', {
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消',
+                    type: 'warning'
+                }).then(() => {
+                    if(this.multipleSelection.length>0){
+                        //循环取出id
+                        for(let i=0;i<this.multipleSelection.length;i++){
+                            //添加到delarr
+                            this.delarr.push(this.multipleSelection[i].floorid)
+                        }
+                        console.log(this.delarr)
+                        axios.delete("/home/floor?ids="+this.delarr).then((res)=>{
+                            if(res.data.flag == true && res.data.data!=null){
+                                this.$message.success("删除成功")
+                            }else{
+                                this.$message.success("删除失败")
+                            }
+                        }).finally(()=>{
+                            this.getAll();
+                        })
+                    }else{
+                        this.$message.warning("至少选中一行");
+                    }
+                    
+                }).catch(() => {
+                    this.$message({
+                        type: 'info',
+                        message: '已取消删除'
+                    });          
+                });
+                
+            },
+            //显示添加弹框
+            handleCreate(){
+                this.addVisible = true;
+                //获取系列数据
+                axios.get("/home/series/").then((res)=>{
+                    console.log(res.data.data);
+                    this.seriesList = res.data.data;
+                })
+            },
+            //查询
+            search(){
+                this.getAll()
+            },
+            //重置
+            resetSearch(){
+                this.searchEntity.name = ""
+            },
+            //监听复选框选中
+            handleSelectionChange(val){
+                this.multipleSelection=val;
+            },
+            //分页
+            searchPage(currentPage){
+                this.page.pageNo = currentPage;
+                this.getAll();
+            },
+            //点击删除
+            handleDelete(row){
+                this.$confirm("此操作永久删除当前信息，是否继续？","提示",{type:"info"}).then(()=>{
+            
+                    axios.delete("/home/floor/"+row.floorid).then((res)=>{
+                        if(res.data.flag==true&&res.data.data!=null){
+                            this.$message.success("删除成功")
+                        }else{
+                            this.$message.error("删除失败")
+                        }
+                    }).finally(()=>{
+                        this.getAll();
+                    })
+                }).catch(()=>{
+                    this.$message.info("取消操作");
+                });
+            },
+            //点击修改
+            handleUpdate(row){
+                this.editVisible = true;
+                //获取系列数据
+                axios.get("/home/series/").then((res)=>{
+                    this.seriesList = res.data.data;
+                });
+                //查询地板数据
+                console.log(row.floorid)
+                axios.get("/home/floor/"+row.floorid).then((res)=>{
+                    this.editEntity = res.data.data[0];
+                    this.editimageUrl = "../../images/floor/"+res.data.data[0].mainimg;
+
+                    var arr = [];
+                    
+
+                    for(let i=0;i<res.data.data[0].img.length;i++){
+                        arr.push({"url":"../../images/floor/" + res.data.data[0].img[i].img})
+                    }
+                    
+                    this.editFileList = arr
+                })
+            },
+            //关闭
+            handleClose(){
+                this.addVisible = false;
+                this.editVisible = false;
+                this.addEntity = {};
+                this.editEntity = {};
+                this.addFileList = [];
+                this.editFileList = []
+            },
+            //检查用户图片类型
+            checkType(file){
+                const isJPG = file.type === 'image/jpeg';
+                const isLt2M = file.size / 1024 / 1024 < 2;
+
+                if (!isLt2M) {
+                    this.$message.error('上传头像图片大小不能超过 2MB!');
+                }
+                if(isLt2M){
+                    //确定上传图片
+                    this.imageFile = file;
+                    //预览图片,赋予头像url
+                    this.imageUrl = URL.createObjectURL(this.imageFile.raw); 
+                }
+            },
+            //添加提交
+            addsubmitForm: function () {
+                
+                let formData = new FormData();
+                formData.append("floorname",this.addEntity.floorname);
+                formData.append("model",this.addEntity.model);
+                formData.append("type",this.addEntity.type);
+                formData.append("level",this.addEntity.level);
+                formData.append("specifications",this.addEntity.specifications);
+                formData.append("geothermal",this.addEntity.geothermal);
+                formData.append("place",this.addEntity.place);
+                formData.append("characteristics",this.addEntity.characteristics);
+                formData.append("seriesid",this.addEntity.seriesid);
+                formData.append("recommend",this.addEntity.recommend);
+                //将文件添加
+                formData.append("mainimgs",this.imageFile.raw);
+                //多文件添加到表单
+                for(let i=0;i<this.addFileList.length;i++){
+                    formData.append("imgs",this.addFileList[i].raw);
+                }
+                console.log(formData);
+                axios.post("/home/floor/",formData).then((res)=>{
+                    console.log(res)
+                    if(res.data.flag == true && res.data.data!=null){
+                        this.$message.success("添加成功")
+                    }else{
+                        this.$message.error("添加失败")
+                    }
+                }).finally(()=>{
+                    this.addVisible = false;
+                    this.getAll();
+                    this.addEntity = {}
+                    this.imageUrl = ""
+                    this.addFileList = []
+                })
+            },
+            //添加重置
+            addresetForm(){
+                this.addEntity = {}
+            },
+            //修改提交
+            editSubmitForm(){
+                let formData = new FormData();
+                console.log(this.editEntity)
+                formData.append("floorid",this.editEntity.floorid);
+                formData.append("floorname",this.editEntity.floorname);
+                formData.append("model",this.editEntity.model);
+                formData.append("type",this.editEntity.type);
+                formData.append("level",this.editEntity.level);
+                formData.append("specifications",this.editEntity.specifications);
+                formData.append("geothermal",this.editEntity.geothermal);
+                formData.append("place",this.editEntity.place);
+                formData.append("characteristics",this.editEntity.characteristics);
+                formData.append("seriesid",this.editEntity.seriesid);
+                formData.append("recommend",this.editEntity.recommend);
+                if(this.editimageFile.raw !=null){
+                    //将文件添加
+                    formData.append("mainimgs",this.editimageFile.raw);
+                }
+
+                //多文件添加到表单
+                for(let i=0;i<this.editFileList.length;i++){
+                    console.log(this.editFileList[i].raw)
+                    if(this.editFileList[i].raw!=null){
+                        formData.append("imgs",this.editFileList[i].raw);
+                    }
+                }
+                console.log(formData);
+                axios.put("/home/floor/",formData).then((res)=>{
+                    console.log(res);
+                    if(res.data.flag == true && res.data.data!=null){
+                        this.$message.success("修改成功")
+                    }else{
+                        this.$message.error("修改失败")
+                    }
+                }).finally(()=>{
+                    this.editVisible = false;
+                    this.getAll();
+                    this.editimageUrl = ""
+                    this.editFileList = []
+                })
+            },
+            //修改重置
+            editResetForm(){
+                this.editEntity = {};
+            },
+            //修改表单文件上传
+            editcheckType(file){
+                const isJPG = file.type === 'image/jpeg';
+                const isLt2M = file.size / 1024 / 1024 < 2;
+
+                if (!isLt2M) {
+                    this.$message.error('上传头像图片大小不能超过 2MB!');
+                }
+                if(isLt2M){
+                    //确定上传图片
+                    this.editimageFile = file;
+                    //预览图片,赋予头像url
+                    this.editimageUrl = URL.createObjectURL(this.editimageFile.raw); 
+                }
+            }
+
+        },
+        created() {
+            this.getAll();
+        },
+    })
+</script>
+</html>

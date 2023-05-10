@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<script type="text/javascript">
+    function handle(e) {
+        document.getElementById("txt").innerText = e.type;
+    }
+
+    window.onload = function () {
+        var btn = document.getElementById("btn");
+        btn.onclick = handle;
+        btn.onmouseup = handle;
+        btn.onmousedown = handle;
+        btn.onmouseover = handle;
+        btn.onmouseleave = handle;
+    }
+
+    function block(e){
+        if (window.event){
+            e = window.event;
+            e.returnValue=false;
+        } else {
+            e.preventDefault();
+        }
+        alert("鼠标右键不可用");
+    }
+    document.oncontextmenu = block;
+
+</script>
+<body>
+    <input id="btn" type="button" value="测试用按钮"/>
+    <h2 id="txt"></h2>
+</body>
+</html>

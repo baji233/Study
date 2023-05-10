@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../js/vue.js"></script>
+    <script src="../js/vue-router_3.0.2.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <h1>  Vue 嵌套路由 </h1>
+    <h1> 编程式 路由 , 路由带参数 </h1>
+    <div id="app">
+         <a href="#/zhuye/88">主页</a>
+         <a href="#/reg">注册</a>
+        <!-- 占位符 -->
+        <router-view></router-view>
+    </div>
+</body>
+<script>
+// 四个组件
+var zhuye = {
+    props:['uid'],
+    template:'<h1>主页内容-- {{uid}}</h1>'
+};
+
+var reg = {
+    template:`<div>
+        <h1>注册页</h1>
+        <a href="#/tab1">英雄联盟</a>
+        <a href="#/tab2">王者</a>
+        <!-- 子路由占位符 -->
+        <router-view></router-view>
+        <button @click="handle">跳首页</button>
+    </div>`,
+    methods:{
+        handle(){
+            this.$router.go(-1)  //返回
+            //this.$router.push('/zhuye/100')
+        }
+    }
+}
+
+// --- 子组件
+var tab1 = {
+    template:'<h1>注册 孩子1</h1>'
+};
+var tab2 = {
+    template:'<h1>注册 孩子2</h1>'
+};
+
+
+//路由对象  配置
+var  router = new VueRouter({
+    routes:[
+        //props: true是打开参数开关,可以在路由中传参数
+        {path: '/zhuye/:uid', component:zhuye,props: true},
+        { 
+            path: '/reg', 
+            component:reg , 
+            children:[
+                {path: '/tab1', component:tab1},
+                {path: '/tab2', component:tab2}
+            ]
+        },
+    ]
+});
+
+var vm = new Vue({
+    el: "#app",
+    data:{
+       
+    },
+    //路由挂载在Vue
+    router
+});
+ 
+
+</script>
+</html>

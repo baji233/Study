@@ -1,0 +1,46 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:http="http://www.springframework.org/schema/c"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/aop
+       http://www.springframework.org/schema/aop/spring-aop.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd">
+    <context:component-scan base-package="com.jiuyun"/>
+    <!-- 面向切面配置 -->
+    <aop:config>
+        <!-- 配置全局切入点，并命名，表达式匹配的是com.jiuyun.service.impl包下面所有的方法 -->
+        <aop:pointcut id="logPoint" expression="execution(public * com.jiuyun.service.impl.*.*(..))"/>
+        <!-- 配置日志记录切面，与com.jiuyun.aspect.LogAspect类关联 -->
+        <aop:aspect id="logAspect" ref="logAspect">
+            <!--        给指定包下所有的类添加一个父接口，并指定父接口的实现类-->
+            <aop:declare-parents types-matching="com.jiuyun.service.impl.*"
+                                 implement-interface="com.jiuyun.service.MyService"
+                                 default-impl="com.jiuyun.service.impl.MyServiceImpl"></aop:declare-parents>
+            <!-- 配置前置通知 -->
+            <aop:before method="startLog" pointcut-ref="logPoint"/>
+            <aop:after-returning method="log" pointcut-ref="logPoint"/>
+            <aop:after-throwing method="logError" pointcut-ref="logPoint"/>
+            <!-- 配置后通知 -->
+            <aop:after method="afterLog" pointcut-ref="logPoint"/>
+        </aop:aspect>
+        <!-- 配置性能统计切面 -->
+        <aop:aspect id="countTimeAspect" ref="countTimeAspect">
+            <!-- 配置环绕通知，使用的是局部切入点 -->
+            <aop:around method="countTime" pointcut="execution(public * com.jiuyun.dao.*.*(..))"/>
+        </aop:aspect>
+    </aop:config>
+</beans>
+
+
+
+
+
+
+
+
+
+

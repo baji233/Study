@@ -1,0 +1,122 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+    <title>用户登录页面</title>
+    <link href="css/style.css" rel="stylesheet" />
+    <script type="text/javascript">
+        //检查用户名和密码
+        function check() {
+            var username = document.myform.username;
+            var password = document.myform.pwd;
+            if (username.value == "") {
+                alert("帐号名不允许为空!");
+                username.focus();
+                return false;
+            } 
+            if (password.value == "") {
+                alert("密码不允许为空!");
+                password.focus();
+                return false;
+            }
+            return true;
+        }
+    </script>
+</head>
+<body>
+    <div class="main">
+        <div id="logo"><img src="image/logo.gif"></div>
+        <div id="menu"><a href="login.html"><img src="image/menu1-1.gif"></a><a href="search.html"><img src="image/menu2-2.gif"></a><a href="intro.html"><img src="image/menu3-2.gif"></a></div>
+        <div id="menu-bg1">我的简历 | 个人搜索器 | 职位收藏夹 | 工作申请记录 | 退出 </div>
+        <div class="register">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                    <!--用户登录-->
+                    <td width="40%" align="right">
+                        <table width="324" border="0" cellspacing="0" cellpadding="0">
+                            <tr>
+                                <td><img src="image/Login_top.gif"></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                        <tr>
+                                            <td width="21"><img src="image/Login_left.gif"></td>
+                                            <td bgcolor="#FFFFF7" align="center" valign="middle">
+                                                <form action="intro.html" method="post" name="myform" onsubmit="return check();">
+                                                    <table width="96%" border="0" cellspacing="0" cellpadding="0">
+                                                        <tr>
+                                                            <td class="register-td">会员名：</td>
+                                                            <td><input name="username" type="text" class="register-input"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="register-td">密&nbsp;码：</td>
+                                                            <td><input name="pwd" type="password" class="register-input"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td colspan="2" align="center" height="50"><input name="b1" type="submit" value="登录" onMouseOut="this.className='login-over'" onMouseOver="this.className='login-out'" class="login-over"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td colspan="2" align="center" height="50"><a href="register.html"><img src="image/login-1.gif"></a></td>
+                                                        </tr>
+                                                    </table>
+                                                </form>
+                                            </td>
+                                            <td width="21"><img src="image/Login_right.gif"></td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align="center"><img src="image/Login_bottom.gif"></td>
+                            </tr>
+                        </table>
+                    </td><!--右侧-->
+                    <td>
+                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                            <tr>
+                                <td width="100" align="center"><img src="image/pic1.jpg" vspace="10"></td>
+                                <td>
+                                    <span class="login-bold">我的简历</span> <br>
+                                    51job的简历中心，您可以在此创建自己专业的个性化的简历。
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align="center"><img src="image/pic2.jpg" vspace="5"></td>
+                                <td>
+                                    <span class="login-bold">找工作</span><br>
+                                    在茫茫职场中如何找工作？51job的职位搜索器助您一臂之力！
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align="center"><img src="image/pic3.jpg" vspace="5"></td>
+                                <td>
+                                    <span class="login-bold">在线申请</span> <br>
+                                    当您找到感兴趣的职位时，可以立即将您在51job上的简历在线<br>
+                                    投递给招聘单位。
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align="center"><img src="image/pic4.jpg" vspace="5"></td>
+                                <td>
+                                    <span class="login-bold">我的搜索和订阅</span> <br>
+                                    设置并订阅您个性化的职位搜索器，51job会贴心的将理想的职<br>
+                                    位发送到您的信箱中。
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table> 
+        </div> 
+    </div> 
+    <div id="bottom-bg" class="bottom-bg">网站导航 | <a href="index.html" class="a-white">网站首页</a> | <a href="search.html" class="a-white">职位搜索</a> | <a href="login.html" class="a-white">Myjob</a> | <a href="register.html" class="a-white">用户注册</a> | <a href="login.html" class="a-white">用户登录</a> | <a href="intro.html" class="a-white">简历管理</a> | <a href="company.html" class="a-white">招聘公司</a></div>
+    <div id="bottom" class="bottom">
+        人才招聘 Email:hr@51job.com<br>个人求职 Email:club@51job.com　或垂询:800-820-5100
+        <br>
+        未经本招聘网站同意，不得转载本网站之所有招聘信息及作品
+        <br>
+        无忧工作网版权所有&copy;1999-2007<br>
+        <a href="http://www.miibeian.gov.cn" target="_blank"><img src="image/bottom1.gif" border="0"></a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<myActions>
+    <!-- path表示请求路径的结尾处字符串 class表示对应实现Action的类 method表示执行实现类里的方法 -->
+    <action path="user" class="com.tjw.action.UserAction"></action>
+    <action path="user/login" class="com.tjw.action.UserAction" method="login"></action>
+</myActions>

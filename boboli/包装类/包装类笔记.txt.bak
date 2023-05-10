@@ -1,0 +1,37 @@
+包装类
+java对基本数据类型提供的相应类，目的是简化基本数据类型的常用操作，同时也体现出
+java是完全面向对象的.
+
+byte ---Byte
+short---Short
+int---Integer
+long---Long
+float---Float
+double---Double
+char---Character
+boolean---Boolean
+
+数值类型的包装类,Byte,Short,Integer,Long,Float,Double会有一个共同的父类Number,
+Number一个抽象类,方法:
+xxx xxxValue():xxx表示数值类型byte、int等,返回xxx类型的值
+
+Byte、Short、Integer、Long相同点:
+1>都有类似的构造函数
+  包装类(基本类型 变量);
+  包装类(String s);
+2>valueOf(基本类型 变量);
+  如果值的范围在-128~127之间获得包装类对象都相同，超出这个范围，就会重新创建一个对象
+
+3>都支持自动装箱和自动拆箱
+
+4>将字符串转换成基本数据类型。
+  parseXxx();Xxx数据类型，例如parseByte();
+
+Integer,Long除上面相同的地方，还有提供进制转换的方法:
+toBinaryString(基本类型 变量)
+toOctalString(基本类型 变量)
+toHexString(基本类型 变量)
+
+
+--------------------------------
+Float,Double,Character,Boolean

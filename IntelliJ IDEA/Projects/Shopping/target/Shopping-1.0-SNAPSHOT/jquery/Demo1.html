@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+<style>.myText</style>
+
+<script src="../JQuery-1.11.1/jquery-1.11.1.min.js"></script>
+<script type="text/javascript">
+  // $(document).ready(function (p) {
+  //   //JQuery函数的起点(只能有一个起点)
+  // });
+
+
+  //初始化函数简化版
+  $(function (){
+
+    $("button").click(function () {
+      $("p").hide();
+    });
+
+    //id选择器
+    $("#btn1").click(function () {
+      alert("Hello JQuery");
+    });
+
+    //class选择器
+    $(".myText").click(function () {
+      alert("Hello World");
+    })
+
+    //键盘事件
+    $(window).keypress(function (event) {
+      alert(event.key + " : " + event.which)
+    })
+  });
+
+
+</script>
+<body>
+<button>ok</button>
+<input id="btn1" type="button" value="nice">
+<p>Hello JQuery</p>
+<p class="myText">Hello World</p>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

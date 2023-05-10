@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1> 手写 ajax </h1>
+
+<script>
+var url = 'https://autumnfish.cn/api/joke/list?num=3';
+//对象  
+var xhr = new XMLHttpRequest();
+xhr.open('get',url);
+xhr.send();
+//准备状态改变时  200正常  404路径错误  500代码错误
+xhr.onreadystatechange = function(){
+    if(xhr.status == 200 && xhr.readyState ==4){
+        var info = xhr.responseText; //返回数据
+        // string ---> json
+        var obj = JSON.parse(info)
+        console.log( info );
+        console.log( obj );
+    }
+}
+
+
+
+
+
+
+
+</script>
+
+</body>
+</html>

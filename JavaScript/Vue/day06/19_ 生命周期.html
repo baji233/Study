@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="../js/vue.js"></script>
+	</head>
+	<body>
+		<div id="app">
+			<h1>{{mess}}</h1>
+		</div>
+	</body>
+	<script>
+		// Vue实例的八个生命周期
+
+		var vm = new Vue({
+			el : "#app", 
+			data : {
+				mess : 'openAI'
+			},
+			// 初始化...
+			beforeCreate() {
+				console.log('创建前');
+				// 打开页面后下面的代码不会执行
+				console.log(this.mess);
+				console.log(this.$el);
+			},
+			created() {
+				console.log('创建后');
+				console.log(this.mess);
+				console.log(this.$el); // 未执行
+
+			},
+			beforeMount() {
+				console.log('挂载前');
+				console.log(this.mess);
+				console.log(this.$el); // 插值表达式的原始状态
+
+			},
+			mounted() {
+				console.log('挂载后');
+				console.log(this.mess);
+				console.log(this.$el); // 插值表达式被解析后的值
+
+			},
+			beforeUpdate() {
+				// data被修改之后会触发更新的生命周期,更新时虚拟DOM会预渲染页面
+				console.log('更新前');
+				console.log(this.mess);
+				console.log(this.$el);
+
+			},
+			updated() {
+				console.log('更新后');
+				console.log(this.mess);
+				console.log(this.$el);
+
+			},
+			// 当vm.$destroy()时,子组件和父组件和时间被销毁
+			beforeDestroy() {
+				console.log('销毁前');
+				console.log(this.mess);
+				console.log(this.$el);
+
+			},
+			destroyed() {
+				console.log('销毁后');
+				console.log(this.mess);
+				console.log(this.$el); // undefined
+
+			},
+
+			methods : {
+				
+			}
+		});
+	</script>
+</html>

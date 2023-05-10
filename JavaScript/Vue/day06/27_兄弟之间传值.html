@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="../js/vue.js"></script>
+	</head>
+	<body>
+		<div id="app">
+            <h1>兄弟传值</h1>
+            <tom></tom>
+            <jerry></jerry>
+		</div>
+	</body>
+	<script>
+        //注册路由, 将在组件的生命周期里使用
+        var hub = new Vue();
+
+        //兄
+        Vue.component('tom', {
+            data : function() {
+                return {
+                    num : 10
+                }
+            },
+            props : [''],
+            template : `
+            <div>
+                <h1>tom = {{num}}</h1>
+                <button @click="xiong">tom按钮</button>
+            </div>
+            `,
+            methods : {
+                xiong() {
+                    console.log('tom');
+                    //这个兄组件tom使用路由在挂载完成后,触发弟组件的jerryMounted事件并传参数10,然后会在事件jerryMounted内进行处理
+                    hub.$emit('jerryMounted', 10);
+                }
+            },
+            // 生命周期之挂载完成
+            mounted() {
+                console.log('挂载完成后,自动执行的tomMounted');
+                //当tomMounted事件触发时, 触发这个箭头函数
+                hub.$on('tomMounted', (v) => {
+                    this.num += v
+                })
+            }
+        })
+
+        //弟
+        Vue.component('jerry', {
+            props : [''],
+            data : function() {
+                return {
+                    num : 80
+                }
+            },
+            template : `
+            <div>
+                <h1>jerry = {{num}}</h1>
+                <button @click="di">jerry按钮</button>
+
+            </div>
+            `,
+            methods : {
+                di() {
+                    console.log('jerry');
+                    hub.$emit('tomMounted', 5);
+                }
+            },
+            mounted() {
+                console.log('挂载完成后,自动执行的jerryMounted');
+                //当jerryMounted事件触发时, 触发这个箭头函数进行处理
+                hub.$on('jerryMounted', (v) => {
+                    this.num += v
+                })
+            }
+        })
+
+        //父
+		var vm = new Vue({
+			el : "#app", 
+			data : {
+			},
+			methods : {
+
+			}
+		});
+	</script>
+</html>

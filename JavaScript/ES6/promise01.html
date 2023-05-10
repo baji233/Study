@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>promise异步</title>
+		<script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+	</head>
+	<body>
+		<h2>解决回调地狱</h2>
+		<button onclick="onclick()">测试</button>
+	</body>
+	<script>
+		//demo1
+		function test01(){
+			let test = new Promise(function(success, error){
+				console.log("执行..");
+				//定时两秒
+				setTimeout(function(){
+					console.log("计时..");
+					let x = Math.random();
+					if(x >= 0.5){
+						success("成功.."+ x);
+					}else{
+						error("失败.."+ x);
+					}
+				},2000);
+				
+				let url01 = 'https://autumnfish.cn/api/joke/list?num=3';
+				let url02 = 'https://autumnfish.cn/search?keywords=大鱼';
+				$.ajax({
+					url:url02,
+					success: function(data){
+						console.log("成功信息:", data);
+					},
+					error: function(e){
+						console.log("错误信息:"+ e);
+					}
+				});
+			});
+		}
+		
+		console.log("开始..");
+		function onclick(){
+			
+		}
+		console.log("结束..");
+		
+		let test01 = new test01();
+		test01.then(function(data){
+			//成功回调
+			console.log("回调:", data);
+		},function(val){
+			//失败回调
+			console.log("回调:", val);
+		});
+		
+		
+		//demo2 
+		function test02(){
+			let test = new promise(function(resolve,reject){
+				setTimeout(function(){
+					
+				});
+			});
+		}
+		
+		//demo3 全部一起调用:Promise.all()
+		let 
+		Promise.all();
+		
+		//demo4 赛跑方式调用:Promise.race()
+		Promise.race();
+		
+	</script>
+</html>
+
+
+

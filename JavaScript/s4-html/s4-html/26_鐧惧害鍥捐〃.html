@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../js/echarts.min.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <h1>百度图表</h1>
+    <div id="main" style="width: 600px;height:400px;"></div>
+</body>
+<script>
+let obj = document.getElementById('main');
+var myChart = echarts.init(obj);
+
+// 指定图表的配置项和数据
+// 指定图表的配置项和数据
+var option = {
+    tooltip: {
+        trigger: 'item',
+        formatter: '{a} <br/>{b}: {c} ({d}%)'
+    },
+    legend: {
+        orient: 'vertical',
+        left: 10,
+        data: ['荣耀王者', '白金战士', '黄金圣斗士', '不屈白银', '青铜渣渣']
+    },
+    series: [
+        {
+            name: '访问来源',
+            type: 'pie',
+            radius: ['50%', '70%'],
+            avoidLabelOverlap: false,
+            label: {
+                show: false,
+                position: 'center'
+            },
+            emphasis: {
+                label: {
+                    show: true,
+                    fontSize: '30',
+                    fontWeight: 'bold'
+                }
+            },
+            labelLine: {
+                show: false
+            },
+            data: [
+                {value: 335, name: '荣耀王者'},
+                {value: 310, name: '白金战士'},
+                {value: 234, name: '黄金圣斗士'},
+                {value: 135, name: '不屈白银'},
+                {value: 1548, name: '青铜渣渣'}
+            ]
+        }
+    ]
+};
+
+
+// 使用刚指定的配置项和数据显示图表。
+myChart.setOption(option);
+
+</script>
+
+</html>

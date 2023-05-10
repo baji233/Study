@@ -1,0 +1,22 @@
+购物车
+	商品类：Product
+	购物项：ShopCarItem
+	购物车：Map
+页面：
+	productList.jsp
+	shopCarPage.jsp
+
+
+过滤器：
+	1.登录验证
+	2.乱码处理
+	3.框架启动加载（Struts2）
+
+MVC设计模式
+	M:Model，模型
+		负责业务逻辑的处理
+	V:View，视图
+		负责页面数据展示，数据收集
+	C:Controller，控制
+		数据获取，数据的转换，调用模型层，数据传递，视图的跳转
+

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<script type="text/javascript">
+    window.onload=function () {
+        alert("页面加载完毕！");
+    }
+
+    function down() {
+        document.getElementById("btn1").style = "background-color: yellow";
+    }
+
+    function up() {
+        document.getElementById("btn1").style = "background-color: red";
+    }
+
+    function changeColor() {
+        document.getElementById("txt1").style = "background-color: blue";
+    }
+
+    function change() {
+        document.getElementById("txt1").style = "background-color: white";
+    }
+
+    function over() {
+        document.getElementById("btn2").style = "background-color: green";
+    }
+
+    function leave() {
+        document.getElementById("btn2").style = "background-color: black";
+    }
+
+</script>
+<body>
+    <input id="btn1" type="button" value="颜色改变" onmousedown="down()" onmouseup="up()"><br/>
+    <input type="text" id="txt1" onfocus="changeColor()" onblur="change()"/><br/>
+    <input id="btn2" type="button" value="请将鼠标移上来" onmouseover="over()" onmouseleave="leave()">
+</body>
+</html>

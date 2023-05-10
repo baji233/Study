@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+    #box {
+        width:50px;
+        height:50px;
+        background-color: red;
+        position:absolute;
+        left:0px;
+        top:0px;
+    }
+    </style>
+</head>
+<body>
+    <div id="box"></div>
+</body>
+<script>
+var x=0,y=0
+
+document.onkeydown = function(){
+    // 按键
+    var box = document.querySelector('#box')
+    let k =  event.keyCode
+    console.log( k );
+    if(k==37){
+       x-=30; 
+    }else if(k==38){
+        y-=30;
+    }else if(k==39){
+        x+=30; 
+    }else if(k==40){
+        y+=30;
+    }
+    box.style.left = x+ 'px'
+    box.style.top = y+ 'px'
+}
+
+</script>
+</html>

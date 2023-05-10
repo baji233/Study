@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<script type="text/javascript">
+    //添加评论
+    function discuss() {
+        var txt = document.getElementById("txt").value;
+        var comments = document.getElementById("comments");
+        var p = document.createElement("p");
+        p.innerText = txt;
+        comments.appendChild(p);
+        document.getElementById("txt").value = "";
+    }
+
+    function countComment() {
+        var div1 = document.getElementById("comments");
+        alert("当前评论数为：" + div1.getElementsByTagName("p").length)
+    }
+
+</script>
+<body>
+    <h3>留言板</h3>
+    <textarea id="txt"></textarea><br/>
+    <input type="button" value="评论" onclick="discuss()"/>
+    <input type="button" value="统计" onclick="countComment()"/>
+    <div id="comments"></div>
+</body>
+</html>

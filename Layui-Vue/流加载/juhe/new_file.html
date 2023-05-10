@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		
+	</head>
+	<body>
+		<div id="a1">
+			
+		</div>
+		
+		<div id="a2">
+			
+		</div>
+		
+		<div id="a3">
+			天气预报：
+		</div>
+		
+	</body>
+	
+	<script src="js/jquery.min.js"></script>
+	<script src="js/vue.js"></script>
+	<script>
+		$(document).ready(function(){
+			
+			$.ajax({
+				type:'post',
+				url:'/juhe/qqevaluate/qq?key=bd08454e85f18a0ce34a35acea1f28b2&qq=635276748',
+				dataType:'json',
+				success:function(item){
+					$("#a1").append(item.result.data.conclusion);
+
+					$("#a2").append(item.result.data.analysis);
+				}
+
+			});
+			
+			$.ajax({
+				type:'post',
+				url:'/yb/simpleWeather/query?key=b3d6767c7512770d1035744728ac02a6&city=株洲',
+				
+				dataType:'json',
+				success:function(item){
+					$("#a3").append(item.result.city+"<br>");
+					$("#a3").append(item.result.realtime.temperature+"<br>");
+					$("#a3").append(item.result.realtime.info+"<br>");
+				}
+			
+			});
+			
+		});
+	</script>
+
+</html>

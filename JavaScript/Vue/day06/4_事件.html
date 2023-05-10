@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="../js/vue.js"></script>
+	</head>
+	<body> 
+		<div id="app">
+			<h1>{{number}}</h1>
+			<!-- 多种简化事件绑定的写法 -->
+			<button v-on:click="add02">+1</button>
+			<button @click="add01(6)">+6</button>
+			<button @click="number += 100">+100</button>
+			
+			<h1>城市: {{city}}</h1>
+			<select @change='select()' >
+				<option>请选择:</option>		
+				<option>长沙</option>
+				<option>湘潭</option>
+				<option>株洲</option>
+			</select>
+			
+			<h1>作业</h1>
+        <div>
+            A <input type="text" v-model="A">
+            B <input type="text" v-model="B"></br>
+            <button @click="add">+</button></br>
+            c <input type="text" v-model="C">
+        </div>
+		</div>		
+		
+	</body>
+	<script>
+		var vm = new Vue({
+			el : "#app", 
+			data : {
+				number : 10,
+				city : '',
+				A : null,
+				B : null,
+				C : null
+			},
+			methods : {
+				//方法区
+				add01 : function(x) {
+					console.log('add.......');
+					this.number += x ; //也可以写成 vm.number++
+				},
+				add02 : function() {
+					console.log('add.......');
+					this.number += 1 ; //也可以写成 vm.number++
+				},
+				select : function() {
+					console.log(event.target.value);
+					this.city = event.target.value;
+				},
+				add : function() {
+				this.C = parseInt(this.A) + parseInt(this.B); //先将字符串类型转化为整形,然后相加
+				}
+			}
+		});
+	</script>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1> 多个任务如何执行</h1>
+    <button onclick="test()"> 测试</button>
+
+</body>
+<script>
+function task1(){
+    let obj = new Promise(function(resolve,reject){
+        setTimeout(function(){
+            resolve('1去银行取钱');
+        },2000);
+    });
+    return obj;
+}
+function task2(){
+    let obj = new Promise(function(resolve,reject){
+        setTimeout(function(){
+            resolve('2去购买 华为手机');
+        },1000);
+    });
+    return obj;    
+}
+function task3(){
+    let obj = new Promise(function(resolve,reject){
+        setTimeout(function(){
+            resolve('3打开游戏。。。。');
+        },3000);
+    });
+    return obj;  
+}
+
+// let obj = task1()
+// obj.then(function(data){
+//     console.log('任务1.....', data );
+//     return task2();
+// }).then(function(data){
+//     console.log('任务2.....', data );
+//     return task3();
+// }).then(function(data){
+//     console.log('任务3.....', data );
+// })
+
+// ajax 优化后   async , await
+
+// async function test(){
+//     let obj = await task1()
+//     console.log( obj );
+//     let obj2 = await task2()
+//     console.log( obj2 );
+//     let obj3 = await task3()
+//     console.log( obj3 );
+// }
+
+//测试
+
+//https://autumnfish.cn/api/joke/list?num=3
+
+//https://autumnfish.cn/search?keywords=大鱼
+
+
+
+// all方式执行 rets是数组
+let t1 = task1();
+let t2 = task2();
+let t3 = task3();
+// Promise.all([t1,t2,t3]).then((rets)=>{
+//     console.log('三件事都做完了', rets);
+// })
+
+//race 赛跑方式
+Promise.race([t1,t2,t3]).then((rets)=>{
+    console.log('第一名是谁？', rets);
+})
+
+
+// echarts百度图表 https://echarts.baidu.com/
+
+</script>
+
+</html>

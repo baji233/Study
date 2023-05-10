@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="../js/vue.js"></script>
+	</head>
+	<body>
+		<div id="app">
+			<!-- 挂载区 -->
+			<h1>
+				你好02
+				{{info}}
+				{{age}}
+			</h1>
+		</div>
+		
+	</body>
+	<script>
+		
+		
+		//{{}}是插值表达式,拥有基本计算功能
+		
+		//MVVM = view + model + viewModel(Vue)
+		
+		//挂载区 #app不能挂载在<html>和<body>内
+		var vm = new Vue({
+			//将挂载在id为app的标签上
+			el : "#app", 
+			data : {
+				info : "知行合一",
+				age : 18
+			}
+		});
+	</script>
+</html>

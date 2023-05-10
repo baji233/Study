@@ -1,0 +1,56 @@
+mysql数据库使用 
+常见数据库 mysql,sqlserver,oracle,db2,infomix
+
+默认实例:MySQL8(数据库服务实例)
+    数据库
+    一个服务实例包含了多个数据库
+     每个数据库下面包含了多张表
+use 数据库名;
+切换当前使用的数据库
+create database 数据库名;
+drop database 数据库名;
+
+
+表的相关操作
+1、创建表的语法
+   create table 表名
+   (
+     字段名 数据类型 约束,
+     字段名n 数据类型 约束
+   )
+  数据类型:
+  int --表示整数
+  float --小数
+  字符串
+  char(长度)--定长
+  varchar(长度)--可变长度
+  char(10) 
+  varchar(10)
+  日期
+  date--年月日
+  datetime --年月日,时分秒
+
+  约束:例如字段的值不能为空
+  
+  插入数据
+  insert into 表名 values(值列表);
+  insert into 表名(字段列表) values(值列表)
+  
+  修改表数据
+  update 表名 set 字段名=值[,字段名=值] [where 条件]
+  
+  删除
+  delete from 表 [where 条件]
+  truncate 表名
+
+  查询
+   select [*|字段名] from 表 [where 条件]
+
+
+
+
+java连接mysql数据库
+jdbc--java.sql.*
+1、获得数据库的驱动程序(jni),隐藏了java与数据库底层实现细节，
+2、加载驱动程序
+3、建立数据库连接

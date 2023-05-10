@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="../js/vue.js"></script>
+	</head>
+	<body>
+		<div id="app">
+            <!-- 当需要子传父数据时,@bigtext是属于绑定在父组件的事件, 事件名随便取 -->
+			<meun-item @bigtext="handle" :parr="parr" :num="num"></meun-item>
+		</div>
+	</body>
+	<script>
+        //子
+        Vue.component('meun-item', {
+            props : ['parr', 'num'],
+            template : `
+            <div>
+                <h1>子组件 {{num}}</h1>
+                <p v-for="(item, i) in parr" :key="i">{{item}}</p>   
+                <button @click="test">子按钮</button>
+            </div>
+            `,
+            methods : {
+                test() {
+                    console.log('test')
+                    this.parr.push('龙龟')
+                    this.parr[0] = 'timo'
+                    // this.num++ // 会报错(子组件和父组件的同一个数据会不一致,就是子组件的变量有变化,而父组件的变量不会变,因为单向数据流) 
+
+                    //调用父组件的事件: this.$emit(事件名, 参数)
+                    this.$emit('bigtext', 100);
+                }
+            }
+        })
+
+        //父
+		var vm = new Vue({
+			el : "#app", 
+			data : {
+				parr : ['提莫', '德玛', '剑圣', '狐狸'],
+                num : 88,
+			},
+			methods : {
+				handle( v ) {
+                    console.log('这是父组件的事件, 参数: ' + v )
+                    this.num = v
+                }
+			}
+		});
+	</script>
+</html>

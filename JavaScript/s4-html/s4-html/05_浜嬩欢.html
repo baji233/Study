@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>事件</h1>
+    键盘 onkeydown, up ,press
+    鼠标 onclick
+    网页  onload  onscroll onhashchange
+    表单  onfocus onblur onchange onsubmit
+    <hr>
+
+    <input type="text" > 
+    <button onclick="add()">send</button>
+    <hr>
+    
+<script>
+function add(){
+    //得到文本框值
+    let txt= document.querySelector('input').value
+    let p = document.createElement('P')
+    let span = document.createElement('SPAN')
+    let btn = document.createElement('BUTTON')
+    btn.innerHTML = 'DEL'
+    span.innerHTML = txt
+    p.appendChild(span)
+    p.appendChild(btn)
+    //删除
+    btn.onclick = function(){
+        // console.log( this.parentNode );
+        // this.parentNode.remove();
+        p.remove();
+    }
+    //最后添加到网页里
+    document.body.appendChild(p)
+}
+
+
+
+/*
+var b1 =  document.querySelector("#btn1")
+var b2 =  document.querySelector("#btn2")
+
+function fun(){
+    alert('按钮2')
+}
+b2.addEventListener('click',fun)
+
+b1.onclick = function(){
+    alert('按钮1')
+}
+function myclear(){
+    console.log('取消');
+    b1.onclick = null;
+    b2.removeEventListener('click',fun) 
+}
+*/
+
+</script>
+
+</body>
+</html>

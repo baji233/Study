@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <script src="../js/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <!-- 从vue实例拿值要用单向绑定 -->
+        <blog title="九云" :pnum="pnum" :pbool="pbool" :pobj="pobj" :info="info" :msg="msg" :parr="parr"></blog>
+    </div>
+</body>
+<script>
+    //演示父传给子不同类型的值
+    Vue.component('blog', {
+        //声明自定义props
+        props : ['title','pnum','pbool','msg','info','parr','pobj',],
+        data: function () {
+            return {
+ 
+            }
+        },
+        template : `
+                <div>
+                    <h1>博客组件 {{title}}</h1>
+                    <h1>年龄 : {{pnum}}</h1>
+                    <h1>布尔 : {{pbool}}</h1>
+                    <h1>消息 : {{msg}}</h1>
+                    <h1>信息 : {{info}}</h1>
+                    <h1 v-for="(item,i) in parr" :key="i">数组 : {{item}}</h1>
+                    <h1>对象 : {{pobj}} 名字 : {{pobj.stname}} 年龄 : {{pobj.age}}</h1>
+
+                </div>
+                `
+    })
+    var vm = new Vue({
+        el: "#app",
+        data: {
+            msg: '明天下雨',
+            info: '看了三本书',
+            pnum: 99,
+            pbool: true,
+            parr: ['苹果', '香蕉', '橘子'],
+            pobj: {
+                stname: 'temo',
+                age: 30
+            }
+        },
+        methods: {
+
+        }
+    });
+</script>
+
+</html>

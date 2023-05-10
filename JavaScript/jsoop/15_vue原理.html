@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Vue 原理</h1>
+
+    <div id="app">
+        <h1> 变量的值= {{info}} </h1>
+        <h1> 姓名= {{stname}} </h1>
+        <h1> 年龄= {{age}} </h1>
+    </div>
+
+</body>
+<script>
+var vm = {
+    el: '#app',
+    elhtml:'',
+    data:{
+        info: '龙龟',
+        stname: 'temo',
+        age : 18 
+    },
+    update: function(){
+        let div = document.querySelector('#app');
+        let temp =  vm.elhtml;
+        for (const key in vm.data) {
+           temp = temp.replace('{{'+key+'}}',vm.data[key])
+        }
+        div.innerHTML = temp 
+    }
+}
+
+//访问器属性
+// Object.defineProperty(vm.data,'_info',{
+//     set:function(v){
+//         console.log('自动更新....');
+//         vm.data.info = v;
+//         var div =  document.querySelector('#app');
+//         var update =div.innerHTML.replace('{{info}}',v)
+//         div.innerHTML = update
+//     },
+//     get:function(){
+//         console.log('在取值....'); 
+//     }
+// })
+
+vm.elhtml = document.querySelector('#app').innerHTML;
+
+for(let key in vm.data){
+    Object.defineProperty(vm.data,'_'+key,{
+        set:function(val){
+            console.log('自动运行....',val);
+            vm.data[key] = val; 
+            vm.update();
+        }
+    })
+}
+
+
+vm.data._info = 'Vue原理'
+vm.data._stname='剑圣'
+vm.data._age=19
+</script>
+
+</html>

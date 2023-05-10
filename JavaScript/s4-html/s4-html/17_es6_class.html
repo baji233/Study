@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1> Class </h1>
+
+<script>
+
+class Person {
+    // constructor(){
+    //     console.log('人的构造方法');
+    // }
+
+    eat(){
+        console.log('人会吃饭');
+    }
+}
+
+class Student extends Person{
+    //构造方法
+    constructor(name,age){
+        super();  //手动调用
+        this.name = name
+        this._age = age 
+    }
+
+    get age(){
+        return this._age;
+    }
+    set age(v){
+        if(v >=100){
+            v =100
+        }
+        this._age = v ;
+    }
+
+    //方法
+    study(){
+        console.log(this.name + '会学习');
+    }
+
+    //静态方法
+    static game(){
+        console.log('玩游戏');
+    }
+}
+
+var temo = new Student('提莫',17)
+//temo.game();  //对象无法使用
+Student.game();
+
+</script>    
+</body>
+</html>

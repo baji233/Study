@@ -1,0 +1,25 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:http="http://www.springframework.org/schema/c"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/aop https://www.springframework.org/schema/aop/spring-aop.xsd">
+    <context:component-scan base-package="com.jiuyun"></context:component-scan>
+
+<!--    <bean id="studentDao" class="com.jiuyun.dao.StudentDAO"></bean>-->
+<!--    <bean id="studentService" class="com.jiuyun.service.impl.StudentServiceImpl"></bean>-->
+
+
+    <!-- 组件扫描包 use-default-filters="false：false表示严格安装过滤器筛选 -->
+<!--    <context:component-scan base-package="com.jiuyun"></context:component-scan>-->
+<!--    &lt;!&ndash; 将Java类交由Spring容器管理  局部配置init-method="initialize"：调用此方法初始化bean  destroy-method="destroy"：调用此方法销毁bean&ndash;&gt;-->
+<!--    <bean id="studentDao" class="com.jiuyun.dao.StudentDao" init-method="initialize" destroy-method="destroy"></bean>-->
+<!--    <bean id="studentService" class="com.jiuyun.service.impl.StudentServiceImpl">-->
+<!--        &lt;!&ndash; 依赖注入：name="studentDao"指的是StudentServiceImpl的私有成员属性  ref="studentDao"引用的是 <bean id="studentDao" &ndash;&gt;-->
+<!--        <property name="studentDao" ref="studentDao"></property>-->
+<!--    </bean>-->
+
+</beans>

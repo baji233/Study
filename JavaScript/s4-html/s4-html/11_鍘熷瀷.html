@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<script>
+
+//学生类
+function Stu(name,age){
+    this.name = name;
+    this.age = age;
+
+    this.hello= function(){
+        console.log('我名字是'+ this.name);
+    }
+}
+
+var xm = new Stu('小明',18);
+var temo = new Stu('提莫',20);
+
+console.log(  xm.__proto__ );
+console.log( Stu.prototype );
+xm.__proto__.address = '湖南湘潭'
+
+console.log( temo.address );
+
+
+
+
+// console.log( Stu.prototype );
+// //新增属性
+// Stu.prototype.edu = '高中'
+// Stu.prototype.study = function(){
+//     console.log('好好学习');
+// }
+
+// console.log( Stu.prototype.constructor == Stu);
+
+// console.log( xm.edu );
+// xm.study();
+
+
+
+// console.log( typeof Stu);
+// console.log( typeof xm);
+// console.log( Stu);
+// console.log( xm );
+// console.log( xm.constructor == Stu );
+
+
+// var o1 = { }
+// var o2 = new Object()
+// function Fun(){
+
+// }
+// var o3 = new Fun();
+
+// var f2 = function(){ }
+// var f3 = new Function('alert(123)')
+
+// console.log( typeof Fun );
+// console.log( typeof f2 );
+// console.log( typeof f3 );
+
+
+// console.log( typeof o1 );
+// console.log( typeof o2 );
+// console.log( typeof o3 );
+
+
+
+</script>    
+
+</body>
+</html>

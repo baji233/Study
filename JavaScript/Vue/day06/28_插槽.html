@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="../js/vue.js"></script>
+	</head>
+	<body>
+		<div id="app">
+			<alert-box>
+                态度决定一切
+            </alert-box>
+
+            <alert-box>
+                <img width="100px" height="100px" src="../img/apple.jpg">
+                <button @click="test">按钮</button>
+            </alert-box>
+		</div>
+	</body>
+	<script>
+        Vue.component('alert-box', {
+            // <slot>是插槽
+            template : `
+            <div class='alert'>
+                <h2>错误信息</h2>
+                <slot>默认信息</slot>
+            </div>
+                `,
+
+        })
+
+		var vm = new Vue({
+			el : "#app", 
+			data : {
+				
+			},
+            methods : {
+                //插槽内的事件函数需要写在Vue的方法区内
+                test() {
+                    alert('123');
+                }
+            }
+		});
+	</script>
+</html>

@@ -1,0 +1,8 @@
+create table if not exists collection_record(
+rid varchar(10) not null comment'读者编号',
+rname varchar(10) comment'读者姓名',
+amountreceivable varchar(10) comment'应收金额',
+amountreceived varchar(10) comment'实收金额',
+paymenttype varchar(10) comment'收款类型',
+collectiontime date comment'收款时间'
+)charset=utf8 comment'收款记录表';

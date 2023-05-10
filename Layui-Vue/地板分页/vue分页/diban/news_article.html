@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<title>新闻详细</title>
+
+<meta name="Keywords" content="">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="stylesheet" href="css/bootstrap.min.css"/>
+
+<link rel="stylesheet" href="css/style.css"/>
+
+</head>
+
+
+
+<body>
+
+
+
+<header id="header">
+
+<nav class="navbar navbar-default navbar-static-top">
+
+	<div class="container">
+
+		<div class="navbar-header">			
+
+			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+
+			<span class="sr-only"></span>
+
+			<span class="icon-bar"></span>
+
+			<span class="icon-bar"></span>
+
+			<span class="icon-bar"></span>
+
+			</button>
+
+
+
+			<div class="navbar-brand">
+
+				<img src="images/logo.png" alt="" width="150px" height="" class="img-responsive"/>
+
+			</div>
+
+		</div>
+
+	  	<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" role="navigation">	  	
+
+			<ul class="nav navbar-nav navbar-right">
+
+				<li><a rel="nofollow" href="index.html">网站首页</a></li>
+
+				<li><a rel="nofollow" href="about.html">关于我们</a></li>
+
+				<li><a rel="nofollow" href="products.html">产品中心</a></li>
+				<li><a rel="nofollow" href="case.html">工程案例</a></li>
+
+				<li><a rel="nofollow" href="news.html" class="active">新闻中心</a></li>
+
+				<li><a rel="nofollow" href="sitemap.html">服务支持</a></li>
+
+				<li><a rel="nofollow" href="join.html">招商加盟</a></li>
+				<li><a rel="nofollow" href="contact.html">联系我们</a></li>
+				
+
+			</ul>
+
+	    </div>
+
+	</div>
+
+</nav>
+
+</header>
+
+
+
+<section class="n_banner">
+
+	<img src="images/banc.jpg" class="img-responsive" width="1855px"/>
+
+</section>
+
+<div id="app">
+	<section class="imain">
+
+		<div class="container">
+	
+			<div class="left_con col-md-3 col-sm-12 col-xs-12">
+	
+				<div class="box">
+		
+					<h3>新闻分类</h3>
+	
+					<ul class="sort">
+	
+						<li @click="setnews(nl.nhid)" v-for="(nl,index) in newslines"><a>{{nl.nhname}}</a></li>
+	
+					</ul>
+	
+				</div>
+	
+	
+				<div class="box">
+	
+					<h3>联系我们</h3>
+	
+					<div class="n_contact">
+	
+						<p>电话：{{phones[0].phone}}</p>
+	
+						<p>网址：{{phones[0].url}}</p>
+	
+						<p>工厂地址：{{phones[0].factoryaddress}}</p>
+	
+						<p>仓储地址：{{phones[0].stockpileaddress}}</p>
+	
+					</div>
+	
+				</div>
+	
+			</div>
+	
+			
+	
+			<div class="right_con col-md-9 col-sm-12 col-xs-12">
+	
+				<div class="row">
+	
+					<div class="crumb clearfix">
+	
+						<h3>新闻详细</h3>
+	
+						<div class="site hidden-xs">您的当前位置：<a href="index.html">首 页</a>><a href="news_article.html">新闻资讯</a></div>
+	
+					</div>
+	
+					<div class="content">			
+	
+						<div class="news_detail">
+	
+						<h1>{{news[0].newsname}}</h1>
+	
+						<div class="info_title clearfix">
+	
+							 来源：<a href="index.html">{{phones[0].url}}</a>&nbsp;&nbsp;<span>发布日期：{{news[0].time}}</span>
+	
+						</div>
+	
+						<div class="news_con">
+	
+							<p>{{news[0].infotop}}</p>	
+	
+							<p v-for="(n,index) in news[0].img"><img class="myimg" style="width: 823px;height: 700px;" :mysrc="['images/news/'+n.img]"></p>
+
+							<p>{{news[0].infodown}}</p>	
+						
+						</div>
+						
+	
+						</div> 
+	
+						
+	
+						<div class="relate_list">
+	
+							<div class="relatenew">
+	
+								<h4>相关新闻：</h4>
+	
+								<ul class="xg_news">				
+	
+									<li v-for="(nm,index) in newsMore">
+	
+										<a @click="newsarticle(nm.newsid)">{{nm.newsname}}</a><span>{{nm.time}}</span>
+	
+									</li>				
+	
+								</ul>
+	
+							</div>
+	
+							<div class="clearfix"></div>
+	
+							<div class="relatepro">
+	
+								<h4>相关产品：</h4>
+	
+								<ul class="xg_pro">
+	
+									<li v-for="(fm,index) in floorMore" class="col-md-4 col-sm-6 col-xs-12">
+	
+										<a @click="article(fm.floorid)" class="img" title=""><img style="width: 254px;height: 200px;" class="myimg" :mysrc="['images/floor/'+fm.mainimg]" alt="" class="img-responsive"/></a>
+	
+										<h3><a @click="article(fm.floorid)" title="">{{fm.floorname}}</a></h3>
+	
+									</li>
+								</ul>
+	
+							</div>        							
+	
+						</div>
+	
+	
+	
+					</div>
+	
+					
+	
+				</div>
+	
+			</div>		
+	
+		</div>
+	
+	</section>
+	
+</div>
+
+
+
+
+<footer class="footer">
+
+	<div class="container">
+
+		<div class="row foot_in">
+
+			<div class="col-md-3 col-sm-12 col-xs-12 hidden-xs">
+
+				<img src="images/ftlogo.png" alt="" class="img-responsive"/>
+
+				<div class="tel">					
+
+					<span>服务热线：</span>
+
+					<p>10086</p>
+
+				</div>
+
+			</div>
+
+			
+
+			<div class="col-md-9 col-sm-12 col-xs-12">
+
+				<ul class="footnav">
+
+					<a href="index.html" title="网站首页" rel="nofollow">网站首页</a> | 
+
+					<a href="about.html" title="关于我们" rel="nofollow">关于我们</a> | 
+
+					<a href="products.html" title="产品中心" rel="nofollow">产品中心</a> | 
+
+					<a href="case.html" title="工程案例"   rel="nofollow">工程案例</a> | 			
+
+					<a href="news.html" title="新闻中心" rel="nofollow">新闻中心</a> | 
+
+					<a href="sitemap.html" title="服务支持"  rel="nofollow">服务支持</a> | 
+
+					<a href="join.html" title="招商加盟"  rel="nofollow">招商加盟</a>
+					
+					<a href="contact.html" title="联系我们"  rel="nofollow">联系我们</a>
+
+				</ul>
+
+				<div class="copyright">					
+
+					备案号：<a href="index.html"  target="_blank" rel="nofollow"></a></p>           	
+
+					<p>电商哪家好？供应订做多少钱？怎么样？诚信公司专业以批发价格大量现货提供cms、、、等品质优良的产品及报价，欢迎来电生产定制！</p>
+
+					<p>地址：九华创新创业中心</p>
+
+					<p>联系人：鑫&nbsp;&nbsp;10086</p>
+
+					<p>网址：www.xxxx.cn&nbsp;&nbsp;邮箱：123456789@qq.com</p>
+					
+
+				</div>
+
+			</div>	
+
+		</div>		
+
+	</div>			
+
+</footer>
+
+
+
+<script type="text/javascript" src="js/jquery.js"></script>
+
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+
+<script src="js/axios.min.js"></script>
+<script src="js/vue.js"></script>
+<script>
+  function myimg(){
+    var imgs=$(".myimg");
+    for (let i=0;i<imgs.length;i++){
+        var img_top=$(imgs[i]).offset().top;//图片距离顶部的距离
+        var scro=$(window).scrollTop();//滚动的距离
+        var window_height=$(window).height();//窗口的高度
+        if(img_top<=(scro+window_height)){
+                $(imgs[i]).attr("src",$(imgs[i]).attr("mysrc"));    
+        }
+    }
+  }
+  var app=new Vue({
+    el:"#app",
+    created() {
+		this.newslinesLoad();   
+		this.getnews();
+		this.getPhones();
+		this.getfloormore();
+		this.getnewsmore();
+    },
+    data() {
+      return {
+		newslines:[],
+		phones:[{}],
+		news:[{}],
+		floorMore:[],
+		newsMore:[]
+      }
+    },
+    methods: {
+		setnews(nhid){
+			localStorage.setItem("nhid",nhid);
+			localStorage.removeItem("newsid");
+			localStorage.removeItem("floorid");
+			window.location.href="news.html";
+		},
+		newsarticle(newsid){
+			// console.log(floorid);
+			localStorage.setItem("newsid",newsid);	
+			window.location.href="news_article.html";
+		},
+		getnewsmore(){
+			axios.get("/home/news?page=1&limit=4")
+			.then(res => {
+				// console.log(res)
+				this.newsMore=res.data.data;
+			})
+			.catch(err => {
+				console.error(err); 
+			})
+		},
+		article(floorid){
+			// console.log(floorid);
+			localStorage.setItem("floorid",floorid);	
+			window.location.href="products_article.html";
+		},
+		getfloormore(){
+			axios.get("/home/floor?page=1&limit=3&state=0")
+			.then(res => {
+				//console.log(res)
+				this.floorMore=res.data.data;
+			})
+			.catch(err => {
+				console.error(err); 
+			})
+		},
+		getnews(){
+			var id=localStorage.getItem("newsid");
+			axios.get("/home/news/"+id)
+			.then(res => {
+				//console.log(res)
+				this.news=res.data.data;
+			})
+			.catch(err => {
+				console.error(err); 
+			})
+		},
+		newslinesLoad(){
+			axios.get("/home/newsheadlines")
+			.then(res => {
+				// console.log(res.data.data);
+				this.newslines=res.data.data;
+			})
+			.catch(err => {
+				console.error(err); 
+			})
+		},
+		getPhones(){
+			axios.get("/home/contactdetails")
+			.then(res => {
+				// console.log(res)
+				this.phones=res.data.data;
+			})
+			.catch(err => {
+				console.error(err); 
+			})
+		}
+    },mounted(){
+   		setTimeout(function(){
+			myimg();
+		},100)
+   	}
+  })
+  $(document).ready(function (){
+		var id=localStorage.getItem("newsid");
+		if(id==null || id==''){
+			window.location.href="news.html";
+		}
+		$(window).scroll(function (){
+			myimg();
+		})
+  })
+  </script>
+</body>
+
+</html>
+

@@ -1,0 +1,514 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>后台管理系统</title>
+    <script src="../static/js/vue.js"></script>
+    <link rel="stylesheet" href="../static/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../static/elementui/index.css">
+    <link rel="stylesheet" href="../static/css/style.css">
+    <script src="../static/elementui/index.js"></script>
+    <script src="../static/js/jquery.min.js"></script>
+    <script src="../static/config/mycode.js"></script>
+    <script src="../static/js/axios-0.18.0.js"></script>
+
+    <style>
+        .avatar-uploader .el-upload {
+            border: 1px dashed #d9d9d9;
+            border-radius: 50%;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .avatar-uploader .el-upload:hover {
+            border-color: #409EFF;
+        }
+
+        .avatar-uploader-icon {
+            font-size: 28px;
+            color: #8c939d;
+            width: 78px;
+            height: 78px;
+            line-height: 78px;
+            text-align: center;
+        }
+
+        .avatar {
+            width: 78px;
+            height: 78px;
+            display: block;
+        }
+    </style>
+    <style>
+        .el-header {
+            background-color: #303133;
+            color: #ffffff;
+            line-height: 60px;
+        }
+
+        .el-footer {
+            background-color: #909399;
+            color: #ffffff;
+            line-height: 60px;
+        }
+
+        body > .el-container {
+            margin-bottom: 40px;
+        }
+
+        /*鼠标经过菜单颜色*/
+        .el-submenu__title:hover {
+            background-color: #409EFF !important;
+            color: #ffffff !important;
+        }
+
+        .el-menu-item:hover {
+            background-color: #409EFF !important;
+            color: #ffffff !important;
+        }
+    </style>
+
+    <style>
+        .el-menu-vertical-demo:not(.el-menu--collapse) {
+            width: 200px;
+            min-height: 400px;
+        }
+    </style>
+    <style type="text/css">
+        /*
+            找到html标签、body标签，和挂载的标签
+            都给他们统一设置样式
+        */
+        html, body, #app, .el-container {
+            /*设置内部填充为0，几个布局元素之间没有间距*/
+            padding: 0px;
+            /*外部间距也是如此设置*/
+            margin: 0px;
+            /*统一设置高度为100%*/
+            height: 100%;
+
+        }
+
+    </style>
+
+</head>
+<body style="overflow:-Scroll;overflow-y:hidden">
+<div id="app">
+    <el-container>
+        <!--        顶部-->
+        <el-header>
+            <el-row>
+                <el-col :span="12">
+                    <span style="font-weight: 700;margin-right: 30px">后台管理系统</span>
+                    <el-button style="color: #ffffff;" type="text" @click="collapseHandle" style="font-size: large"><i
+                            class="fa fa-indent"></i></el-button>
+                    <el-button style="color: #ffffff;" type="text" @click="refreshHandle" style="font-size: large"><i
+                            class="fa fa-refresh"></i></el-button>
+                </el-col>
+
+                <el-col :span="12">
+                    <div class="lw-fr">
+                        <el-dropdown style="margin-right: 30px ;">
+                      <span class="el-dropdown-link" style="color: #ffffff; ">
+                        <div class="lw-header">
+                            <img :src="'../images/users/'+users.img" alt="">
+                        </div>
+                        <span style="margin-left: 10px;margin-right: 5px;">{{ users.username }}</span><i
+                              class="el-icon-arrow-down el-icon--right"></i>
+                      </span>
+                            <el-dropdown-menu slot="dropdown">
+                                <el-dropdown-item>
+                                    <el-button type="text" @click="descDlgDisable=true;descDlgVisible = true">个人信息
+                                    </el-button>
+                                </el-dropdown-item>
+                                <el-dropdown-item>
+                                    <el-button type="text" @click="repwdDlgOpen">修改密码</el-button>
+                                </el-dropdown-item>
+                                <el-dropdown-item divided>
+                                    <el-button type="text" @click="logout">退出</el-button>
+                                </el-dropdown-item>
+                            </el-dropdown-menu>
+                        </el-dropdown>
+                        <a href="../index.html" class="lw-a-no-hover">网站前台</a>
+                    </div>
+
+                </el-col>
+            </el-row>
+
+        </el-header>
+        <el-container>
+            <el-collapse-transition>
+                <!--                侧边栏-->
+                <el-menu class="el-menu-vertical-demo"
+                         @open="handleOpen" @close="handleClose"
+                         background-color="#F2F6FC"
+                         text-color="#303133"
+                         active-text-color="#409EFF"
+                         :unique-opened="true"
+                         :collapse="isCollapse">
+                    <!-- 首页 -->
+                    <el-menu-item :index="obj.id+''" @click="handleNodeClick(obj)">
+                        <i :class="obj.icon"></i>
+                        <span slot="title" style="margin-left: 5px;">{{obj.name}}</span>
+                    </el-menu-item>
+
+                    <el-submenu v-for="item in menuList" :key="item.menuid" :index="item.menuid+''"
+                                @click="handleNodeClick(item)" v-if="item.childList!=null">
+                        <template slot="title">
+                            <i :class="item.icon"></i>
+                            <span slot="title" style="margin-left: 5px;">{{item.name}}</span>
+                        </template>
+                        <el-menu-item-group v-if="item.childList!=null">
+                            <el-menu-item v-for="child in item.childList" v-bind:key="child.id"
+                                          :index="item.menuid+'-'+child.id" @click="handleNodeClick(child)">
+                                <i class="fa fa-angle-right"></i> <span
+                                    style="font-size: 13px">{{child.name}}</span>
+                            </el-menu-item>
+                        </el-menu-item-group>
+                    </el-submenu>
+                    <el-menu-item v-else :index="item.id+''" @click="handleNodeClick(item)">
+                        <i :class="item.icon"></i>
+                        <span slot="title" style="margin-left: 5px;">{{item.name}}</span>
+                    </el-menu-item>
+
+                </el-menu>
+            </el-collapse-transition>
+
+            <el-container>
+                <!--                中间部分-->
+                <el-main style="padding: 0;">
+                    <el-tabs v-model="editableTabsValue" type="border-card" closable @tab-remove="removeTab">
+                        <el-tab-pane
+                                v-for="(item, index) in editableTabs"
+                                :key="item.name"
+                                :label="item.title"
+                                :name="item.name"
+                        >
+                            <span slot="label">{{item.title}}</span>
+                            <iframe :id="'iframe'+item.name" :src="item.content" scrolling="no"  style="width: 100%;height: 900px;"
+                                    frameborder="0"></iframe>
+                        </el-tab-pane>
+                    </el-tabs>
+                </el-main>
+                <!--                底部-->
+                <el-footer>
+                    <el-row :gutter="20">
+                        <el-col :span="12" :offset="6" style="font-size: 12px">
+                            © copyright 2019-2020 后端管理系统 All rights reserved.
+                            陕ICP备19024566号
+                        </el-col>
+                    </el-row>
+                </el-footer>
+            </el-container>
+        </el-container>
+    </el-container>
+
+    <!--    个人信息对话框-->
+    <el-dialog title="个人信息" width="30%" :visible.sync="descDlgVisible" :before-close="handleCloses" >
+        <el-form :model="descModel"
+                 label-suffix=" :"
+                 :disabled="descDlgDisable"
+                 :label-position="labelPosition"
+                 label-width="100px">
+            <el-form-item label="头像" prop="img">
+                <el-upload
+                        class="avatar-uploader"
+                        action="none"
+                        :show-file-list="false"
+                        :auto-upload="false"
+                        :on-change="checkType">
+                    <img v-if="imageUrl" :src="imageUrl" class="avatar">
+                    <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+                </el-upload>
+            </el-form-item>
+            <el-form-item label="姓名" prop="name">
+                <el-input v-model="descModel.name"></el-input>
+            </el-form-item>
+            <el-form-item label="个人简介" prop="info">
+                <el-input type="textarea" v-model="descModel.info"></el-input>
+            </el-form-item>
+        </el-form>
+        <div slot="footer" class="dialog-footer">
+            <el-button @click="handleCloses">取消</el-button>
+            <el-button type="primary" @click="descDlgDisable = false">编辑</el-button>
+            <el-button type="success" @click="repwdSubmit()">确认</el-button>
+        </div>
+    </el-dialog>
+
+    <!--    修改密码对话框-->
+    <el-dialog title="修改密码" width="30%" :visible.sync="repwdDlgVisible" :before-close="handleCloses">
+        <el-form :label-position="labelPosition"
+                 ref="repwdModel"
+                 label-width="90px"
+                 :rules="repwdRules"
+                 label-suffix=" :"
+                 :status-icon="statusIcon"
+                 :model="repwdModel">
+            <el-form-item label="原密码" prop="oldPwd">
+                <el-input type="password" v-model="repwdModel.oldPwd"></el-input>
+            </el-form-item>
+            <el-form-item label="新密码" prop="newPwd">
+                <el-input type="password" v-model="repwdModel.newPwd"></el-input>
+            </el-form-item>
+            <el-form-item label="确认密码" prop="checkPwd">
+                <el-input type="password" v-model="repwdModel.checkPwd "></el-input>
+            </el-form-item>
+        </el-form>
+        <div slot="footer" class="dialog-footer">
+            <el-button @click="repwdDlgVisible = false">取消</el-button>
+            <el-button type="success" @click="pass('repwdModel')">确认</el-button>
+        </div>
+    </el-dialog>
+</div>
+<script>
+    const app = new Vue({
+        el: "#app",
+        data: {
+            //个人信息
+            descDlgVisible: false,
+            descDlgDisable: true,
+            descModel: {
+
+            },
+            imageUrl: "",//添加图片路径
+            imageFile:{},//添加图片文件
+            // 表单对齐方式
+            labelPosition: 'right',
+            // 重置密码
+            repwdModel: {},
+            repwdRules: {
+                oldPwd: [
+                    {required: true, message: '请输入原密码', trigger: 'blur'},
+                ],
+                newPwd: [
+                    {required: true, message: '请输入新密码', trigger: 'blur'},
+                ],
+                checkPwd: [
+                    {required: true, message: '请输入确认密码', trigger: 'blur'},
+                    {
+                        validator: (rule, value, callback, source, options) => {
+                            if (value !== app.repwdModel.newPwd) {
+                                callback(new Error('两次输入密码不一致!'));
+                            } else {
+                                callback();
+                            }
+                        },
+                        trigger: 'blur'
+                    }
+                ]
+            },
+            //表单显示错误图标
+            statusIcon: true,
+            repwdDlgVisible: false,
+            // 左侧菜单栏是否隐藏
+            isCollapse: false,
+            // 菜单列表
+            menuList: [],
+            // 标签页
+            editableTabsValue: '1293',
+            indexTabName: '1293',
+            editableTabs: [{
+                title: '首页',
+                name: '1293',
+                content: './main.html'
+            }],
+            obj:{
+                id: 1293,
+                name: '首页',
+                icon: 'fa fa-server',
+                url: 'sa-html/sa-doc.html',
+                parentId: 0
+            },
+            users:{}
+        },
+        methods: {
+            //修改密码
+            pass(){
+                console.log(this.repwdModel)
+                let formData = new FormData();
+                formData.append("userid",this.users.userid);
+                formData.append("password",this.repwdModel.oldPwd);
+                formData.append("newPassword",this.repwdModel.newPwd)
+                if(this.repwdModel.newPwd==this.repwdModel.checkPwd){
+                	axios.put("/home/users/pass/",formData).then((res)=>{
+	                    if(res.data.flag == true && res.data.data != null){
+	                        this.$message.success("修改成功,请重新登录")
+	                        setTimeout(() => {
+	                            sessionStorage.removeItem("token");
+	                            location.href="login.html"
+	                        }, 1000);
+	                    }else{
+	                        this.$message.error(res.data.msg);
+	                    }
+	                }).finally(()=>{
+	                    this.repwdDlgVisible = false;
+	                    this.repwdModel = {}
+	                })
+                }
+            },
+            //关闭弹窗
+            handleCloses(){
+                console.log(1)
+                this.descDlgVisible = false;
+                this.repwdDlgVisible = false;
+                this.repwdModel = {}
+                this.getAll(); 
+            },
+            //编辑个人资料
+            repwdSubmit(){
+                console.log(this.descModel)
+                let formData = new FormData();
+                formData.append("userid",this.descModel.userid);
+                formData.append("name",this.descModel.name);
+                formData.append("info",this.descModel.info);
+                if(this.imageFile.raw!=null){
+                    formData.append("file",this.imageFile.raw);
+                }
+                axios.put("/home/users/",formData).then((res)=>{
+                    if(res.data.flag == true && res.data.data!=null){
+                        this.$message.success("修改成功")
+                    }else{
+                        this.$message.error("修改失败")
+                    }
+                }).finally(()=>{
+                    this.descDlgVisible = false;
+                    this.getAll();
+                })
+            },
+            //登出
+            logout(){
+                console.log(11)
+                //清楚缓存中信息
+                sessionStorage.removeItem("token");
+                location.href = 'login.html'
+            },
+            refreshHandle: function () {
+                let iframe = "#iframe" + this.editableTabsValue
+                $(iframe).attr('src', $(iframe).attr('src'));
+            },
+             //检查用户图片类型
+            checkType(file){
+                const isJPG = file.type === 'image/jpeg';
+                const isLt2M = file.size / 1024 / 1024 < 2;
+
+                if (!isLt2M) {
+                    this.$message.error('上传头像图片大小不能超过 2MB!');
+                }
+                if(isLt2M){
+                    //确定上传图片
+                    this.imageFile = file;
+                    //预览图片,赋予头像url
+                    this.imageUrl = URL.createObjectURL(this.imageFile.raw); 
+                }
+            },
+            validatePass: function (rule, value, callback) {
+                console.log(value);
+                if (value === '') {
+                    callback(new Error('请输入密码'));
+                } else {
+                    callback();
+                }
+            },
+
+            repwdDlgOpen: function () {
+                this.repwdModel = {}
+                this.repwdDlgVisible = true
+            },
+            //标签页处理
+            handleNodeClick(data) {
+                console.log(data);
+                if (data.url != null && data.url != "") {
+                    //取得当前已打开的tab页
+                    let tabs = this.editableTabs;
+                    console.log(tabs);
+                    let flag = true;//表示可以新打开
+                    tabs.forEach((tab, index) => {
+                        if (tab.title === data.name) {
+                            //如果打开则选中
+                            this.editableTabsValue = tab.name;
+                            flag = false;
+                            return;
+                        }
+                    });
+                    if (flag) {//如果没有打开则添加
+                        let newTabName = data.id + '';
+                       
+                        this.editableTabs.push({
+                            title: data.name,
+                            name: newTabName,
+                            content: data.url
+                        });
+                        this.editableTabsValue = newTabName;
+                    }
+                }
+            },
+            //标签页移除
+            removeTab(targetName) {
+                if (targetName == this.indexTabName) {
+                    return
+                }
+                console.log(targetName);
+                let tabs = this.editableTabs;
+                let activeName = this.editableTabsValue;
+                if (activeName === targetName) {
+                    tabs.forEach((tab, index) => {
+                        if (tab.name === targetName) {
+                            let nextTab = tabs[index + 1] || tabs[index - 1];
+                            if (nextTab) {
+                                activeName = nextTab.name;
+                            }
+                        }
+                    });
+                }
+
+                this.editableTabsValue = activeName;
+                this.editableTabs = tabs.filter(tab => tab.name !== targetName);
+            },
+            collapseHandle: function () {
+                this.isCollapse = !this.isCollapse;
+            }
+            ,
+            handleOpen(key, keyPath) {
+                console.log(key, keyPath);
+            }
+            ,
+            handleClose(key, keyPath) {
+                console.log(key, keyPath);
+            },
+            getAll(){
+                if(sessionStorage.getItem("token")==null){
+                    location.href="login.html"
+                }
+                //查询菜单信息
+                axios.get("/home/menu/token/"+sessionStorage.getItem("token")
+                ).then((res)=>{
+                    if(res.data.flag == true && res.data.data!=null){
+                        //菜单列表赋值
+                        this.menuList = res.data.data;
+                    }else{
+                        this.$message.error("系统错误")
+                    }
+                })
+                //解码获取用户信息
+                axios.get("/home/users/"+JSON.parse(atob(sessionStorage.getItem("token"))).userid).then((res)=>{
+                    console.log(res.data.data)
+                    this.users = res.data.data;
+                    this.descModel = res.data.data;
+                    this.imageUrl = "../images/users/"+this.users.img;
+                })
+
+
+            }
+            
+        },
+        created: function () {
+           this.getAll();
+        }
+    })
+</script>
+</body>
+</html>

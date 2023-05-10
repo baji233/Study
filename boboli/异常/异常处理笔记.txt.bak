@@ -1,0 +1,146 @@
+一、什么是异常，异常处理和程序的健壮性
+异常就是不正常.程序中的异常是指,按照正常情况下，程序的执行是没有任何问题的，
+但是由于一些特殊的情况，会导致程序出现运行时错误，这个错误会对正个程序造成
+严重的后果--系统崩溃(整个程序会因为一个异常都不能被使用)。
+实际过程中，我们不希望系统因为一个小问题而导致整个系统崩溃，可以采取相关措施，解决这个
+异常，确保程序能够继续执行后面的内容。异常处理，
+目的提高程序的健壮性(程序异常处理的能力)。
+
+
+二、异常的体系结构
+java程序用于表示程序的运行异常,定义了一个类进行表示
+java.lang.Throwable。
+
+构造方法:
+Throwable();
+创建一个错误对象,表示异常，没有指定异常信息或者原因
+Throwable(String message);
+创建一个错误对象,表示异常，message参数表示错误的信息
+
+方法:
+String getMessage();返回错误的信息
+
+void printStackTrace();打印输出程序出现异常的跟踪执行情况
+
+程序的异常根据是否可处理，分为两类:
+Throwable
+|
+ ---Error:用于表示程序无法抗拒、无法修复的错误.Error下面还有很多的子类,XxxError.每一个子类都用于代表一种具体错误
+ ---Exception:表示程序是可以进行修复、处理的。关注程序可处理的异常
+
+
+Exception：
+运行时异常,用子类RuntimeException表示,这种异常编译器不会强制要求做处理。
+除了RuntimeException异常之外的其他异常，即便程序没有任何问题，
+编译器要求强制做异常处理
+
+
+RuntimeException需要掌握:
+1、ArithMeticExcetpion:算数运算异常，例如:被0除
+2、IndexOutOfBoundsException:索引下标越界异常,细分为两种,ArrayIndexOutOfBoundsException(数组下标越界)
+   StringIndexOutOfBoundsException(字符串索引下标越界)
+3、NullPointerException--空指针异常(引用类型的内存没有分配)
+4、ClassCastException--引用类型的类型转换异常
+
+
+
+三、异常处理语法
+try{
+  //有可能出现异常的代码块,try关键字相当于监视作用
+}catch(异常类 对象){
+  //对捕获到的异常进行处理
+}
+
+catch(异常类 对象)：指定捕获的异常类型，以便对不同类型的异常进行特殊处理
+
+执行过程:
+如果try语句块中,程序出现问题，忽略try语句块中异常代码后续的语句的执行，
+立即跳转catch语句块，进行异常处理。前提是要明确异常的类型是否吻合，如果吻合，
+进入相应的catch语句块进行异常处理，处理完毕之后，跳出异常处理代码，继续执行后续的语句
+
+如果try语句块中有可能出现多种异常，一个try语句块后面可以跟多个catch语句块，对不同的
+异常做不同的处理.
+
+如果没办法确定代码产生的具体异常，可以使用Exception来笼统处理,某种具体的异常都属于Exception
+注意：有多个catch语句块，顺序遵循的原则:异常表示的范围从小到大的范围(必须)
+try{
+String s=null;
+s.length();//NullPointerException
+}catch (Exception e) {
+			//System.out.println(e.getMessage());
+			e.printStackTrace();
+		}
+分析:catch后面只是声明了一个Exception类型的变量e(对象),但是我们自身没有创建对象,
+为什么，在catch语句块中可以操作对象e的方法。
+
+原因:
+s.length()这句代码,一旦出现异常,jvm会自动创建一个NullPointerException的对象,
+跳转到catch,判断对象是属于Exception类型,然后将对象赋值给e.
+
+
+finally关键字
+最终，无论是否处理了异常，finally修饰的代码块都必须保证执行。
+
+try{
+
+}finally{
+
+}
+-----------
+try{
+
+}catch(Exception ex){
+
+}finally{
+
+}
+
+finally语句块，一般情况下，用于释放程序占用的系统资源(保障性)
+
+注意:finally语句块会在方法调用返回之前执行,
+但是在try或者catch语句块中返回的值不受finally的影响
+
+作业:ClassCastException
+------------------------
+
+public class Animal{
+	
+}
+
+public class Dog extends Animal{
+
+}
+
+public class Test{
+	public static void main(String []args)
+	{
+		try{
+		Animal animal=new Animal();
+		Dog dog=(Dog)animal;
+		}catch(ClassCastException ex){
+		  //异常处理
+		}
+	}
+}
+---------------
+throw和throws作业:
+throw人为产生抛出异常
+什么情况下需要人为产生异常:程序本身没有异常，但是程序的逻辑不符合要求的时候，可以
+通过人为的抛出一个异常。
+格式:throw 异常对象;
+throw new RuntimeException("分母不能为零");
+注意点:如果throw面跟的异常对象是RuntimeException，则在编译器是不需要强制进行异常处理的。
+       如果是非RuntimeException,在编译期是需要强制进行异常处理的
+
+如果方法中的异常不做处理，可以告诉调用者，该方法内部是有可能产生异常的,异常处理
+的责任交给调用者。
+
+throws声明某个方法会产生异常，告诉方法的调用者必须进行异常处理
+
+方法() throws 异常类型{
+
+}
+
+如果一个方法有可能出现多个异常,throws 后面可以跟多个异常,用逗号分隔
+
+

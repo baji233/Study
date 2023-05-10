@@ -1,0 +1,156 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+    <title>用户注册页面</title>
+    <link href="css/style.css" rel="stylesheet" />
+    <script type="text/javascript">
+        //根据id获取对象的通用方法
+        function getobj(str) {
+            var obj = document.getElementById(str);
+            return obj;
+        }
+
+        //电子邮件地址验证
+        function chemail() {
+            var str = getobj("email");
+            var expt = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/;
+            if (expt.test(str.value)) { 
+                window.open("checkmail.html", null, "height=100,width=370,toolbar=no,menubar=no,scrollbar=no,resizable=no");
+            } else {
+                alert("请输入正确的邮件地址！");
+                str.focus();
+                return false;
+            } 
+        }
+        //会员名验证
+        function checkuser() {
+            var expt = /^[A-Za-z][A-Za-z0-9_]{5,10}$/;
+            var str = getobj("username"); 
+            if (expt.test(str.value)) {
+                window.open("checkuser.html", null, "height=100,width=370,toolbar=no,menubar=no,scrollbar=no,resizable=no");
+            } else {
+                alert("会员名必须以字母打头!并且长度不能少于5个，多于10个！");
+                str.focus();
+                return false;
+            } 
+        }
+        //密码验证
+        function checkpwd() {
+            var expt = /^[A-Za-z0-9]{6,10}$/;
+            var str = getobj("psw1");
+            if (expt.test(str.value)) {
+                document.getElementById("fpwd1").className = "font_true";
+                document.getElementById("fpwd1").innerHTML = ("您填写的密码是合法的！");
+                return true;
+            }
+            else {
+                document.getElementById("fpwd1").className = "font_error";
+                document.getElementById("fpwd1").innerHTML = "请输入不少于6位的密码!";
+                str.focus();
+                return false;
+            }
+        } 
+
+        //检查两次密码是否一致
+        function checkrpwd() {
+            var pwd1 = getobj("psw1");
+            var pwd2 = getobj("psw2");
+            var expt = /^[A-Za-z0-9]{6,10}$/;
+            if (expt.test(pwd2.value)) {
+                if (pwd1.value != pwd2.value) {
+                    document.getElementById("fpwd2").className = "font_error";
+                    document.getElementById("fpwd2").innerHTML = "两次输入的密码不一致，请重新输入!";
+                    return false;
+                }
+            } else {
+                document.getElementById("fpwd2").className = "font_error";
+                document.getElementById("fpwd2").innerHTML = "请输入不少于6位的密码!";
+                pwd2.focus();
+            } 
+        } 
+    </script>
+</head>
+<body>
+    <div class="main">
+        <div id="logo"><img src="image/logo.gif"></div>
+        <div id="menu"><a href="login.html"><img src="image/menu1-1.gif"></a><a href="search.html"><img src="image/menu2-2.gif"></a><a href="intro.html"><img src="image/menu3-2.gif"></a></div>
+        <div id="menu-bg1">我的简历 | 个人搜索器 | 职位收藏夹 | 工作申请记录 | 退出 </div>
+        <!--用户注册开始-->
+        <div class="register">
+            <table width="857" border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                    <td><img src="image/register-top.gif"></td>
+                </tr>
+                <tr>
+                    <td>
+                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                            <tr>
+                                <td background="image/register-line.gif" width="3"></td>
+                                <td>
+                                    <form action="" method="post" name="myform"  >
+                                        <table width="760" border="0" cellspacing="0" cellpadding="0" align="center">
+                                            <tr>
+                                                <td class="register-bold">会员信息：<img src="image/dot_line_1.gif" align="absmiddle"></td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <table width="96%" border="0" cellspacing="0" cellpadding="0" align="center">
+                                                        <tr>
+                                                            <td width="15"><img src="image/register-arrow.gif"></td>
+                                                            <td class="register-td">E-mail：</td>
+                                                            <td width="180"><input name="email" id="email" type="text" class="register-input"></td>
+                                                            <td><input name="check1" id="check1" type="button" value="" class="register-check" onclick="chemail()"> &nbsp;&nbsp;请填写常用电子邮件</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td width="30"><img src="image/register-arrow.gif"></td>
+                                                            <td class="register-td">会员名：</td>
+                                                            <td><input name="username" id="username" type="text" class="register-input"></td>
+                                                            <td><input name="check2" id="check2"  type="button" value="" class="register-check" onclick="checkuser()"> &nbsp;&nbsp;会员名须以字母开头，至少5位</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td width="30"><img src="image/register-arrow.gif"></td>
+                                                            <td class="register-td">密&nbsp;&nbsp;码：</td>
+                                                            <td><input name="psw1" id="psw1" type="password" class="register-input" onblur="checkpwd()">
+                                                            </td> 
+                                                            <td><div id="fpwd1" style="float:left">密码设置至少6位</div></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td width="30"><img src="image/register-arrow.gif"></td>
+                                                            <td class="register-td">重复密码：</td>
+                                                            <td><input name="psw2" id="psw2" type="password" class="register-input" onblur="checkrpwd()"></td>
+                                                            <td><div id="fpwd2">密码设置至少6位</div></td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="register-bold"><img src="image/dot_line_2.gif" align="absmiddle"></div>
+                                                    <div align="center"><input name="b1" type="button" value="&nbsp;"  onmouseover="this.className='register-over'"  onmouseout="this.className='register-out'" class="register-over"></div>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </form>
+                                </td>
+                                <td background="image/register-line.gif" width="3"></td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td><img src="image/register-bottom.gif"/></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div id="bottom-bg" class="bottom-bg">网站导航 | <a href="index.html" class="a-white">网站首页</a> | <a href="search.html" class="a-white">职位搜索</a> | <a href="login.html" class="a-white">Myjob</a> | <a href="register.html" class="a-white">用户注册</a> | <a href="login.html" class="a-white">用户登录</a> | <a href="intro.html" class="a-white">简历管理</a> | <a href="company.html" class="a-white">招聘公司</a></div>
+    <div id="bottom" class="bottom">
+        人才招聘 Email:hr@51job.com<br>个人求职 Email:club@51job.com　或垂询:800-820-5100
+        <br>
+        未经本招聘网站同意，不得转载本网站之所有招聘信息及作品
+        <br>
+        无忧工作网版权所有&copy;1999-2007<br>
+        <a href="http://www.miibeian.gov.cn" target="_blank"><img src="image/bottom1.gif" border="0"></a>
+    </div>
+</body>
+</html>

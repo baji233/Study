@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jiuyun.mapper.StudentMapper">
+    <resultMap id="defaultMap" type="student">
+        <id column="stu_id" property="stuId"/>
+        <result column="stu_name" property="stuName"/>
+        <result column="major" property="major"/>
+        <result column="sex" property="sex"/>
+        <result column="age" property="age"/>
+        <result column="remark" property="remark"/>
+    </resultMap>
+
+    <sql id="columns">stu_id,stu_name,major,sex,age,remark</sql>
+
+    <select id="selectAll" resultMap="defaultMap">
+        select <include refid="columns"/> from t_student
+    </select>
+
+    <select id="selectByParams" parameterType="student" resultMap="defaultMap">
+        select <include refid="columns"/> from t_student
+        <where>
+            <if test="stuId!=null">
+                and stu_id=#{stuId}
+            </if>
+            <if test="stuName != null">
+                and stu_name like '%${stuName}%'
+            </if>
+            <if test="major != null">
+                and major = #{major}
+            </if>
+            <if test="sex != null">
+                and sex = #{sex}
+            </if>
+            <if test="age != null">
+                and age >= #{age}
+            </if>
+            <if test="remark != null">
+                and remark like '%${remark}%'
+            </if>
+        </where>
+    </select>
+
+    <update id="update" parameterType="student">
+        update t_student
+        <set>
+            <if test="stuName != null">
+                stu_name=#{stuName},
+            </if>
+            <if test="major != null">
+                major=#{major},
+            </if>
+            <if test="sex != null">
+                sex=#{sex},
+            </if>
+            <if test="age != null">
+                age=#{age},
+            </if>
+            <if test="remark != null">
+                remark=#{remark}
+            </if>
+        </set>
+        where stu_id=#{stuId}
+    </update>
+
+    <select id="selectByIds" parameterType="integer" resultMap="defaultMap">
+        select * from t_student where stu_id in
+        <foreach collection="ids" item="stuId" open="(" separator="," close=")">
+            #{stuId}
+        </foreach>
+    </select>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

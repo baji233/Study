@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<actions>
+    <!-- id代表请求路径，class对应Action的实现类，method对应需要执行的方法，method可省略 -->
+    <action id="student/save" class="com.jiuyun.action.StudentAction" method="save"></action>
+    <action id="student" class="com.jiuyun.action.StudentAction"></action>
+    <action id="login" class="com.jiuyun.action.UserAction" method="login"></action>
+    <action id="teacher/save" class="com.jiuyun.action.TeacherAction"></action>
+    <action id="cat" class="com.jiuyun.action.CatAction" method="delete"></action>
+
+</actions>

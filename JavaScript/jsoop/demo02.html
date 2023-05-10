@@ -1,0 +1,58 @@
+
+		<meta charset="utf-8">
+		<title>作业</title>
+	</head>
+	<body>
+	</body>
+	<script>
+		//1
+		var cat = {};
+		Object.defineProperty(cat,'name',{
+			value:'大黄',
+			writable:false,
+			enumerable:true,
+			configurable:true
+		});
+		Object.defineProperty(cat,'color',{
+			value:'黄色',
+			enumerable:true,
+			configurable: true,	
+			writable:true,
+			weight:{
+				enumerable:true,
+				configurable: true
+			}
+		});
+		//2
+		var stu = {};
+		Object.defineProperty(stu,'score'{
+			score:{
+				score:function(s){
+					if(stu.score.value == 5){
+						console.info('成绩进步了5分');
+					}else if (s == stu.score.value) {
+						console.info('成绩是95分');
+					}
+				}
+			}
+		});
+		stu.score = 5;
+		var s = stu.score;
+		//3
+		var car = {};
+		Object.defineProperty(car,'price'{
+			price:{
+				price:function(p){
+					if(car.price.value == 9){
+						console.info('售车打9折');
+					}else if(p == car.price.value){
+						console.info('价格是999999元');
+					}
+				}
+			}
+		});
+		car.price = 9;
+		var p = car.price; 
+		
+	</script>
+</html>

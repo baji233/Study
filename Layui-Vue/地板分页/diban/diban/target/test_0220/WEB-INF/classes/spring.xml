@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                        http://www.springframework.org/schema/beans/spring-beans.xsd
+                         http://www.springframework.org/schema/context
+                          https://www.springframework.org/schema/context/spring-context.xsd
+                           http://www.springframework.org/schema/mvc
+                            https://www.springframework.org/schema/mvc/spring-mvc.xsd
+                           http://www.springframework.org/schema/tx
+                            https://www.springframework.org/schema/tx/spring-tx.xsd">
+
+    <!--    控制层交给springMVC扫描，其他层面给spring扫描-->
+
+    <!--    加载properties文件-->
+    <context:property-placeholder location="classpath:db.properties"/>
+
+    <!--    配置数据源-->
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="url" value="${jdbc.url}"/>
+        <property name="username" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
+        <property name="driverClassName" value="${jdbc.driver}"/>
+    </bean>
+
+    <!--    配置SqlSessionFactoryBean 可以直接在spring IOC容器中获取SqlSessionFactory-->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <!--        设置当前mybatis核心配置文件的位置-->
+        <property name="configLocation" value="classpath:mybatis.xml"/>
+        <property name="mapperLocations" value="classpath:mapper/*Mapper.xml"/>
+        <!--            配置数据源-->
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <!--    mapper扫描，扫描当前mybatis中的mapper接口所在的包-->
+    <bean id="mapperScannerConfigurer" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <!--        指定包-->
+        <property name="basePackage" value="com.jy.dao"/>
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
+    </bean>
+
+
+    <!--
+    原本mybatis是需要先获取配置文件，然后获取到SqlSessionFactory对象，然后openSession
+    现在通过倒数第二个bean配置类FactoryBean可以直接返回一个SqlSessionFactory对象，
+    这样就可以直接@Autowire注入一个SqlSessionFactory，但是只有SqlSessionFactory还不够，
+
+    倒数第一个配置作用：通过倒数第二个bean创建的SqlSessionFactory创建的SqlSession获取指定包下的
+                    所有接口的代理实现类对象，并交给IOC容器管理。
+    public class SqlSessionUtils {
+    public static SqlSession getSqlSession(){
+    InputStream resourceAsStream = null;
+    SqlSessionFactory build = null;
+    SqlSession sqlSession = null;
+    try {
+    resourceAsStream = Resources.getResourceAsStream("mybatis-config.xml");
+    build = new SqlSessionFactoryBuilder().build(resourceAsStream);
+    sqlSession = build.openSession(true);
+
+    } catch (IOException e) {
+    e.printStackTrace();
+    }
+    return sqlSession;
+    }
+    }-->
+
+    <!--    事务管理-->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+
+    <!--    开启事务的注解驱动 将使用注解@Transactional标识的类或者方法进行事务管理-->
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+
+
+</beans>

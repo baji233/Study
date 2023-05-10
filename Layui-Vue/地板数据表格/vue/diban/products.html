@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<title>产品中心</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="stylesheet" href="css/bootstrap.min.css"/>
+
+<link rel="stylesheet" href="css/style.css"/>
+
+</head>
+
+
+
+<body>
+
+
+
+
+
+<header id="header">
+
+<nav class="navbar navbar-default navbar-static-top">
+
+	<div class="container">
+
+		<div class="navbar-header">			
+
+			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+
+			<span class="sr-only"></span>
+
+			<span class="icon-bar"></span>
+
+			<span class="icon-bar"></span>
+
+			<span class="icon-bar"></span>
+
+			</button>
+
+
+
+			<div class="navbar-brand">
+
+				<img src="images/logo.png" alt="" width="150px" height="" class="img-responsive"/>
+
+			</div>
+
+		</div>
+
+	  	<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" role="navigation">	  	
+
+			<ul class="nav navbar-nav navbar-right">
+
+				<li><a rel="nofollow" href="index.html">网站首页</a></li>
+
+				<li><a rel="nofollow" href="about.html">关于我们</a></li>
+
+				<li><a rel="nofollow" href="products.html" class="active">产品中心</a></li>
+				<li><a rel="nofollow" href="case.html">工程案例</a></li>
+
+				<li><a rel="nofollow" href="news.html">新闻中心</a></li>
+
+				<li><a rel="nofollow" href="sitemap.html">服务支持</a></li>
+
+				<li><a rel="nofollow" href="join.html">招商加盟</a></li>
+
+				<li><a rel="nofollow" href="contact.html">联系我们</a></li>
+			</ul>
+
+	    </div>
+
+	</div>
+
+</nav>
+
+</header>
+
+
+
+<section class="n_banner">
+
+	<img src="images/banc.jpg" class="img-responsive" width="1855px"/>
+
+</section>
+
+
+<div id="abc">
+	<section class="imain">
+
+		<div class="container">				
+	
+			<div class="col-md-12 col-sm-12 col-xs-12">
+	
+				<div class="row">
+	
+					<div class="crumb clearfix">
+	
+						<h3>产品中心</h3>
+	
+						<div class="site hidden-xs">您的当前位置：<a href="index.html">首 页</a>><a href="products.html">产品中心</a></div>
+	
+					</div>
+	
+					<div class="clearfix"></div>
+	
+					<div class="fenlei pt15">
+	
+						<ul class="row">
+							
+							<li ><a ></a></li> 
+	
+						</ul>
+	
+					</div>
+	
+					
+	
+					<div class="content">				  
+	
+						<div class="protext">“第一印象地板”是中国生产实木地板、实木三层地板、实木多层地板、强化地板的著名品牌。经过多年的发展，逐渐成为具有自主研发能力，集生产、销售、
+                            服务于一体的现代化、专业化地板企业。产品远销欧美、东南亚、中国大陆地区，受到广大客户的赞誉。先后被评为中国绿色环保品牌，中国十大质量品牌等殊荣。
+	
+						</div>
+	
+						<ul class="ipro clearfix">
+	
+							<li class="col-md-4 col-sm-6 col-xs-12" v-for="p in products">
+	
+								<div class="lar">
+	
+									<a class="img" title="" rel="nofollow">
+									
+										<img class="myimg" src="images/1.jpg" style="width: 339px;height: 250px;" alt="" class="img-responsive"/>
+	
+										<div class="hides">
+											<div>
+												<p><img src="images/adv.png"/></p>
+											</div>
+										</div>
+									</a>
+								</div>
+	
+								<h3 id="hehe"><a  title="">{{p.productname}} {{p.specifications}}</a></h3>
+	
+							</li>
+	
+						</ul>
+	
+						
+	
+						<div class="pages">
+	
+							<ul>
+	
+								<li >总页数:{{totalPage}}</li>
+
+								<li v-show="page>1"  @click="proPage"><a>上一页</a></li>
+	
+								<li class="pages_solid"><a>{{page}}</a></li>
+	
+								<li v-show="page<totalPage" @click="nextPage"><a>下一页</a></li>
+
+								<li>到<input @change="toPage" v-model="page"  style="width: 35px;margin-left: 5px;margin-right: 5px;padding-left: 5px;padding-right: 5px;"  type="text"/>页</li>
+	
+							</ul>
+	
+						</div>
+	
+						
+	
+					</div>			
+	
+				</div>
+	
+			</div>		
+	
+		</div>
+	
+	</section>
+	
+	
+</div>
+
+
+
+<footer class="footer">
+
+	<div class="container">
+
+		<div class="row foot_in">
+
+			<div class="col-md-3 col-sm-12 col-xs-12 hidden-xs">
+
+				<img src="images/ftlogo.png" alt="" class="img-responsive"/>
+
+				<div class="tel">					
+
+					<span>服务热线：</span>
+
+					<p>10086</p>
+
+				</div>
+
+			</div>
+
+			
+
+			<div class="col-md-9 col-sm-12 col-xs-12">
+
+				<ul class="footnav">
+
+					<a href="index.html" title="网站首页" rel="nofollow">网站首页</a> | 
+
+					<a href="about.html" title="关于我们" rel="nofollow">关于我们</a> | 
+
+					<a href="products.html" title="产品中心" rel="nofollow">产品中心</a> | 
+
+					<a href="case.html" title="工程案例"   rel="nofollow">工程案例</a> | 			
+
+					<a href="news.html" title="新闻中心" rel="nofollow">新闻中心</a> | 
+
+					<a href="sitemap.html" title="服务支持"  rel="nofollow">服务支持</a> | 
+
+					<a href="join.html" title="招商加盟"  rel="nofollow">招商加盟</a>
+					
+					<a href="contact.html" title="联系我们"  rel="nofollow">联系我们</a>
+
+				</ul>
+
+				<div class="copyright">					
+
+					备案号：<a href="index.html"  target="_blank" rel="nofollow"></a></p>           	
+
+					<p>电商哪家好？供应订做多少钱？怎么样？诚信公司专业以批发价格大量现货提供cms、、、等品质优良的产品及报价，欢迎来电生产定制！</p>
+
+					<p>地址：九华创新创业中心</p>
+
+					<p>联系人：鑫&nbsp;&nbsp;10086</p>
+
+					<p>网址：www.xxxx.cn&nbsp;&nbsp;邮箱：123456789@qq.com</p>
+					
+
+				</div>
+
+			</div>	
+
+		</div>		
+
+	</div>			
+	<a href="http://localhost:8080/diban_war_exploded/Product/findByPage.do">阿斯顿发射点</a>
+</footer>
+
+<script type="text/javascript" src="js/jquery.js"></script>
+
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/url.js"></script>
+<script src="js/axios.min.js"></script>
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+<script>
+
+		//挂载
+		const { createApp } = Vue
+		var vue=createApp({
+			data(){
+				return {
+					page:1,
+					count:9,
+					products:[],
+					total:0
+				}
+			},
+			computed:{//计算属性
+				totalPage:function(){
+					//通过总条数除以每页的条数，得到总页数
+					return Math.ceil(this.total/this.count);
+				}
+			},
+			methods:{
+				//所有的自定义方法全在methods里
+				request:function(){
+					var _this=this;
+					$.ajax({
+						url:'/daili/Product/findByPage.do',
+						type:'post',
+						data:{page:_this.page,limit:_this.count},
+						dataType:'json',
+						success:function(item){
+							_this.products=item.products;
+							_this.total=item.count;
+						}
+					});
+				},
+				nextPage:function(){
+					this.page++;
+					this.request();
+				},
+				proPage:function(){
+					this.page--;
+					this.request();
+				},
+				toPage:function(){
+					
+					this.request();
+				}
+				
+			},
+			beforeMount:function(){
+				//在挂载前调用request发送请求给后端
+				this.request();
+				
+			}
+		}).mount("#abc");
+	
+
+	//把item的值送给products
+	
+	
+ 
+	
+</script>
+
+</body>
+
+</html>
+

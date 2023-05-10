@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jiuyun.mapper.UserMapper">
+    <resultMap id="defaultMap" type="com.jiuyun.bean.User">
+        <id property="userId" column="id"/>
+        <result property="userName" column="user_name"/>
+        <result property="password" column="password"/>
+        <result property="remark" column="remark"/>
+    </resultMap>
+
+    <select id="selectById" parameterType="integer" resultMap="defaultMap">
+        select * from t_user where id=#{userId}
+    </select>
+
+    <select id="selectAll" resultType="user" resultMap="defaultMap">
+        select * from t_user
+    </select>
+</mapper>

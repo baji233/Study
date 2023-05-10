@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>在线留言管理</title>
+    <script src="../../static/js/vue.js"></script>
+    <link rel="stylesheet" href="../../static/elementui/index.css" />
+    <script src="../../static/elementui/index.js"></script>
+
+    <link rel="stylesheet" href="../../static/css/style.css">
+    
+    <script src="../../static//js/axios-0.18.0.js"></script>
+</head>
+<body>
+    <div id="app">
+        <el-card shadow="never">
+            <!-- 搜索列表 -->
+            <el-form :inline="true" size="small" :model="searchEntity">
+                <el-form-item label="姓名">
+                    <el-input v-model="searchEntity.name" clearable placeholder="姓名"></el-input>
+                </el-form-item>
+    
+                <el-form-item>
+                    <el-button type="danger" @click="delAll"><i class="fa fa-trash"></i> 删除选中</el-button>
+                    <el-button type="info" @click="resetSearch"><i class="fa fa-refresh"></i> 重置</el-button>
+                    <el-button type="success" @click="search"><i class="fa fa-search"></i> 查询</el-button>
+                </el-form-item>
+            </el-form>
+        </el-card>
+
+        <el-card shadow="never">
+            <!-- 表格数据 -->
+            <el-table
+                    :data="tableData"
+                    height="650"
+                    @selection-change="handleSelectionChange"
+                    style="width: 100%">
+                <el-table-column
+                        type="selection"
+                        @selection-change="handleSelectionChange"
+                        width="55">
+                </el-table-column>
+                <el-table-column
+                        type="index"
+                        width="50"
+                        label="序号">
+                </el-table-column>
+                <el-table-column
+                        prop="companyname"
+                        label="公司名称"
+                  >
+                </el-table-column>
+                <el-table-column
+                        prop="name"
+                        label="姓名"
+                        width="180">
+                </el-table-column>
+                <el-table-column
+                        prop="phone"
+                        width="180"
+                        label="电话">
+                </el-table-column>
+                <el-table-column
+                    prop="address"
+                    width="250"
+                    label="地址">
+                </el-table-column>
+
+                <el-table-column
+                    prop="demand"
+                    width="250"
+                    label="需求">
+                </el-table-column>
+
+                <el-table-column
+                        label="操作"
+                        width="200">
+                    <template slot-scope="scope">
+                        <el-button @click="handleDelete(scope.row)" type="danger" size="mini" style="padding: 2px 4px; border-radius: 0">
+                            <i class="fa fa-trash"></i> 删 除
+                        </el-button>
+                    </template>
+                </el-table-column>
+            </el-table>
+            <!-- 分页 -->
+            <div class="lw-fr" style="margin: 10px;">
+                <el-pagination background
+                               layout="total, prev, pager, next, sizes, jumper"
+                               :current-page.sync="page.pageNo"
+                               :page-size.sync="page.pageSize"
+                               :total="page.count"
+                               :page-sizes="[ 10, 20, 30, 40, 50, 100]"
+                               @current-change="searchPage"
+                               @size-change="searchPage">
+                </el-pagination>
+            </div>
+        </el-card>
+    </div>
+</body>
+<script>
+    var app = new Vue({
+        el:"#app",
+        data() {
+            return {
+                //表格数据
+                tableData:[],
+                //搜索表单
+                searchEntity:{
+                    name: ""
+                },
+                //分页数据
+                page: {
+                    pageNo: 1,
+                    pageSize: 10,
+                    count: 10
+                },
+                delarr:[],//存放删除的id
+                multipleSelection:[],//多选的数据
+            }
+        },
+        methods: {
+            //查询所有数据
+            getAll(){
+                axios.get("/home/leave/"+this.page.pageNo+"/"+this.page.pageSize+"?name="+this.searchEntity.name)
+                .then((res)=>{
+                    if(res.data.flag == true && res.data.data!=null){
+    
+                        this.tableData = res.data.data.records;
+                        this.page.count = res.data.data.total;
+                    }
+                })
+            },
+            //监听复选框选中
+            handleSelectionChange(val){
+                this.multipleSelection=val;
+            },
+            //查询
+            search(){
+                this.getAll()
+            },
+            //重置
+            resetSearch(){
+                this.searchEntity.name = ""
+            },
+            //分页
+            searchPage(currentPage){
+                this.page.pageNo = currentPage;
+                this.getAll();
+            },
+             //点击删除
+             handleDelete(row){
+                this.$confirm("此操作永久删除当前信息，是否继续？","提示",{type:"info"}).then(()=>{
+                    console.log(row.leaveid)
+                    axios.delete("/home/leave/"+row.leaveid).then((res)=>{
+                        if(res.data.flag==true&&res.data.data!=null){
+                            this.$message.success("删除成功")
+                        }else{
+                            this.$message.error("删除失败")
+                        }
+                    }).finally(()=>{
+                        this.getAll();
+                    })
+                }).catch(()=>{
+                    this.$message.info("取消操作");
+                });
+            },
+            //批量删除
+            delAll(){
+                this.$confirm('是否删除选中'+this.multipleSelection.length+'行?', '提示', {
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消',
+                    type: 'warning'
+                }).then(() => {
+                    if(this.multipleSelection.length>0){
+                        //循环取出id
+                        for(let i=0;i<this.multipleSelection.length;i++){
+                            //添加到delarr
+                            this.delarr.push(this.multipleSelection[i].leaveid)
+                        }
+                        console.log(this.delarr)
+                        axios.delete("/home/leave?ids="+this.delarr).then((res)=>{
+                            if(res.data.flag == true && res.data.data!=null){
+                                this.$message.success("删除成功")
+                            }else{
+                                this.$message.success("删除失败")
+                            }
+                        }).finally(()=>{
+                            this.getAll();
+                        })
+                    }else{
+                        this.$message.warning("至少选中一行");
+                    }
+                    
+                }).catch(() => {
+                    this.$message({
+                        type: 'info',
+                        message: '已取消删除'
+                    });          
+                });
+                
+            },
+        },
+        created() {
+            this.getAll();
+        },
+    })
+</script>
+</html>

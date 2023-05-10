@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="../js/vue.js"></script>
+	</head>
+	<body>
+		<div id="app">
+			变量 : {{info}} <br>
+			插值表达式 : {{info | high}} </br>
+			单向绑定 : <p :msg="info | high"></p>
+			
+		</div>
+	</body>
+	<script>
+		//过滤器可以用在两个地方：双花括号插值和 v-bind 表达式 (过滤器在Vue3被淘汰)
+		
+		// 定义全局过滤器
+		Vue.filter('high', v => {
+			return v.toUpperCase();
+		})
+		
+		var vm = new Vue({
+			el : "#app", 
+			data : {
+				info : 'chatGPT',
+				
+			},
+			methods : {
+				
+			},
+			// 定义本地过滤器
+			filters: {
+			  capitalize: function (value) {
+			    if (!value) return ''
+			    value = value.toString()
+			    return value.charAt(0).toUpperCase() + value.slice(1)
+			  }
+			}
+		});
+	</script>
+</html>

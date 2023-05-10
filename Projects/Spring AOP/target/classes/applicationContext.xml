@@ -1,0 +1,39 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:http="http://www.springframework.org/schema/c"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/aop
+       http://www.springframework.org/schema/aop/spring-aop.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:component-scan base-package="com.jiuyun"></context:component-scan>
+
+<!--    面向切面的配置-->
+    <aop:config>
+<!-- 配置全局切入点并命名，表达式匹配的是com.jiuyun.service.impl包下面所有的公共方法 -->
+        <aop:pointcut id="logPoint" expression="execution(public * com.jiuyun.service.impl.*.*(..))"></aop:pointcut>
+<!-- 配置日志记录切面，与com.jiuyun.aspect.LogAspect类关联，ref="logAspect":bean的驼峰命名法名称(自动识别) -->
+        <aop:aspect id="myLogAspect" ref="logAspect">
+            <!--        配置前置通知-->
+            <aop:before method="startLog" pointcut-ref="logPoint"></aop:before>
+            <!--        返回后通知-->
+            <aop:after-returning method="logging" pointcut-ref="logPoint"></aop:after-returning>
+            <!--        抛出异常后通知-->
+            <aop:after-throwing method="logError" pointcut-ref="logPoint"></aop:after-throwing>
+            <!--        配置后通知-->
+            <aop:after method="afterLog" pointcut-ref="logPoint"></aop:after>
+        </aop:aspect>
+
+<!--        配置性能统计切面,ref="com.jiuyun.aspect.CountTimeAspect"-->
+        <aop:aspect id="myCountTime" ref="countTimeAspect">
+            <!--  配置环绕通知，使用的是局部切入点-->
+            <aop:around method="countTime" pointcut="execution(public * com.jiuyun.dao.*.*(..))"></aop:around>
+        </aop:aspect>
+    </aop:config>
+
+</beans>
+

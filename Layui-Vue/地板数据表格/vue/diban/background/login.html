@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>后台管理系统</title>
+    <script src="../static/js/vue.js"></script>
+    <link rel="stylesheet" href="../static/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../static/elementui/index.css">
+    <link rel="stylesheet" href="../static/css/style.css">
+    <script src="../static/elementui/index.js"></script>
+    <script src="../static/js/moment.js"></script>
+    <script src="../static/js/axios-0.18.0.js"></script>
+    <style>
+        .el-card__body {
+            padding: 0px !important;
+        }
+
+        .el-tabs__nav {
+            width: 100%;
+        }
+
+        .el-tabs__item {
+            width: 50%;
+            text-align: center;
+        }
+
+        .el-tabs__content {
+            padding: 0 !important;
+        }
+    </style>
+</head>
+<body style="background-color: #262C35;">
+<div id="app">
+    <el-row style="margin-top: 200px;">
+        <el-col :span="5" :offset="10">
+            <h1 style="color: #ffffff; text-align: center;margin-bottom: 50px;">后端管理系统</h1>
+            <el-card style="border-radius: 0;">
+                <el-tabs style="margin: 0;" v-model="activeName" height="290" type="border-card"
+                         >
+                    <el-tab-pane label="账号登录" name="login">
+                        <div style="padding: 40px 30px 20px 10px;">
+                            <el-form :model="entity"
+                                     status-icon
+                                     label-position="right"
+                                     label-width="80px"
+                                     label-suffix=": ">
+                                <el-form-item label="用户名" prop="username">
+                                    <el-input v-model="entity.username" prefix-icon="fa fa-user"></el-input>
+                                </el-form-item>
+                                <el-form-item label="密码" prop="password">
+                                    <el-input type="password" v-model="entity.password"
+                                              prefix-icon="fa fa-lock"></el-input>
+                                </el-form-item>
+                                <el-form-item>
+                                    <el-button type="primary" style="width: 100%;" @click="submitForm">登录
+                                    </el-button>
+                                </el-form-item>
+                            </el-form>
+                        </div>
+                    </el-tab-pane>
+                   
+                </el-tabs>
+            </el-card>
+        </el-col>
+    </el-row>
+
+</div>
+<script>
+    new Vue({
+        el: "#app",
+        data: {
+            entity: {},
+            activeName: 'login'
+        },
+        methods: {
+            submitForm: function() {
+                axios.get("/home/users/login?username="+this.entity.username+"&password="+this.entity.password).then((res)=>{
+                    if(res.data.flag == true && res.data.data!=null){
+                        sessionStorage.setItem("token",res.data.data);
+                        location.href="index.html"
+                    }else{
+                        this.$message.error("账号密码错误");
+                    }
+                    
+                })
+            },
+        },
+        created: function () {
+
+        }
+    })
+</script>
+</body>
+</html>

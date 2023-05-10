@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="app">
+			省<select @change="p_change" id="provice" v-model="p_index">
+				<option v-for="(p,index) in provice"  :value="index">{{p.name}}</option>
+			</select><br>
+			市<select @change="c_change" id="city" v-model="c_index">
+					<option v-for="(c,index) in city" :value="index">{{c.name}}</option>
+			</select><br>
+			县/区<select id="area">
+					<option v-for="a in area">{{a}}</option>
+			</select><br>
+		</div>
+	</body>
+	<script src="js/jquery.min.js"></script>
+	<script src="js/vue.js"></script>
+	<script src="js/city.js"></script>
+	<script>
+		const { createApp } = Vue
+		var p=0;
+		var vue=createApp({
+			data(){
+				return {
+					provice:provice,
+					city:provice[0].city,
+					area:provice[0].city[0].districtAndCounty,
+					p_index:0,
+					c_index:0,
+					a_index:0
+				}
+			},
+			methods:{
+				p_change:function(){
+					//得到省份的下标
+					this.city=provice[this.p_index].city;
+					p=this.p_index;
+					console.info(p);
+				},
+				c_change:function(){
+					//得到城市的下标
+					this.area=provice[p].city[this.c_index].districtAndCounty;
+					console.info(this.c_index);333
+				}
+			}
+		}).mount("#app");
+	</script>
+</html>

@@ -1,0 +1,16 @@
+
+<jsp:useBean id="product" class="com.web07.Product"></jsp:useBean>
+
+  Product p = new Product();
+  pageContext.setAttribute("product",p);
+  
+  
+<%@ include file="" %>
+
+<jsp:include > </jsp:include>
+
+两个include的区别：
+	<%@ include   在编译时就包含原jsp页面   也叫 静态包含
+	<jsp:include >  包含jsp页面输出的html 也叫 动态包含
+	
+include的用途：重用重复的jsp代码块，提高可维护性。

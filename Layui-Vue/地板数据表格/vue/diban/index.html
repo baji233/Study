@@ -1,0 +1,366 @@
+﻿<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>第一印象地板</title>
+<meta name="Keywords" content="">
+<meta name="Description" content="">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="css/bootstrap.min.css"/>
+<link rel="stylesheet" href="css/style.css"/>
+</head>
+
+<style>
+	.storehoving2{
+		background-color: #ddd; height: 150px;text-align: center;padding-top: 20px;color: #555;
+	}
+	.storehoving:hover .storehoving2{
+		background-color: #4E9110;
+		color: white;
+	}
+	.gddp{
+		background-color: #b8b8b8;display: inline-block;font-size: 20px;width: 200px;height: 46px;border-radius: 5px;color: white;text-align: center;line-height: 44px;cursor: pointer;
+	}
+	.gddp:hover{
+		background-color: #4E9110;
+		color: white;
+	}
+</style>
+
+<body>
+<header id="header">
+  <nav class="navbar navbar-default navbar-static-top">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false"> <span class="sr-only"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
+        <div class="navbar-brand"> <img src="images/logo.png" alt="" width="150px" height="" class="img-responsive"/> </div>
+      </div>
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" role="navigation">
+        <ul class="nav navbar-nav navbar-right">
+          <li><a rel="nofollow" href="index.html" class="active">网站首页</a></li>
+          <li><a rel="nofollow" href="about.html">关于我们</a></li>
+          <li><a rel="nofollow" href="products.html">产品中心</a></li>
+          <li><a rel="nofollow" href="case.html">工程案例</a></li>
+          <li><a rel="nofollow" href="news.html">新闻中心</a></li>
+          <li><a rel="nofollow" href="sitemap.html">服务支持</a></li>
+          <li><a rel="nofollow" href="join.html">招商加盟</a></li>
+          <li><a rel="nofollow" href="contact.html">联系我们</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<div id="app">
+  <section class="carousel slide" data-ride="carousel" id="main_banner">
+    <ol class="carousel-indicators focus ">
+      <li  v-for="(i,index) in indexImg" :class="1>index?'active':''" data-target="#main_banner" :data-slide-to="index"></li>
+    </ol>
+    <div class="carousel-inner" role="listbox">
+      <div  v-for="(i,index) in indexImg" :class="1>index?'item active':'item'"> <img class="myimg" :mysrc="['images/carouseldiagram/'+i.img]" alt=""/> </div>
+    </div>
+    <a class="left carousel-control" href="#main_banner" role="button" data-slide="prev"> <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span> <span class="sr-only">Previous</span> </a> <a class="right carousel-control" href="#main_banner" role="button" data-slide="next"> <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span> <span class="sr-only">Next</span> </a> </section>
+  <section class="clearfix jianju container iabout">
+    <div class="row">
+      <div class="iabo_box">
+        <div class="col-md-6 col-sm-6 col-xs-12">
+          <div class="tit"> <em></em>
+            <h3>ABOUT US</h3>
+            <span>关于我们</span> </div>
+          <div class="abo_txt">{{abo}}</div>
+          <div class="clearfix"></div>
+          <a href="about.html" class="abo_more">MORE<i class="glyphicon glyphicon-forward"></i></a> </div>
+        <div class="col-md-6 col-sm-6 col-xs-12"> <img src="images/about.jpg" alt="" class="img-responsive"/> </div>
+      </div>
+    </div>
+  </section>
+  <section class="clearfix jianju case">
+    <div class="container">
+      <div class="tit t-cen">
+        <h3>PRODUCT</h3>
+        <span>产品展示</span> </div>
+      <div class="fenlei text-center">
+        <ul class="row">
+          <li v-for="(s,index) in series"><a @click="setseriesid(s.seriesid)" title="">{{s.seriesname}}</a></li>
+        </ul>
+      </div>
+      <div class="row">
+        <ul class="case_list">
+          <li v-for="(f,index) in floors" class="col-md-4 col-sm-6 col-xs-12" style="margin-bottom: 30px;"> <a @click="article(f.floorid)" class="img" title=""><img style="height: 300px!important;width: 357px !important; ;"  class="myimg" :mysrc="['images/floor/'+f.mainimg]" alt="" class="img-responsive"/></a>
+            <h3><a href="products_article.html" title="">{{f.floorname}}</a></h3>
+            <p>{{ f.floorname }}</p>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+  <section class="clearfix jianju container">
+    <div class="tit"> <em></em>
+      <h3>CASE DISPLAY</h3>
+      <span>案例展示</span> </div>
+    <div class="row">
+      <ul class="ipro">
+        <li class="col-md-4 col-sm-6 col-xs-12" v-for="(c,index) in cases">
+          <div class="lar"> <a class="img" @click="casearticle(c.caseid)" title="" rel="nofollow"> <img style="width: 370px; height: 277px;"  class="myimg" :mysrc="['images/case/'+c.mainimg]" alt="" class="img-responsive"/>
+            <div class="hides">
+              <div>
+                <p><img src="images/adv.png"/></p>
+              </div>
+            </div>
+            </a> </div>
+          <h3><a @click="casearticle(c.caseid)" title="">{{c.casename}}</a></h3>
+        </li>
+      </ul>
+    </div>
+  </section>
+  <section class="clearfix jianju inews">
+    <div class="container">
+      <div class="tit t-cen">
+        <h3>NEWS CENTER</h3>
+        <span>新闻中心</span> </div>
+      <ul class="inews_list">
+        <li class="col-md-6 col-sm-12 col-xs-12" v-for="(n,index) in news">
+          <div class="inews_in">
+            <div class="col-md-4 col-sm-4 col-xs-12"><img style="height: 113px;width: 153px;" :mysrc="['images/news/'+n.mainimg]"  class="myimg" class="img-responsive"/> </div>
+            <div class="news_txt col-md-8 col-sm-8 col-xs-12"> <a @click="gonews(n.newsid)" title="">{{n.newsname}}</a>
+              <p>{{n.infodown}}</p>
+              <span>{{n.time}}</span> </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </section>
+  <section class="jianju container clearfix hidden-xs">
+    <div class="tit"> <em></em>
+      <h3>STORE</h3>
+      <span>专卖店</span> </div>
+   <div class="row">
+      <ul class="ipro">
+        <li class="col-md-3 col-sm-6 col-xs-12 storehoving" @click="setid(s.storeid)" v-for="(s,index) in store">
+          <div class="lar"> <a class="img" title="" rel="nofollow"> <img style="width: 370px; height: 220px;"  class="myimg" :mysrc="['images/store/'+s.mainimg]" alt="" class="img-responsive"/>
+            </a> </div>
+          <div class="storehoving2">
+      			<p style="font-size: 20px;">{{s.storename}}</p>
+      			<p>{{s.address}}</p>
+      			<p>营业时间：{{s.time}}</p>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <div style="text-align: center;"><a class="gddp" @click="gostore">更多店铺>></a></div>
+	
+  </section>
+  <footer class="footer">
+
+	<div class="container">
+
+		<div class="row foot_in">
+
+			<div class="col-md-3 col-sm-12 col-xs-12 hidden-xs">
+
+				<img src="images/ftlogo.png" alt="" class="img-responsive"/>
+
+				<div class="tel">					
+
+					<span>服务热线：</span>
+
+					<p>10086</p>
+
+				</div>
+
+			</div>
+
+			
+
+			<div class="col-md-9 col-sm-12 col-xs-12">
+
+				<ul class="footnav">
+
+					<a href="index.html" title="网站首页" rel="nofollow">网站首页</a> | 
+
+					<a href="about.html" title="关于我们" rel="nofollow">关于我们</a> | 
+
+					<a href="products.html" title="产品中心" rel="nofollow">产品中心</a> | 
+
+					<a href="case.html" title="工程案例"   rel="nofollow">工程案例</a> | 			
+
+					<a href="news.html" title="新闻中心" rel="nofollow">新闻中心</a> | 
+
+					<a href="sitemap.html" title="服务支持"  rel="nofollow">服务支持</a> | 
+
+					<a href="join.html" title="招商加盟"  rel="nofollow">招商加盟</a>
+					
+					<a href="contact.html" title="联系我们"  rel="nofollow">联系我们</a>
+
+				</ul>
+
+				<div class="copyright">					
+
+					备案号：<a href="index.html"  target="_blank" rel="nofollow"></a></p>           	
+
+					<p>电商哪家好？供应订做多少钱？怎么样？诚信公司专业以批发价格大量现货提供cms、、、等品质优良的产品及报价，欢迎来电生产定制！</p>
+
+					<p>地址：九华创新创业中心</p>
+
+					<p>联系人：鑫&nbsp;&nbsp;10086</p>
+
+					<p>网址：www.xxxx.cn&nbsp;&nbsp;邮箱：123456789@qq.com</p>
+					
+
+				</div>
+
+			</div>	
+
+		</div>		
+
+	</div>			
+
+</footer>
+</div>
+<script type="text/javascript" src="js/jquery.js"></script> 
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<script src="js/axios.min.js"></script>
+<script src="js/vue.js"></script>
+<script>
+  function myimg(){
+    var imgs=$(".myimg");
+    for (let i=0;i<imgs.length;i++){
+        var img_top=$(imgs[i]).offset().top;//图片距离顶部的距离
+        var scro=$(window).scrollTop();//滚动的距离
+        var window_height=$(window).height();//窗口的高度
+        if(img_top<=(scro+window_height)){           
+                $(imgs[i]).attr("src",$(imgs[i]).attr("mysrc"));    
+        }
+    }
+  }
+  var app=new Vue({
+    el:"#app",
+    created() {
+      this.indexImgLoad();
+      this.seriesLoad();
+      this.floorLoad();
+      this.casesLoad();
+      this.newsLoad();
+      this.storeLoad();
+    },
+    data() {
+      return {
+          abo:"第一印象地板，感官体验第一地板品牌，创建于2005年，是中国生产实木地板、实木三层地板、实木多层地板、强化地板的著名品牌。经过多年的发展，逐渐成为具有自主研发能力，集生产、销售、服务于一体的现代化、专业化地板企业。公司占地面积达43500平方米，年产能力达到500万平方米以上，规模居行业前列。 企业成立之初，为确保产品的质量，先后从德国、意大利引进多条先进的生产线、UV淋漆线和PU淋漆线，同时引进微电子控制干燥窑等先进生产设备。2008年，公司成功携手香港恒创国际投资有限公司，为“第一印象”地板品牌拓展国际市场奠定了基础，产品远销欧美、东南亚、中国大陆地区，受到广大客户的赞誉。先后被评为中国绿色环保品牌，中国十大质量品牌等殊荣。 “第一印象地板”营销网络遍布全球，拥有20多家分公司，在中国23个省份拥有400余家统一授权、统一形象的地板专卖店。 ",
+          indexImg:[],
+          series:[],
+          floors:[],
+          cases:[],
+          news:[],
+          store:[]
+      }
+    },
+    methods: {
+		setid(storeid){
+				localStorage.setItem("storeid",storeid);
+				window.location.href="store_article.html";
+			},
+		gostore(){
+			window.location.href="store.html";
+		},
+        gonews(newsid){
+          localStorage.setItem("newsid",newsid);	
+			    window.location.href="news_article.html";
+        },
+        casearticle(caseid){
+          // console.log(floorid);
+          localStorage.setItem("caseid",caseid);	
+          window.location.href="case_article.html";
+        },
+        setseriesid(seriesid){
+          localStorage.setItem("seriesid",seriesid);			
+          localStorage.removeItem("floorid");
+          window.location.href="products.html";
+        },
+        article(floorid){
+          // console.log(floorid);
+          localStorage.setItem("floorid",floorid);	
+          window.location.href="products_article.html";
+        },
+        storeLoad(){
+          axios.get("/home/store?recommend=1&page=1&limit=4")
+          .then(res => {
+            // console.log(res)
+            this.store=res.data.data;
+          })
+          .catch(err => {
+            console.error(err); 
+          })
+        },
+        newsLoad(){
+          axios.get("/home/news?recommend=1&state=0&page=1&limit=4")
+          .then(res => {
+            //console.log(res)
+            this.news=res.data.data;
+            for(let i=0;i<res.data.data.length;i++){
+              if(res.data.data[i].infodown.length>=45){
+                var ss=res.data.data[i].infodown.substring(0,45)+"...";
+                this.news[i].infodown=ss;
+              }
+            }
+          })
+          .catch(err => {
+            console.error(err); 
+          })
+        },
+        casesLoad(){
+          axios.get("/home/cases?recommend=1&page=1&limit=3")
+          .then(res => {
+            // console.log(res)
+            this.cases=res.data.data;
+          })
+          .catch(err => {
+            console.error(err); 
+          })
+        },
+        floorLoad(){
+          axios.get("/home/floor?recommend=1&state=0&page=1&limit=6")
+          .then(res => {
+            // console.log(res.data.data);
+            this.floors=res.data.data;
+          })
+          .catch(err => {
+            console.error(err); 
+          })
+        },
+        indexImgLoad(){
+          axios.get("/home/carouseldiagram")
+          .then(res => {
+            this.indexImg=res.data.data;
+          })
+          .catch(err => {
+            console.error(err); 
+          }) 
+        },
+        seriesLoad(){
+          axios.get("/home/series/1")
+          .then(res => {
+            // console.log(res.data.data);
+            if(this.series.length<8){
+            	this.series=res.data.data;
+            }
+          })
+          .catch(err => {
+            console.error(err); 
+          })
+        }    
+    },
+    mounted() {
+    	setTimeout(function(){
+    		myimg();
+    	},100)
+    }
+  })
+  $(document).ready(function (){
+      $(window).scroll(function (){
+          myimg();
+      })
+  })
+</script>
+</body>
+</html>

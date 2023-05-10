@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+    .box {
+        background-color: yellow;
+        height: 600px;
+        display: flex;
+        /* flex-direction: column; */
+        /* flex-wrap: wrap; */
+        /* justify-content: center; */
+        /* align-items: stretch; */
+    }
+
+    .item {
+        width:200px;
+        height: 200px;
+        background-color: orange;
+        font-size:30px;
+        margin: 10px;
+
+        flex: 1;
+    }
+
+    .two {
+        flex: 3; 
+    }
+    </style>
+</head>
+<body>
+    
+    <div class="box">
+        <div class="item">1</div>
+        <div class="item">2</div>
+        <div class="item two">3</div>
+    </div>
+</body>
+</html>

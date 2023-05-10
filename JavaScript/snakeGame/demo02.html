@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+			html,body,div{
+				margin: 0;
+				padding: 0;
+				
+			}
+			.food{
+				margin: 0;
+				padding: 0;
+				border-radius: 25px;
+			}
+			.snake{
+				margin: 0;
+				padding: 0;
+				border-radius: 5px;
+			}
+		</style>
+	</head>
+	
+	
+	<body>
+		
+		
+		
+		
+
+		
+	</body>
+	
+	
+	<script>
+		//游戏界面
+		var w = 600;
+		var h = 400;
+		//每次移动
+		var movelen = 20;
+		//地图类
+		var Map = function(){
+			this.show = function(){
+				var div =  document.createElement('div');
+				document.body.appendChild(div);
+				div.style.width = w+'px';
+				div.style.height = h+'px';
+				div.style.backgroundColor='yellow';
+				
+			}
+		}
+		//食物
+		var Food = function(){
+			//位置
+			this.x = 20;
+			this.y = 20;
+			//食物在网页上的DIV
+			this.pie = null;
+			this.show = function(){
+				if(this.pie==null){
+					var f = document.createElement('div');
+					document.body.appendChild(f);
+					f.style.width = movelen+'px';
+					f.style.height = movelen+'px';
+					f.style.backgroundColor='green';
+					f.className = "food";
+					
+					f.style.position = 'absolute'; //绝对定位
+					this.pie = f;
+				}
+				//随机位置
+				this.x = parseInt(w/movelen * Math.random());
+				this.y = parseInt(h/movelen * Math.random());
+				this.pie.style.top = this.y*20 +'px';
+				this.pie.style.left = this.x*20+'px';
+				// alert(this.x);
+				// alert(this.y);
+			}
+		}
+		//蛇类
+		var Snake =function(){
+			//方向 right left up down
+			this.direct = 'right';
+			//默认蛇为四节
+			this.body=[
+				{x:0,y:0,color:'blue',pie:null},
+				{x:1,y:0,color:'blue',pie:null},
+				{x:2,y:0,color:'blue',pie:null},
+				{x:3,y:0,color:'red',pie:null}
+			];
+			
+			this.show = function(){
+				for(var b of this.body){
+					if(b.pie==null){
+						var f = document.createElement('div');
+						document.body.appendChild(f);
+						f.style.width = movelen+'px';
+						f.style.height = movelen+'px';
+						f.style.backgroundColor=b.color;
+						f.className = "snake";
+						f.style.position = 'absolute'; //绝对定位
+						b.pie = f;
+					}
+					//网页上的定位
+					b.pie.style.left = b.x*20+'px';
+					b.pie.style.top = b.y*20 +'px';	
+				}
+			}
+			//移动
+			this.move = function(){
+				//0-2
+				var p,p1;
+				for(var i =0 ;i<this.body.length -1;i++){
+					p = this.body[i];
+					p1 = this.body[i+1];
+					p.x = p1.x;
+					p.y = p1.y;
+				}
+				// 头
+				var n = this.body.length;
+				var head = this.body[n-1];
+				if(this.direct == 'right'){
+					head.x += 1;
+				}else if(this.direct == 'left'){
+					head.x -= 1;
+				}else if(this.direct == 'up'){
+					head.y -= 1;
+				}else if(this.direct == 'down'){
+					head.y += 1;
+				}
+				this.touch();
+				this.eat();
+				this.show();//重新显示每一节
+			}
+			//吃东西
+			this.eat = function(){
+				var n = this.body.length;
+				var head = this.body[n-1];
+				if(head.x==food.x && head.y==food.y){
+					var p = {
+						x:this.body[0].x,
+						y:this.body[0].y,
+						color:'blue',
+						pie:null
+					}
+					this.body.unshift(p);
+					//吃到之后重新生产食物
+					food.show();
+				}
+			}
+			
+			//触碰边界或者身体，提升游戏结束，重新开始
+			this.touch = function(){
+				var n = this.body.length;
+				// var p3 = this.body;
+				//console.info(p);
+				//snake.move();
+				var head = this.body[n-1];
+				var x = head.x;
+				var y = head.y;
+				for(var i = 0; i<n-1;i++){
+					if(x == this.body[i].x && y == this.body[i].y){
+						// console.info(x);
+						// console.info(this.body[i].x);
+						alert("游戏失败！！！");
+						// this.direct = 'right';
+						// this.body=[
+						// 	{x:0,y:0,color:'blue',pie:null},
+						// 	{x:1,y:0,color:'blue',pie:null},
+						// 	{x:2,y:0,color:'blue',pie:null},
+						// 	{x:3,y:0,color:'red',pie:null}
+						// ];
+						location.reload([true]);
+						
+					}
+				}
+				//触碰边界
+				
+				if (head.x == 30 || head.y == 20 || head.x == -1 || head.y == -1){
+					alert("游戏失败！！！");
+					location.reload([true]);
+				
+					// this.renovate();
+					// this.direct = 'right';
+					// this.body=[
+					// 	{x:0,y:0,color:'blue',pie:null},
+					// 	{x:1,y:0,color:'blue',pie:null},
+					// 	{x:2,y:0,color:'blue',pie:null},
+					// 	{x:3,y:0,color:'red',pie:null}
+					// ];
+					
+				}
+					
+			}
+			//重新加载蛇
+			// this.renovate = function(){
+			// 	//方向 right left up down
+			// 	var snake = new Snake();
+			// 	this.direct = 'right';
+			// 	//默认蛇为四节
+			// 	this.body=[
+			// 		{x:0,y:0,color:'blue',pie:null},
+			// 		{x:1,y:0,color:'blue',pie:null},
+			// 		{x:2,y:0,color:'blue',pie:null},
+			// 		{x:3,y:0,color:'red',pie:null}
+			// 	];
+				
+				
+			// }
+			
+		}
+		
+		//定时器
+		var timer = setInterval(function(){
+			snake.move();
+		},500);
+		
+		
+		
+		//test
+		var map = new Map();
+		var food = new Food();
+		var snake = new Snake();
+		map.show();
+		food.show();
+		snake.show();
+		
+		//键盘监听
+		document.onkeydown = function(e){
+			var kc =e.keyCode;
+			//alert(kc);
+			// left:37 up :38 right:39 down:40
+			if(kc == 37 && snake.direct !='right'){
+				snake.direct = 'left';
+				snake.move();
+			}else if(kc == 38 && snake.direct !='down'){
+				snake.direct = 'up';
+				snake.move();
+			}else if(kc == 39 && snake.direct !='left'){
+				snake.direct = 'right';
+				snake.move();
+			}else if(kc == 40 && snake.direct !='up'){
+				snake.direct = 'down';
+				snake.move();
+			}
+			//alert(snake.direct);
+		}
+	</script>
+</html>

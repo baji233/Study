@@ -1,0 +1,57 @@
+npm init -y  初始化项目
+
+模块依赖的描述在D:\code\JavaScript\node.js\project\package.json中
+npm i 模块名称 -g //全局依赖(将安装在C盘)
+npm i 模块名称    //dependencies: 生产依赖(程序员用的模块依赖)
+npm i 模块名称 -D //devDependencies: 开发依赖(用户用的模块依赖)
+
+
+
+npm install  nodemon -S -g
+// 日期模块
+npm install moment     安装一个生产依赖
+npm install jquery  -D 安装一个开发依赖
+npm install nodemon -g 安装一个全局依赖
+
+  //全局依赖(在C盘), npm i module -g
+	  //dependencies: 生产依赖(程序员用的模块依赖), npm i jquery
+	  //devDependencies: 开发依赖(用户用的模块依赖), npm i less -D
+	  
+	  //"dev": "node demo02.js" 自定义简化脚本启动命令 npm run dev
+
+
+
+在package.json内,自定义脚本 -- 简化启动命令
+"scripts": {
+    "dev": "node app.js" //需要运行的指令
+}
+npm run dev(脚本名)
+
+当需要将项目拷贝给别人时,要提前把node_modeules文件夹删除,
+因为里面的模块太多所以内存会非常大,
+然后别人可以使用 npm install 重新安装模块依赖
+npm install  :  安装nodejs的依赖包
+
+npm update  :  升级当前目录下的项目的所有模块
+
+npm update express  :  升级当前目录下的项目的指定模块名
+
+
+
+npm -v          #显示版本，检查npm 是否正确安装。
+ 
+npm install express   #安装express模块
+ 
+npm install -g express  #全局安装express模块
+ 
+npm list         #列出已安装模块
+ 
+npm show express     #显示模块详情
+ 
+npm update        #升级当前目录下的项目的所有模块
+ 
+npm update express    #升级当前目录下的项目的指定模块
+ 
+npm update -g express  #升级全局安装的express模块
+ 
+npm uninstall express  #删除指定的模块

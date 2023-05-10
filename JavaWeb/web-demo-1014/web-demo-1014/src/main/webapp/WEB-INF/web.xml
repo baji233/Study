@@ -1,0 +1,51 @@
+<!DOCTYPE web-app PUBLIC
+ "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+ "http://java.sun.com/dtd/web-app_2_3.dtd" >
+
+<web-app>
+  <display-name>Archetype Created Web Application</display-name>
+
+  <filter>
+    <filter-name>myFilter</filter-name>
+    <filter-class>com.jiuyun.web.MyFilter</filter-class>
+  </filter>
+  <filter>
+    <filter-name>checkLoginFilter</filter-name>
+    <filter-class>com.jiuyun.web.CheckLoginFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>myFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>checkLoginFilter</filter-name>
+    <url-pattern>/manage/*</url-pattern>
+  </filter-mapping>
+
+  <listener>
+    <listener-class>com.jiuyun.web.MyServletContextListener</listener-class>
+  </listener>
+  <listener>
+    <listener-class>com.jiuyun.web.MyServletContextAttributeListener</listener-class>
+  </listener>
+  <listener>
+    <listener-class>com.jiuyun.web.MyHttpSessionListener</listener-class>
+  </listener>
+  
+  <servlet>
+    <servlet-name>helloServlet</servlet-name>
+    <servlet-class>com.jiuyun.servlet.HelloServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>createSessionServlet</servlet-name>
+    <servlet-class>com.jiuyun.servlet.CreateSessionServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>helloServlet</servlet-name>
+    <url-pattern>/hello</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>createSessionServlet</servlet-name>
+    <url-pattern>/create</url-pattern>
+  </servlet-mapping>
+</web-app>

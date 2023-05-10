@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+<script>
+
+/*    
+// 类
+ var Animal = function(name,type){
+        //私有
+        var _type = type;
+        var _age = 0 ;
+        var isAnimal = function(){
+            console.log("私有方法" +_type );
+        }
+
+        //保护的
+        var _color = '白色'
+        Object.defineProperty(this,"color",{
+             get:function(){
+                return _color;
+             },
+             set:function(v){
+                _color = v
+             }
+        });
+
+        //公有
+        this.type = type;
+        this.eat = function(){
+            console.log("公有...吃东西");
+        }
+}
+
+//原型属性和方法
+Animal.prototype.age = 10;
+Animal.prototype.fight=function(){
+    console.log("动物打架"+this.type);
+    console.log('私有'+ _age);
+}
+
+//静态属性
+Animal.number = 90;
+Animal.count = function(){
+    console.log("动物总数"+ Animal.number);
+}
+
+//对象
+console.log( Animal.number );
+Animal.count()
+
+var cat = new Animal('tom','狸花猫')
+console.log( cat.number );
+cat.count();
+
+// console.log( cat.age );
+// cat.fight()
+*/
+
+// 模拟继承
+Object.copy = function(a,b){
+    for(var attr in b){
+        a[attr] = b[attr];
+    }
+    return a;
+}
+
+Object.prototype.extends=function(o){
+    return Object.copy(this,o);
+}
+
+// var temo={ 
+//     name:'temo',
+//     age:18,
+//     r: function(){
+//         console.log("种蘑菇");
+//     }
+// };
+// var dema={ };  
+// dema.extends( temo )
+// console.log( dema );
+
+//多态
+var Rect = function(){
+    this.draw = function(){
+        console.log('画个矩形');
+    }
+}
+
+var Circle = function(){
+    this.draw = function(){
+        console.log('画个圆形');
+    }
+}
+
+//多态
+function shape( obj ){
+    obj.draw();
+}
+
+var o = new Circle();
+var box = new Rect();
+
+shape( o )
+shape( box )
+
+
+
+
+</script>
+</body>
+</html>

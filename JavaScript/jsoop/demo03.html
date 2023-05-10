@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>JavaScript的封装继承多态</title>
+	</head>
+	<body>
+	</body>
+	<script>
+		/**
+		 * 拷贝方法(继承)
+		 * @param {Object} a 子类
+		 * @param {Object} b 父类
+		 */
+		Object.copy = function(a, b){ 
+			for(var attr in b){
+				//将父类的属性赋给子类
+				a[attr] = b[attr];
+			}
+			return a;
+		}
+		/**
+		 * 模拟继承
+		 * @param {Object} obj 
+		 */
+		Object.prototype.extends = function(obj){
+			return Object.copy(this, obj);
+		}
+		
+		
+		/**
+		 * 封装
+		 * @param {Object} name
+		 * @param {Object} pass
+		 */
+		var student = function(name, pass){
+			//公用属性
+			this.name = name;
+			//私有属性
+			var pass = pass;
+			//私有方法(隐藏属性)
+			var perform = function(){
+				console.log('被隐藏的密码'+ pass);
+			}
+			//公开方法(调用私有方法)
+			this.operDoor = function(){
+				perform();
+			}
+		}
+		
+		
+		/**
+		 * 多态
+		 */
+		var Rect = function(){
+			this.draw = function(){
+				console.log('画矩形');
+			}
+		}
+		var Circle = function(){
+			this.draw = function(){
+				console.log('画圆形');
+			}
+		}
+		function shape(type){
+			type.draw();
+		}
+		//不同类中的同一个方法所呈现出的不同状态
+		shape(new Rect());
+		shape(new Circle());
+	</script>
+</html>

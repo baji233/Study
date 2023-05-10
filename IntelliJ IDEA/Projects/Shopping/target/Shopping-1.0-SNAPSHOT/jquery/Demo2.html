@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+  <script src="../JQuery-1.11.1/jquery-1.11.1.min.js"></script>
+  <script type="text/javascript">
+    $(function () {
+      $("#btn1").click(function () {
+        $("p").hide(500);
+        alert("隐藏完成");
+      });
+
+      $("#btn2").click(function () {
+        $("p").show(500);
+        alert("显示完成");
+      });
+
+      $("#btn3").click(function (){
+        $("p").fadeToggle(2000);
+      });
+    });
+
+
+  </script>
+    </head>
+
+<body>
+<input type="button" value="隐藏/显示" id="btn3"/>
+<button id="btn1">隐藏</button>
+<button id="btn2">显示</button>
+<p>1</p>
+<p>2</p>
+<p>3</p>
+<p>4</p>
+
+</body>
+</html>

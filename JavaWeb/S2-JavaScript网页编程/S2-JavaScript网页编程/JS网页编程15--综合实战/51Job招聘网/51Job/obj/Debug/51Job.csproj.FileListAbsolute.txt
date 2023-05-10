@@ -1,0 +1,132 @@
+d:\用户目录\我的文档\visual studio 2015\Projects\51Job\51Job\bin\ApplicationInsights.config
+d:\用户目录\我的文档\visual studio 2015\Projects\51Job\51Job\bin\roslyn\csc.exe
+d:\用户目录\我的文档\visual studio 2015\Projects\51Job\51Job\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+d:\用户目录\我的文档\visual studio 2015\Projects\51Job\51Job\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+d:\用户目录\我的文档\visual studio 2015\Projects\51Job\51Job\bin\roslyn\Microsoft.CodeAnalysis.dll
+d:\用户目录\我的文档\visual studio 2015\Projects\51Job\51Job\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+d:\用户目录\我的文档\visual studio 2015\Projects\51Job\51Job\bin\roslyn\Microsoft.CSharp.Core.targets
+d:\用户目录\我的文档\visual studio 2015\Projects\51Job\51Job\bin\roslyn\Microsoft.VisualBasic.Core.targets
+d:\用户目录\我的文档\visual studio 2015\Projects\51Job\51Job\bin\roslyn\System.Collections.Immutable.dll
+d:\用户目录\我的文档\visual studio 2015\Projects\51Job\51Job\bin\roslyn\System.Reflection.Metadata.dll
+d:\用户目录\我的文档\visual studio 2015\Projects\51Job\51Job\bin\roslyn\vbc.exe
+d:\用户目录\我的文档\visual studio 2015\Projects\51Job\51Job\bin\roslyn\VBCSCompiler.exe
+d:\用户目录\我的文档\visual studio 2015\Projects\51Job\51Job\bin\roslyn\VBCSCompiler.exe.config
+d:\用户目录\我的文档\visual studio 2015\Projects\51Job\51Job\bin\51Job.dll.config
+d:\用户目录\我的文档\visual studio 2015\Projects\51Job\51Job\bin\51Job.dll
+d:\用户目录\我的文档\visual studio 2015\Projects\51Job\51Job\bin\51Job.pdb
+d:\用户目录\我的文档\visual studio 2015\Projects\51Job\51Job\bin\Microsoft.AI.Agent.Intercept.dll
+d:\用户目录\我的文档\visual studio 2015\Projects\51Job\51Job\bin\Microsoft.AI.DependencyCollector.dll
+d:\用户目录\我的文档\visual studio 2015\Projects\51Job\51Job\bin\Microsoft.AI.PerfCounterCollector.dll
+d:\用户目录\我的文档\visual studio 2015\Projects\51Job\51Job\bin\Microsoft.AI.ServerTelemetryChannel.dll
+d:\用户目录\我的文档\visual studio 2015\Projects\51Job\51Job\bin\Microsoft.AI.Web.dll
+d:\用户目录\我的文档\visual studio 2015\Projects\51Job\51Job\bin\Microsoft.AI.WindowsServer.dll
+d:\用户目录\我的文档\visual studio 2015\Projects\51Job\51Job\bin\Microsoft.ApplicationInsights.dll
+d:\用户目录\我的文档\visual studio 2015\Projects\51Job\51Job\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+d:\用户目录\我的文档\visual studio 2015\Projects\51Job\51Job\bin\Microsoft.AI.DependencyCollector.xml
+d:\用户目录\我的文档\visual studio 2015\Projects\51Job\51Job\bin\Microsoft.AI.ServerTelemetryChannel.xml
+d:\用户目录\我的文档\visual studio 2015\Projects\51Job\51Job\bin\Microsoft.AI.Web.xml
+d:\用户目录\我的文档\visual studio 2015\Projects\51Job\51Job\bin\Microsoft.AI.WindowsServer.xml
+d:\用户目录\我的文档\visual studio 2015\Projects\51Job\51Job\bin\Microsoft.ApplicationInsights.xml
+d:\用户目录\我的文档\visual studio 2015\Projects\51Job\51Job\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+d:\用户目录\我的文档\visual studio 2015\Projects\51Job\51Job\obj\Debug\51Job.csprojResolveAssemblyReference.cache
+d:\用户目录\我的文档\visual studio 2015\Projects\51Job\51Job\obj\Debug\51Job.dll
+d:\用户目录\我的文档\visual studio 2015\Projects\51Job\51Job\obj\Debug\51Job.pdb
+D:\九云教育\DONET\S2阶段\S2-JavaScript网页编程\JS网页编程15--综合实战\51Job项目实战\51Job\bin\ApplicationInsights.config
+D:\九云教育\DONET\S2阶段\S2-JavaScript网页编程\JS网页编程15--综合实战\51Job项目实战\51Job\bin\roslyn\csc.exe
+D:\九云教育\DONET\S2阶段\S2-JavaScript网页编程\JS网页编程15--综合实战\51Job项目实战\51Job\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+D:\九云教育\DONET\S2阶段\S2-JavaScript网页编程\JS网页编程15--综合实战\51Job项目实战\51Job\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+D:\九云教育\DONET\S2阶段\S2-JavaScript网页编程\JS网页编程15--综合实战\51Job项目实战\51Job\bin\roslyn\Microsoft.CodeAnalysis.dll
+D:\九云教育\DONET\S2阶段\S2-JavaScript网页编程\JS网页编程15--综合实战\51Job项目实战\51Job\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+D:\九云教育\DONET\S2阶段\S2-JavaScript网页编程\JS网页编程15--综合实战\51Job项目实战\51Job\bin\roslyn\Microsoft.CSharp.Core.targets
+D:\九云教育\DONET\S2阶段\S2-JavaScript网页编程\JS网页编程15--综合实战\51Job项目实战\51Job\bin\roslyn\Microsoft.VisualBasic.Core.targets
+D:\九云教育\DONET\S2阶段\S2-JavaScript网页编程\JS网页编程15--综合实战\51Job项目实战\51Job\bin\roslyn\System.Collections.Immutable.dll
+D:\九云教育\DONET\S2阶段\S2-JavaScript网页编程\JS网页编程15--综合实战\51Job项目实战\51Job\bin\roslyn\System.Reflection.Metadata.dll
+D:\九云教育\DONET\S2阶段\S2-JavaScript网页编程\JS网页编程15--综合实战\51Job项目实战\51Job\bin\roslyn\vbc.exe
+D:\九云教育\DONET\S2阶段\S2-JavaScript网页编程\JS网页编程15--综合实战\51Job项目实战\51Job\bin\roslyn\VBCSCompiler.exe
+D:\九云教育\DONET\S2阶段\S2-JavaScript网页编程\JS网页编程15--综合实战\51Job项目实战\51Job\bin\roslyn\VBCSCompiler.exe.config
+D:\九云教育\DONET\S2阶段\S2-JavaScript网页编程\JS网页编程15--综合实战\51Job项目实战\51Job\bin\51Job.dll.config
+D:\九云教育\DONET\S2阶段\S2-JavaScript网页编程\JS网页编程15--综合实战\51Job项目实战\51Job\bin\51Job.dll
+D:\九云教育\DONET\S2阶段\S2-JavaScript网页编程\JS网页编程15--综合实战\51Job项目实战\51Job\bin\51Job.pdb
+D:\九云教育\DONET\S2阶段\S2-JavaScript网页编程\JS网页编程15--综合实战\51Job项目实战\51Job\bin\Microsoft.AI.Agent.Intercept.dll
+D:\九云教育\DONET\S2阶段\S2-JavaScript网页编程\JS网页编程15--综合实战\51Job项目实战\51Job\bin\Microsoft.AI.DependencyCollector.dll
+D:\九云教育\DONET\S2阶段\S2-JavaScript网页编程\JS网页编程15--综合实战\51Job项目实战\51Job\bin\Microsoft.AI.PerfCounterCollector.dll
+D:\九云教育\DONET\S2阶段\S2-JavaScript网页编程\JS网页编程15--综合实战\51Job项目实战\51Job\bin\Microsoft.AI.ServerTelemetryChannel.dll
+D:\九云教育\DONET\S2阶段\S2-JavaScript网页编程\JS网页编程15--综合实战\51Job项目实战\51Job\bin\Microsoft.AI.Web.dll
+D:\九云教育\DONET\S2阶段\S2-JavaScript网页编程\JS网页编程15--综合实战\51Job项目实战\51Job\bin\Microsoft.AI.WindowsServer.dll
+D:\九云教育\DONET\S2阶段\S2-JavaScript网页编程\JS网页编程15--综合实战\51Job项目实战\51Job\bin\Microsoft.ApplicationInsights.dll
+D:\九云教育\DONET\S2阶段\S2-JavaScript网页编程\JS网页编程15--综合实战\51Job项目实战\51Job\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+D:\九云教育\DONET\S2阶段\S2-JavaScript网页编程\JS网页编程15--综合实战\51Job项目实战\51Job\bin\Microsoft.AI.DependencyCollector.xml
+D:\九云教育\DONET\S2阶段\S2-JavaScript网页编程\JS网页编程15--综合实战\51Job项目实战\51Job\bin\Microsoft.AI.ServerTelemetryChannel.xml
+D:\九云教育\DONET\S2阶段\S2-JavaScript网页编程\JS网页编程15--综合实战\51Job项目实战\51Job\bin\Microsoft.AI.Web.xml
+D:\九云教育\DONET\S2阶段\S2-JavaScript网页编程\JS网页编程15--综合实战\51Job项目实战\51Job\bin\Microsoft.AI.WindowsServer.xml
+D:\九云教育\DONET\S2阶段\S2-JavaScript网页编程\JS网页编程15--综合实战\51Job项目实战\51Job\bin\Microsoft.ApplicationInsights.xml
+D:\九云教育\DONET\S2阶段\S2-JavaScript网页编程\JS网页编程15--综合实战\51Job项目实战\51Job\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+D:\九云教育\DONET\S2阶段\S2-JavaScript网页编程\JS网页编程15--综合实战\51Job项目实战\51Job\obj\Debug\51Job.csprojResolveAssemblyReference.cache
+D:\九云教育\DONET\S2阶段\S2-JavaScript网页编程\JS网页编程15--综合实战\51Job项目实战\51Job\obj\Debug\51Job.dll
+D:\九云教育\DONET\S2阶段\S2-JavaScript网页编程\JS网页编程15--综合实战\51Job项目实战\51Job\obj\Debug\51Job.pdb
+D:\九云教育\DONET\S2阶段\S2-JavaScript网页编程\JS网页编程15--综合实战\51Job项目\51Job\bin\ApplicationInsights.config
+D:\九云教育\DONET\S2阶段\S2-JavaScript网页编程\JS网页编程15--综合实战\51Job项目\51Job\bin\roslyn\csc.exe
+D:\九云教育\DONET\S2阶段\S2-JavaScript网页编程\JS网页编程15--综合实战\51Job项目\51Job\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+D:\九云教育\DONET\S2阶段\S2-JavaScript网页编程\JS网页编程15--综合实战\51Job项目\51Job\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+D:\九云教育\DONET\S2阶段\S2-JavaScript网页编程\JS网页编程15--综合实战\51Job项目\51Job\bin\roslyn\Microsoft.CodeAnalysis.dll
+D:\九云教育\DONET\S2阶段\S2-JavaScript网页编程\JS网页编程15--综合实战\51Job项目\51Job\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+D:\九云教育\DONET\S2阶段\S2-JavaScript网页编程\JS网页编程15--综合实战\51Job项目\51Job\bin\roslyn\Microsoft.CSharp.Core.targets
+D:\九云教育\DONET\S2阶段\S2-JavaScript网页编程\JS网页编程15--综合实战\51Job项目\51Job\bin\roslyn\Microsoft.VisualBasic.Core.targets
+D:\九云教育\DONET\S2阶段\S2-JavaScript网页编程\JS网页编程15--综合实战\51Job项目\51Job\bin\roslyn\System.Collections.Immutable.dll
+D:\九云教育\DONET\S2阶段\S2-JavaScript网页编程\JS网页编程15--综合实战\51Job项目\51Job\bin\roslyn\System.Reflection.Metadata.dll
+D:\九云教育\DONET\S2阶段\S2-JavaScript网页编程\JS网页编程15--综合实战\51Job项目\51Job\bin\roslyn\vbc.exe
+D:\九云教育\DONET\S2阶段\S2-JavaScript网页编程\JS网页编程15--综合实战\51Job项目\51Job\bin\roslyn\VBCSCompiler.exe
+D:\九云教育\DONET\S2阶段\S2-JavaScript网页编程\JS网页编程15--综合实战\51Job项目\51Job\bin\roslyn\VBCSCompiler.exe.config
+D:\九云教育\DONET\S2阶段\S2-JavaScript网页编程\JS网页编程15--综合实战\51Job项目\51Job\bin\51Job.dll.config
+D:\九云教育\DONET\S2阶段\S2-JavaScript网页编程\JS网页编程15--综合实战\51Job项目\51Job\bin\51Job.dll
+D:\九云教育\DONET\S2阶段\S2-JavaScript网页编程\JS网页编程15--综合实战\51Job项目\51Job\bin\51Job.pdb
+D:\九云教育\DONET\S2阶段\S2-JavaScript网页编程\JS网页编程15--综合实战\51Job项目\51Job\bin\Microsoft.AI.Agent.Intercept.dll
+D:\九云教育\DONET\S2阶段\S2-JavaScript网页编程\JS网页编程15--综合实战\51Job项目\51Job\bin\Microsoft.AI.DependencyCollector.dll
+D:\九云教育\DONET\S2阶段\S2-JavaScript网页编程\JS网页编程15--综合实战\51Job项目\51Job\bin\Microsoft.AI.PerfCounterCollector.dll
+D:\九云教育\DONET\S2阶段\S2-JavaScript网页编程\JS网页编程15--综合实战\51Job项目\51Job\bin\Microsoft.AI.ServerTelemetryChannel.dll
+D:\九云教育\DONET\S2阶段\S2-JavaScript网页编程\JS网页编程15--综合实战\51Job项目\51Job\bin\Microsoft.AI.Web.dll
+D:\九云教育\DONET\S2阶段\S2-JavaScript网页编程\JS网页编程15--综合实战\51Job项目\51Job\bin\Microsoft.AI.WindowsServer.dll
+D:\九云教育\DONET\S2阶段\S2-JavaScript网页编程\JS网页编程15--综合实战\51Job项目\51Job\bin\Microsoft.ApplicationInsights.dll
+D:\九云教育\DONET\S2阶段\S2-JavaScript网页编程\JS网页编程15--综合实战\51Job项目\51Job\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+D:\九云教育\DONET\S2阶段\S2-JavaScript网页编程\JS网页编程15--综合实战\51Job项目\51Job\bin\Microsoft.AI.DependencyCollector.xml
+D:\九云教育\DONET\S2阶段\S2-JavaScript网页编程\JS网页编程15--综合实战\51Job项目\51Job\bin\Microsoft.AI.ServerTelemetryChannel.xml
+D:\九云教育\DONET\S2阶段\S2-JavaScript网页编程\JS网页编程15--综合实战\51Job项目\51Job\bin\Microsoft.AI.Web.xml
+D:\九云教育\DONET\S2阶段\S2-JavaScript网页编程\JS网页编程15--综合实战\51Job项目\51Job\bin\Microsoft.AI.WindowsServer.xml
+D:\九云教育\DONET\S2阶段\S2-JavaScript网页编程\JS网页编程15--综合实战\51Job项目\51Job\bin\Microsoft.ApplicationInsights.xml
+D:\九云教育\DONET\S2阶段\S2-JavaScript网页编程\JS网页编程15--综合实战\51Job项目\51Job\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+D:\九云教育\DONET\S2阶段\S2-JavaScript网页编程\JS网页编程15--综合实战\51Job项目\51Job\obj\Debug\51Job.csprojResolveAssemblyReference.cache
+D:\九云教育\DONET\S2阶段\S2-JavaScript网页编程\JS网页编程15--综合实战\51Job项目\51Job\obj\Debug\51Job.dll
+D:\九云教育\DONET\S2阶段\S2-JavaScript网页编程\JS网页编程15--综合实战\51Job项目\51Job\obj\Debug\51Job.pdb
+G:\九云资料\S2-JavaScript网页编程\JS网页编程15--综合实战\51Job招聘网\51Job\bin\ApplicationInsights.config
+G:\九云资料\S2-JavaScript网页编程\JS网页编程15--综合实战\51Job招聘网\51Job\bin\roslyn\csc.exe
+G:\九云资料\S2-JavaScript网页编程\JS网页编程15--综合实战\51Job招聘网\51Job\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+G:\九云资料\S2-JavaScript网页编程\JS网页编程15--综合实战\51Job招聘网\51Job\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+G:\九云资料\S2-JavaScript网页编程\JS网页编程15--综合实战\51Job招聘网\51Job\bin\roslyn\Microsoft.CodeAnalysis.dll
+G:\九云资料\S2-JavaScript网页编程\JS网页编程15--综合实战\51Job招聘网\51Job\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+G:\九云资料\S2-JavaScript网页编程\JS网页编程15--综合实战\51Job招聘网\51Job\bin\roslyn\Microsoft.CSharp.Core.targets
+G:\九云资料\S2-JavaScript网页编程\JS网页编程15--综合实战\51Job招聘网\51Job\bin\roslyn\Microsoft.VisualBasic.Core.targets
+G:\九云资料\S2-JavaScript网页编程\JS网页编程15--综合实战\51Job招聘网\51Job\bin\roslyn\System.Collections.Immutable.dll
+G:\九云资料\S2-JavaScript网页编程\JS网页编程15--综合实战\51Job招聘网\51Job\bin\roslyn\System.Reflection.Metadata.dll
+G:\九云资料\S2-JavaScript网页编程\JS网页编程15--综合实战\51Job招聘网\51Job\bin\roslyn\vbc.exe
+G:\九云资料\S2-JavaScript网页编程\JS网页编程15--综合实战\51Job招聘网\51Job\bin\roslyn\VBCSCompiler.exe
+G:\九云资料\S2-JavaScript网页编程\JS网页编程15--综合实战\51Job招聘网\51Job\bin\roslyn\VBCSCompiler.exe.config
+G:\九云资料\S2-JavaScript网页编程\JS网页编程15--综合实战\51Job招聘网\51Job\bin\51Job.dll.config
+G:\九云资料\S2-JavaScript网页编程\JS网页编程15--综合实战\51Job招聘网\51Job\bin\51Job.dll
+G:\九云资料\S2-JavaScript网页编程\JS网页编程15--综合实战\51Job招聘网\51Job\bin\51Job.pdb
+G:\九云资料\S2-JavaScript网页编程\JS网页编程15--综合实战\51Job招聘网\51Job\bin\Microsoft.AI.Agent.Intercept.dll
+G:\九云资料\S2-JavaScript网页编程\JS网页编程15--综合实战\51Job招聘网\51Job\bin\Microsoft.AI.DependencyCollector.dll
+G:\九云资料\S2-JavaScript网页编程\JS网页编程15--综合实战\51Job招聘网\51Job\bin\Microsoft.AI.PerfCounterCollector.dll
+G:\九云资料\S2-JavaScript网页编程\JS网页编程15--综合实战\51Job招聘网\51Job\bin\Microsoft.AI.ServerTelemetryChannel.dll
+G:\九云资料\S2-JavaScript网页编程\JS网页编程15--综合实战\51Job招聘网\51Job\bin\Microsoft.AI.Web.dll
+G:\九云资料\S2-JavaScript网页编程\JS网页编程15--综合实战\51Job招聘网\51Job\bin\Microsoft.AI.WindowsServer.dll
+G:\九云资料\S2-JavaScript网页编程\JS网页编程15--综合实战\51Job招聘网\51Job\bin\Microsoft.ApplicationInsights.dll
+G:\九云资料\S2-JavaScript网页编程\JS网页编程15--综合实战\51Job招聘网\51Job\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+G:\九云资料\S2-JavaScript网页编程\JS网页编程15--综合实战\51Job招聘网\51Job\bin\Microsoft.AI.DependencyCollector.xml
+G:\九云资料\S2-JavaScript网页编程\JS网页编程15--综合实战\51Job招聘网\51Job\bin\Microsoft.AI.ServerTelemetryChannel.xml
+G:\九云资料\S2-JavaScript网页编程\JS网页编程15--综合实战\51Job招聘网\51Job\bin\Microsoft.AI.Web.xml
+G:\九云资料\S2-JavaScript网页编程\JS网页编程15--综合实战\51Job招聘网\51Job\bin\Microsoft.AI.WindowsServer.xml
+G:\九云资料\S2-JavaScript网页编程\JS网页编程15--综合实战\51Job招聘网\51Job\bin\Microsoft.ApplicationInsights.xml
+G:\九云资料\S2-JavaScript网页编程\JS网页编程15--综合实战\51Job招聘网\51Job\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+G:\九云资料\S2-JavaScript网页编程\JS网页编程15--综合实战\51Job招聘网\51Job\obj\Debug\51Job.csprojResolveAssemblyReference.cache
+G:\九云资料\S2-JavaScript网页编程\JS网页编程15--综合实战\51Job招聘网\51Job\obj\Debug\51Job.dll
+G:\九云资料\S2-JavaScript网页编程\JS网页编程15--综合实战\51Job招聘网\51Job\obj\Debug\51Job.pdb

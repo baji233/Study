@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<!--<link href="../js/bootstrap-3.4.1-dist/css/bootstrap.min.css">-->
+<!--<script src="../js/jquery-1.11.1.min.js"></script>-->
+<!--<script src="../js/bootstrap-3.4.1-dist/js/bootstrap.min.js"></script>-->
+<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+<script type="text/javascript">
+    $(function () {
+        $(document.registerForm.userName).blur(function () {
+            console.log("in blur...");
+            var param = {};
+            param.userName = $(document.registerForm.userName).val();
+            $.ajax({
+                url: "../index/checkUserName",
+                type: "post",
+                data: param,
+                dataType: "text",
+                success: function (res) {
+                    console.log(res + "," + typeof res);
+                    if(res == "false ") {
+                        $("#userNameMsg").text("该用户名已被使用，请重新填写！");
+                    } else {
+                        $("#userNameMsg").text("");
+                    }
+                }
+            });
+        });
+    });
+</script>
+<body>
+        <h3>用户注册</h3>
+        <form role="form" name="registerForm">
+            <div class="form-group">
+                    <label for="userName">用户名:</label>
+                    <input type="text" class="form-control" id="userName" name="userName" placeholder="请输入用户名">
+                    <span id="userNameMsg"></span>
+            </div>
+            <div class="form-group">
+                <label for="password">密码:</label>
+                <input type="password" class="form-control" id="password" name="password" placeholder="请输入密码">
+            </div>
+            <button type="submit" class="btn btn-default">提交</button>
+        </form>
+
+</body>
+</html>

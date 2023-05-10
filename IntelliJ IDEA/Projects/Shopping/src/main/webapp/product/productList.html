@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>购物商城</title>
+</head>
+<script src="../bootstrap-3.4.1-dist/js/bootstrap.min.js"></script>
+<script src="../JQuery-1.11.1/jquery-1.11.1.min.js"></script>
+<script src="../bootstrap-3.4.1-dist/css/bootstrap.min.css"></script>
+
+
+<script type="text/javascript">
+    //product/productList.html
+     function search() {
+         let params = {};
+         params.productName=$(document.searchForm.productName);
+         params.description=$(document.searchForm.description);
+         params.productPrice=$(document.searchForm.productPrice);
+         params.typeId=$(document.searchForm.typeId);
+        //将多条件搜索的值作为参数传给servlet
+        params.description=$(document.searchForm.description).val();
+        $.ajax({
+            url : "../Product/search",
+            type : "get",
+            data : params,
+            dataType : "json",
+            success : function (responseTxt) {
+                console.log(responseTxt);
+                let byParamsList=responseTxt.byParamsList;//获取商品列表
+                console.log(byParamsList);
+                console.log(byParamsList.length);
+                let typeMap = responseTxt.typeMap;
+                console.log(typeMap);
+                //向商品展示表添加数据
+                let html = "";
+                for(let i=0;i<byParamsList.length;i++){
+                    html += "<tr>";
+                    html += "<td>"+byParamsList[i].product_id+"</td>";
+                    html += "<td>"+byParamsList[i].product_name+"</td>";
+                    html += "<td>"+getTypeName(byParamsList[i].type_id,typeMap)+"</td>";
+                    html += "<td>"+byParamsList[i].description+"</td>";
+                    html += "<td>"+byParamsList[i].price+"</td>";
+                    html += "<td>"+byParamsList[i].remark+"</td>";
+                    html += "<td>"+byParamsList[i].product_id+"<a>加入购物车</a></td>";
+                    html += "</tr>"
+                }
+                $("#tbl_product").html(html);
+                //制作商品类型选择框
+                let options="<option value=''></option>";
+                for (let id in typeMap) {
+                    options +="<option value='"+id+"'>"+typeMap[id]+"</option>";
+                }
+                $("#typeId").html(options);
+            },
+            error: function (responseTxt) {
+                console.log("请求失败"+responseTxt.toString());
+            }
+        });
+
+        //检查商品表中的类型id是否与商品类型表一致
+        function getTypeName(typeId,typeMap) {
+            for (let id in typeMap) {
+                console.log(id);
+                if(id == typeId){
+                    //返回正确的商品类型名称
+                    return typeMap[id];
+                }
+            }
+        }
+    }
+</script>
+<body>
+<center>
+    <h1>购物商城首页</h1>
+    <form action="<%=request.getContextPath()%>/Product/searchByParams" method="get" name="searchForm">
+        <table>
+            <tr>
+                <td>商品名称:</td>
+                <td><label>
+                    <input type="text" name="productName">
+                </label></td>
+                <td>商品类型:</td>
+                <td>
+                    <label for="typeId"></label><select id="typeId">
+                        <!--使用AJAX生成选择器-->
+                    </select>
+                </td>
+                <td>描述:</td>
+                <td><label>
+                    <input type="text" name="description">
+                </label></td>
+                <td>价格:</td>
+                <td><label>
+                    <input type="text" name="productPrice">
+                </label></td>
+                <td><input type="submit" value="搜索" onclick="search()"></td>
+            </tr>
+        </table>
+    </form>
+    <table border="1px">
+        <thead>
+        <tr>
+            <th>商品编号</th>
+            <th>商品名称</th>
+            <th>商品描述</th>
+            <th>商品图片</th>
+            <th>商品状态</th>
+            <th>操作商品</th>
+        </tr>
+        </thead>
+        <tbody id="tbl_product">
+        <!--AJAX-->
+        </tbody>
+    </table>
+    <a href="">去购物车</a>
+    <a href="">我的订单</a>
+    <a href="">修改密码</a>
+    <a href="">退出登录</a>
+</center>
+</body>
+</html>
