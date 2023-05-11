@@ -52,7 +52,7 @@
       <el-table-column
       label="操作" width="180px">
       <template slot-scope="scope">
-      <el-button @click="editDialong = true" size="mini" type="primary" icon="el-icon-edit"></el-button>
+      <el-button @click="showEditDialong( scope.row )" size="mini" type="primary" icon="el-icon-edit"></el-button>
       <el-button @click="deleteByUser( scope.row )" size="mini" type="danger" icon="el-icon-delete"></el-button>
       <el-button @click="showRoleDialong(scope.row)" size="mini" type="warning" icon="el-icon-setting"></el-button>
       </template>
@@ -118,6 +118,20 @@
     </span>
     </el-dialog>
 
+    <el-dialog
+    title="编辑用户"
+    :visible.sync="editDialong"
+    width="30%"
+    :before-close="handleClose">
+    <p>当前用户ID : {{ userInfo.id }}</p>
+    <p>邮箱: <el-input v-model="userInfo.email" autocomplete="off"></el-input></p>
+    <p>电话: <el-input v-model="userInfo.mobile" autocomplete="off"></el-input></p>
+    <span slot="footer" class="dialog-footer">
+      <el-button @click="editDialong = false">取 消</el-button>
+      <el-button @click="editUserInfo" type="primary">确 定</el-button>
+    </span>
+    </el-dialog>
+
   </div>
 </template>
 
@@ -148,10 +162,11 @@ data() {
   }
 },
 created() {
-  this.getUserList()  //获取用户信息
+  this.getUserList()  
 },
 methods: {
   async getUserList() {
+    //获取用户信息
     let ret = await this.http.get('users', { params: this.queryInfo })
     console.log('用户信息菜单', ret);
     this.userList = ret.data.users
@@ -198,11 +213,31 @@ methods: {
       this.getUserList(); //刷新表单
       return;
     }
+    this.$message.success( ret.meta.msg )
+  },
+  showEditDialong( u ) {
+    //显示编辑用户对话框
+    this.editDialong = true
+    console.log('编辑用户信息: ', u );
+    this.userInfo.id = u.id
   },
   async editUserInfo() {
     //编辑用户
+    console.log('用户id: ', this.userInfo.id);
+    let path = `users/${this.userInfo.id}`
+    let ret = await this.http.put( path, {email:this.userInfo.email, mobile:this.userInfo.email})
+    console.log('编辑用户结果: ', ret);
+    if( ret.meta.status == 200 ) {
+      this.$message.success( ret.meta.msg )
+      this.getUserList(); //刷新表单
+      this.userInfo.email = ''
+      this.userInfo.mobile = ''//手动清空输入框
+      return;
+    }
+    this.$message.success( ret.meta.msg )
+
   },
-  async deleteByUser( u ) {
+  async deleteByUser(u) {
     //删除用户
     let ok = await this.$confirm('此操作将永久删除该用户, 是否继续?', '提示', {
       confirmButtonText: '确定',
@@ -223,7 +258,8 @@ methods: {
       this.$message.success( ret.meta.msg )
       this.getUserList(); //刷新表单
       return;
-    } 
+    }
+    this.$message.success( ret.meta.msg ) 
   },
   async showRoleDialong( u ) {
     //显示分配角色对话框
@@ -244,7 +280,9 @@ methods: {
       this.getUserList(); //刷新表单
       return;
     } 
+    this.$message.success( ret.meta.msg )
   }
+
 }
 }
 </script>
