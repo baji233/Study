@@ -16,7 +16,7 @@
           </el-input>
         </el-col>
         <el-col :span="4">
-          <el-button type="primary">添加用户</el-button>
+          <el-button @click="addDialong = true" type="primary">添加用户</el-button>
         </el-col>
       </el-row>
       <!-- 表格显示用户信息 -->
@@ -51,9 +51,11 @@
       </el-table-column>      
       <el-table-column
       label="操作" width="180px">
-      <el-button size="mini" type="primary" icon="el-icon-edit"></el-button>
-      <el-button size="mini" type="danger" icon="el-icon-delete"></el-button>
-      <el-button size="mini" type="warning" icon="el-icon-setting"></el-button>
+      <template slot-scope="scope">
+      <el-button @click="editDialong = true" size="mini" type="primary" icon="el-icon-edit"></el-button>
+      <el-button @click="deleteByUser( scope.row )" size="mini" type="danger" icon="el-icon-delete"></el-button>
+      <el-button @click="showRoleDialong(scope.row)" size="mini" type="warning" icon="el-icon-setting"></el-button>
+      </template>
       </el-table-column>
     </el-table>
     <el-pagination
@@ -66,6 +68,55 @@
       :total=total>
     </el-pagination>
     </el-card>
+
+    <el-dialog
+    title="添加用户"
+    :visible.sync="addDialong"
+    width="30%"
+    :before-close="handleClose">
+      <el-form :model="addForm" ref="addFormRef" label-width="70px">
+        <el-form-item label="用户名" prop="username">
+          <el-input v-model="addForm.username"></el-input>
+        </el-form-item>
+        <el-form-item label="密码" prop="password">
+          <el-input v-model="addForm.password"></el-input>
+        </el-form-item>
+        <el-form-item label="邮箱" prop="email">
+          <el-input v-model="addForm.email"></el-input>
+        </el-form-item>
+        <el-form-item label="手机" prop="mobile">
+          <el-input v-model="addForm.mobile"></el-input>
+        </el-form-item>
+      </el-form>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="addDialong = false">取 消</el-button>
+        <el-button type="primary" @click="addUser">确 定</el-button>
+      </span>
+    </el-dialog>
+
+    <el-dialog
+    title="分配角色"
+    :visible.sync="roleDialong"
+    width="30%"
+    :before-close="handleClose">
+    <!-- 放个div -->
+    <div>
+      <p>当前用户: {{ userInfo.username }}</p>
+      <p>当前角色: {{ userInfo.role_name }}</p>
+      <p>角色列表: <el-select v-model="roleId" placeholder="请选择">
+    <el-option
+      v-for="item in roles"
+      :key="item.id"
+      :label="item.roleName"
+      :value="item.id">
+    </el-option>
+  </el-select></p>
+    </div>
+    <span slot="footer" class="dialog-footer">
+      <el-button @click="roleDialong = false">取 消</el-button>
+      <el-button @click="setUserRole" type="primary">确 定</el-button>
+    </span>
+    </el-dialog>
 
   </div>
 </template>
@@ -81,7 +132,19 @@ data() {
       pagenum: 1,
       pagesize: 5
     },
-    total: 0
+    total: 0,
+    addDialong: false,
+    editDialong: false,
+    roleDialong: false,
+    addForm: {
+      username: '',
+      password: '',
+      email: '',
+      mobile: ''
+    },
+    userInfo: [],
+    roles: [],
+    roleId : ''
   }
 },
 created() {
@@ -102,7 +165,7 @@ methods: {
   },
   handleCurrentChange( pagenum ) {
     //当前页面被改变
-    console.log('当前页码: ', pagenump );
+    console.log('当前页码: ', pagenum );
     this.queryInfo.pagenum = pagenum
     this.getUserList()
   },
@@ -117,6 +180,70 @@ methods: {
       return this.$message.error(ret.meta.msg)
     }
     this.$message.success(ret.meta.msg)
+  },
+  handleClose() {
+    //点击对话框右上角关闭时触发
+    this.addDialong = false
+    this.editDialong = false
+    this.roleDialong = false
+  },
+  async addUser() {
+    //新增用户
+    let ret = await this.http.post('users', this.addForm)
+    console.log( ret );
+    this.addDialong = false
+    if( ret.meta.status == 201 ) {
+      this.$refs.addFormRef.resetFields() //清空表单数据
+      this.$message.success( ret.meta.msg )
+      this.getUserList(); //刷新表单
+      return;
+    }
+  },
+  async editUserInfo() {
+    //编辑用户
+  },
+  async deleteByUser( u ) {
+    //删除用户
+    let ok = await this.$confirm('此操作将永久删除该用户, 是否继续?', '提示', {
+      confirmButtonText: '确定',
+      cancelButtonText: '取消',
+      type: 'warning'
+    }).catch( err => err )
+    console.log( ok );
+    if( ok != 'confirm' ) {
+      this.$message({
+      type: 'info',
+      message: '已取消删除'
+      });
+      return;
+    }
+    console.log( u.id );
+    let ret = await this.http.delete('users/'+u.id)
+    if( ret.meta.status == 200 ) {
+      this.$message.success( ret.meta.msg )
+      this.getUserList(); //刷新表单
+      return;
+    } 
+  },
+  async showRoleDialong( u ) {
+    //显示分配角色对话框
+    this.roleDialong = true
+    console.log('当前用户信息: ', u);
+    this.userInfo = u
+    let ret = await this.http.get('roles')
+    console.log('角色列表: ', ret);
+    this.roles = ret.data
+  },
+  async setUserRole() {
+    //分配用户的角色
+    let path = `users/${this.userInfo.id}/role`
+    let ret = await this.http.put(path, {rid:this.roleId})
+    console.log( '分配角色结果: ', ret );
+    if( ret.meta.status == 200 ) {
+      this.$message.success( ret.meta.msg )
+      this.getUserList(); //刷新表单
+      return;
+    } 
   }
 }
 }
