@@ -1,6 +1,6 @@
 <template>
   <div>
-    <!-- 面包蟹导航区域 -->
+    <!-- 面包屑导航区域 -->
     <el-breadcrumb separator-class="el-icon-arrow-right">
       <el-breadcrumb-item :to="{ path: '/home' }">首页</el-breadcrumb-item>
       <el-breadcrumb-item>权限列表</el-breadcrumb-item>
@@ -14,7 +14,7 @@
         </el-col>
       </el-row>
       <!-- 表格 -->
-      <el-table :data="rolelist">
+      <el-table :data="rolelist" border>
         <!-- 展开行 -->
         <el-table-column type="expand">
           <template slot-scope="scope">

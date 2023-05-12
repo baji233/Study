@@ -21,6 +21,7 @@
       </el-row>
       <!-- 表格显示用户信息 -->
       <el-table
+      border
       :data="userList"
       style="width: 100%">
       <el-table-column
