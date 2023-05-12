@@ -37,7 +37,6 @@ export default {
       let ret = await this.http.get('rights/list')
       console.log('权限列表: ', ret);
       this.rightList = ret.data
-      console.log('rightList: ', this.rightList);
     }
   },
   created() {
