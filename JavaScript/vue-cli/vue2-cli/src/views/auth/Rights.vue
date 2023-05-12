@@ -1,13 +1,15 @@
 <template>
-    <h1>权限列表</h1>
-  </template>
-  
-  <script>
-  export default {
-  
-  }
-  </script>
-  
-  <style>
-  
-  </style>
+  <div>
+    权限列表
+  </div>
+</template>
+
+<script>
+export default {
+
+}
+</script>
+
+<style>
+
+</style>
