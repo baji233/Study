@@ -28,7 +28,7 @@
 export default {
   data() {
     return {
-      rightList: [],
+      rightList: []
     }
   },
   methods: {
