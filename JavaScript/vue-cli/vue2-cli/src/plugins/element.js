@@ -3,7 +3,7 @@ import { Button, Tag, Form, FormItem, Input, Message,
 Container, Header, Aside, Main, Card, Row, Col, Switch,
 Menu, Submenu, MenuItem, Breadcrumb, BreadcrumbItem,
 Table, TableColumn, Pagination, Dialog, MessageBox,
-Select, Option
+Select, Option, Tree
 } from 'element-ui'
 
 // 导入elementUI组件
@@ -31,6 +31,7 @@ Vue.use(Pagination)
 Vue.use(Dialog)
 Vue.use(Select)
 Vue.use(Option)
+Vue.use(Tree)
 
 //将组件挂载到Vue原型上
 Vue.prototype.$message = Message
