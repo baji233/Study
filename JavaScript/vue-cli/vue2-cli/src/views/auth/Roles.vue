@@ -10,7 +10,7 @@
     <el-card>
       <el-row>
         <el-col>
-          <el-button type="primary">添加角色</el-button>
+          <el-button @click="addRoleDialog = true" type="primary">添加角色</el-button>
         </el-col>
       </el-row>
       <!-- 表格 -->
@@ -82,7 +82,18 @@
         <el-button @click="editRole" type="primary">确 定</el-button>
       </span>
       </el-dialog>
-
+      <el-dialog
+      title="添加角色"
+      :visible.sync="addRoleDialog"
+      width="30%"
+      :before-close="handleClose">
+      角色名称: <el-input v-model="roleName" placeholder="请输入内容"></el-input>
+      角色描述: <el-input v-model="roleDesc" placeholder="请输入内容"></el-input>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="handleClose">取 消</el-button>
+        <el-button @click="addRole" type="primary">确 定</el-button>
+      </span>
+      </el-dialog>
 
     </el-card>
   </div>
@@ -96,6 +107,7 @@ export default {
       rolelist: [],
       rightsDialong: false,
       editDialog: false,
+      addRoleDialog: false,
       rightList: [], //树的数据
       treetProps: {
         //树的参数对应的变量
@@ -164,6 +176,9 @@ export default {
     handleClose() {
       this.rightsDialong = false
       this.editDialog = false
+      this.addRoleDialog = false
+      this.roleName = '',
+      this.roleDesc = '',
       this.defKeys = []
     },
     //递归查找三级节点
@@ -220,6 +235,7 @@ export default {
       this.editDialog = true
       this.roleId = id
     },
+    //提交编辑角色
     async editRole() {
       let ret = await this.http.put('roles/'+ this.roleId, { roleName: this.roleName, roleDesc: this.roleDesc})
       if( ret.meta.status == 200 ) {
@@ -228,6 +244,17 @@ export default {
         return;
       }
       this.$message.error( ret.meta.msg ) 
+    },
+    //添加新的角色
+    async addRole() {
+      let ret = await this.http.post('roles', {roleName: this.roleName, roleDesc: this.roleDesc})
+      if( ret.meta.status == 201 ) {
+        this.$message.success( '添加角色成功!' )
+        this.getRoleList(); //刷新
+        return;
+      }
+      this.$message.error( ret.meta.msg ) 
+
     }
   }
 }
