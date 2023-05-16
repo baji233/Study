@@ -177,8 +177,8 @@ export default {
       this.rightsDialong = false
       this.editDialog = false
       this.addRoleDialog = false
-      this.roleName = '',
-      this.roleDesc = '',
+      this.roleName = ''
+      this.roleDesc = ''
       this.defKeys = []
     },
     //递归查找三级节点
@@ -209,7 +209,7 @@ export default {
     },
     //删除角色
     async deleteRole( id ) {
-      let ok = await this.$confirm('此操作将永久删除该用户, 是否继续?', '提示', {
+      let ok = await this.$confirm('此操作将永久删除该角色, 是否继续?', '提示', {
       confirmButtonText: '确定',
       cancelButtonText: '取消',
       type: 'warning'

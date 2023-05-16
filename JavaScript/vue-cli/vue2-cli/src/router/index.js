@@ -48,7 +48,7 @@ const routes = [
       { path: '/categories', component: GoodsSorting},
       { path: '/params', component: SortingParameter},
       { path: '/orders', component: OrderList},
-      { path: '/reports', component: DataReport}
+      { path: '/reports', component: DataReport},
     ]
   },
   {
