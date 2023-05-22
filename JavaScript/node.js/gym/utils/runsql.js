@@ -9,7 +9,7 @@ var mysql = require('mysql')
 var mydb = {
      host: 'localhost',
      user: 'root',
-     password: '888888888',
+     password: '88888888',
      database: 'cxy'
 }
 
@@ -17,7 +17,7 @@ var mydb = {
 function runsql(sql, callback, val = null) {
     var conn = mysql.createConnection(mydb)
     conn.connect()
-    if(vall == null) {
+    if(val == null) {
         conn.query(sql, callback)
     }else {
         conn.query(sql, callback, val)
@@ -26,5 +26,5 @@ function runsql(sql, callback, val = null) {
 }
 
 //导出
-module.export = runsql
+module.exports = runsql
 
