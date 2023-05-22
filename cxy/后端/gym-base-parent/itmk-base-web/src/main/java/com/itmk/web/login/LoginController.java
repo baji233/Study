@@ -63,6 +63,9 @@ public class LoginController {
         //把生成的验证码存到session里面
         HttpSession session = request.getSession();
         session.setAttribute("code", text);
+
+        System.out.println("============================================后台生成验证码后存入session: "+ session.getAttribute("code"));
+
         //生成图片,转换为base64
         BufferedImage bufferedImage = defaultKaptcha.createImage(text);
         ByteArrayOutputStream outputStream = null;
@@ -94,18 +97,22 @@ public class LoginController {
         if (StringUtils.isEmpty(parm.getUsername()) || StringUtils.isEmpty(parm.getPassword()) || StringUtils.isEmpty(parm.getUserType()) || StringUtils.isEmpty(parm.getCode())) {
                 return ResultUtils.error("用户名、密码、验证码或用户类型不能为空!");
             }
-            //获取sessoin
+            //获取session
             HttpSession session = request.getSession();
-            //获取验证码
+        //获取验证码
             String code = (String) session.getAttribute("code");
-            if (StringUtils.isEmpty(code)) {
-                return ResultUtils.error("验证码过期,请刷新验证码!");
-            }
-            //验证验证码
-            if (!code.equals(parm.getCode())) {
-                return ResultUtils.error("验证码错误!");
-            }
-//        String password = DigestUtils.md5DigestAsHex(parm.getPassword().getBytes());
+        System.out.println("============================================获取session中保存的验证码: "+ code);
+        System.out.println("============================================用户提交的表单: "+ parm.getUsername() + "," + parm.getUserType() + "," + parm.getPassword() + "," + parm.getCode());
+
+
+//        if (StringUtils.isEmpty(code)) {
+//                return ResultUtils.error("验证码过期,请刷新验证码!");
+//            }
+//            //验证验证码
+//            if (!code.equals(parm.getCode())) {
+//                return ResultUtils.error("验证码错误!");
+//            }
+
             String password = passwordEncoder.encode(parm.getPassword());
             //构造spring security需要的token
             UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(parm.getUsername() + ":" + parm.getUserType(), parm.getPassword());
@@ -135,6 +142,7 @@ public class LoginController {
                 map.put("username", user.getUsername());
                 map.put("userType", parm.getUserType());
                 String token = jwtUtils.generateToken(map);
+                System.out.println("======================================================================================Token: "+ token);
                 //返回登录成功信息
                 LoginResult result = new LoginResult();
                 result.setToken(token);

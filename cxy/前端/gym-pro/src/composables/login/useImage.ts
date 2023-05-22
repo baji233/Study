@@ -7,6 +7,7 @@ export default function useImage(){
     const getImage = async()=>{
         let res = await getImageApi()
         if(res && res.code == 200){
+            console.log('验证码图片: ',res);
             imgSrc.value = res.data;
         }
     }

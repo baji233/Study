@@ -132,6 +132,7 @@ const onSubmit = () => {
       let res = await loginApi(loginModel);
       if (res && res.code == 200) {
         //存储userid和token
+        console.log('Token: ', res.data.token);
         store.setToken(res.data.token);
         store.setUserId(res.data.userId);
         store.setUserType(res.data.userType)

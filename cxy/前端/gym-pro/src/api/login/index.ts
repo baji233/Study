@@ -6,7 +6,7 @@ export const getImageApi = ()=>{
 }
 //登录
 export const loginApi = (parm:LoginParm)=>{
-    return http.post("/api/login/login",parm)
+    return http.post("/api/login/login",parm)    
 }
 //获取菜单数据
 export const getMenuListApi = (parm:InfoParm)=>{
