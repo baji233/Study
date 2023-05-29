@@ -84,6 +84,7 @@
 import { getTotalApi, getSuggestListApi,getHotCardstApi,getHotCourseApi,getHotGoodstApi } from "@/api/home";
 import { onMounted, reactive, nextTick, ref } from "vue";
 import useInstance from "@/hooks/useInstance";
+import { log } from "console";
 const { global } = useInstance();
 const myChart = ref<HTMLElement>();
 const myChart1 = ref<HTMLElement>();
@@ -114,6 +115,8 @@ const charts1 = async() => {
   });
   //获取数据
   const res = await getHotGoodstApi()
+  console.log('===热销商品=== ', res);
+  
   if(res && res.code == 200){
     console.log(res.data)
     option.xAxis.data = res.data.names
@@ -153,6 +156,7 @@ const charts2 = async() => {
   });
   //获取数据
   const res = await getHotCardstApi()
+  console.log('===热销会员卡=== ', res);
   if(res && res.code == 200){
     console.log(res)
     option.series[0].data = res.data;
@@ -195,6 +199,7 @@ const charts3 = async() => {
     ],
   });
   const res = await getHotCourseApi()
+  console.log('===热销课程=== ', res);
   if(res && res.code == 200){
     option.series[0].data = res.data;
   }
