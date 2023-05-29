@@ -1,0 +1,155 @@
+// cover some element-ui styles
+
+.el-breadcrumb__inner,
+.el-breadcrumb__inner a {
+  font-weight: 400 !important;
+}
+
+.el-upload {
+  input[type="file"] {
+    display: none !important;
+  }
+}
+
+.el-upload__input {
+  display: none;
+}
+
+
+$borderColor: #f1f1f1;
+.el-dialog {
+  transform: none;
+  left: 0;
+  position: relative;
+  margin: 0 auto;
+  width: 50vw;
+
+  &>:first-of-type {
+    background-color: #009788;
+    font-weight: bold;
+
+    * {
+      color: #fff;
+    }
+  }
+
+  .el-form {
+    padding-right: 20px;
+
+    &>:last-of-type {
+      text-align: right;
+      border-top: 2px solid $borderColor;
+      transform: translate(0, 20px);
+      padding: 10px 0;
+      margin-bottom: 0;
+    }
+  }
+}
+
+// refine element ui upload
+.upload-container {
+  .el-upload {
+    width: 100%;
+
+    .el-upload-dragger {
+      width: 100%;
+      height: 200px;
+    }
+  }
+}
+
+// dropdown
+.el-dropdown-menu {
+  a {
+    display: block
+  }
+}
+
+// to fix el-date-picker css style
+.el-range-separator {
+  box-sizing: content-box;
+}
+
+.member-manage {
+  margin-top: -10vh;
+
+  .el-dialog {
+    width: 50vw;
+    text-align: left;
+
+    .el-form {
+      display: flex;
+      flex-wrap: wrap;
+      padding-right: 0;
+      column-gap: 20px;
+
+      label {
+        padding: 0 0 5px;
+      }
+
+      .el-input {
+        width: 100%;
+      }
+      
+      &>div {
+        width: 45%;
+        margin-bottom: 0;
+      }
+
+      &>div:last-of-type {
+        margin-top: 10px;
+        width: 100%;
+      }
+    }
+  }
+}
+
+.do-card {
+  display: inline-block;
+  
+  .el-dialog {
+    width: 50%;
+    text-align: left;
+
+    &>div:last-of-type {
+      padding: 20px;
+
+      .el-col:nth-of-type(2) {
+        padding: 10px 0;
+        border-top: 2px solid $borderColor;
+        border-bottom: 2px solid $borderColor;
+        margin: 10px 0;
+        height: 200px;
+        
+        .el-select {
+          width: 100%;
+        }
+      }
+
+      .el-col:last-of-type {
+        text-align: right;
+      }
+    }
+  }
+}
+
+.el-dialog  {
+
+  .recharge {
+    .el-col:nth-of-type(2) {
+      padding: 10px 0;
+      margin: 5px 0;
+      height: 80px;
+      border-top: 1px solid $borderColor;
+      border-bottom: 1px solid $borderColor;
+    }
+
+    .el-col:last-of-type {
+      text-align: right;
+    }
+  }
+}
+
+.el-scrollbar {
+  height: 200px;
+}
