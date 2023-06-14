@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+			* {
+                /* 清除默认样式 */
+                margin: 0;
+                padding: 0;
+            }
+            body {
+                height: 4000px;
+                background-color: green;
+            }
+            .page-header {
+                height: 100px;
+                background-color: orange;
+                text-align: center;
+                line-height: 100px;
+                font-size: 90px;
+            }
+            .content {
+                height: 200px;
+                overflow: auto;
+            }
+            .item {
+                background-color: gray;
+            }
+            .first {
+                background-color: aqua;
+                font-size: 80px;
+                /* 开启粘性定位 */
+                position: sticky;
+                /* top的参考点是: 离他最近的拥有滚动行为的祖先元素(body), 当开启粘性定位的元素的父容器(item)也被滚走后,粘性定位将失效 */
+                top: 0px;
+            }
+		</style>
+	</head>
+	<body>
+        <!-- 头部 -->
+		<div class="page-header">头部</div>
+        <!-- 内容 -->
+        <div class="content">
+            <!-- 项目 -->
+            <div class="item">
+                <div class="first">A</div>
+                <h1>A1</h1>
+                <h1>A2</h1>
+                <h1>A3</h1>
+                <h1>A4</h1>
+                <h1>A5</h1>
+                <h1>A6</h1>
+                <h1>A7</h1>
+                <h1>A8</h1>
+            </div>
+            <div class="item">
+                <div class="first">B</div>
+                <h1>B1</h1>
+                <h1>B2</h1>
+                <h1>B3</h1>
+                <h1>B4</h1>
+                <h1>B5</h1>
+                <h1>B6</h1>
+                <h1>B7</h1>
+                <h1>B8</h1>
+            </div>
+            <div class="item">
+                <div class="first">C</div>
+                <h1>C1</h1>
+                <h1>C2</h1>
+                <h1>C3</h1>
+                <h1>C4</h1>
+                <h1>C5</h1>
+                <h1>C6</h1>
+                <h1>C7</h1>
+                <h1>C8</h1>
+            </div>
+            <div class="item">
+                <div class="first">D</div>
+                <h1>D1</h1>
+                <h1>D2</h1>
+                <h1>D3</h1>
+                <h1>D4</h1>
+                <h1>D5</h1>
+                <h1>D6</h1>
+                <h1>D7</h1>
+                <h1>D8</h1>
+            </div>
+            <div class="item">
+                <div class="first">E</div>
+                <h1>E1</h1>
+                <h1>E2</h1>
+                <h1>E3</h1>
+                <h1>E4</h1>
+                <h1>E5</h1>
+                <h1>E6</h1>
+                <h1>E7</h1>
+                <h1>E8</h1>
+            </div>
+            <div class="item">
+                <div class="first">F</div>
+                <h1>F1</h1>
+                <h1>F2</h1>
+                <h1>F3</h1>
+                <h1>F4</h1>
+                <h1>F5</h1>
+                <h1>F6</h1>
+                <h1>F7</h1>
+                <h1>F8</h1>
+            </div>
+        </div>
+
+	</body>
+</html>

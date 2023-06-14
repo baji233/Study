@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+			/* 选中div的子代中排除类名为fail的标签 */
+			div>p:not(.fail) {
+				color: aqua;
+			}
+			
+			/* 选中被选中状态的复选框 */
+			input:checked {
+				width: 100px;
+				height: 100px;
+			}
+			
+			/* 选中禁用状态下的输入框 */
+			input:disabled {
+				background-color: red;
+			}
+			
+			/* 目标伪类 */
+			div:target {
+				background-color: green;
+				width: 100px;
+				height: 100px;
+			}
+			
+			/* 语言伪类 */
+			div:lang(en) {
+				background-color: gold;
+			}
+			
+		</style>
+	</head>
+	<body>
+		<div>英语</div>
+		<div lang="en">English</div>
+		
+		
+		<a href="#one">to-1</a></br>
+		<a href="#two">to-2</a></br>
+		<a href="#three">to-3</a></br>
+		<div id="one">1</div></br>
+		<div id="two">2</div></br>
+		<div id="three">3</div></br>
+		
+		
+		<div>
+			<input type="checkbox">
+			<input disabled>
+			
+			<marquee>
+				<span>3</span>
+				<span>5</span>
+			</marquee>
+			<p>4</p>
+			<p>2</p>
+			<p class="fail">6</p>
+			<p>1</p>
+		</div>
+	</body>
+</html>

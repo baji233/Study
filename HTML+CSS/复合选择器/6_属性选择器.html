@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+			[title] {
+				/* 选中具有title属性的标签 */
+			}
+			
+			[title = "div01"] {
+				/* 选中具有title属性且值为div01的标签 */
+			}
+			
+			/* 正则表达式 */
+			[title ^= "div"] {
+				/* 选中具有title属性且值的开头为div01的标签 */
+			}
+			[title $= "01"] {
+				/* 选中具有title属性且值的结尾为01的标签 */
+			}
+			[title *= "d"] {
+				/* 选中具有title属性且值包含d的标签 */
+			}
+			
+		</style>
+	</head>
+	<body>
+		<div title="div01">div</div>
+	</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <style>
+        .outer {
+            width: 400px;
+            height: 400px;
+            background-color: gray;
+
+            /* 解决: 隐藏溢出的内容 */
+            overflow: hidden;
+        }
+
+        .inner1 {
+            width: 100px;
+            height: 100px;
+            background-color: orange;
+
+            /* 会被父容器抢走 */
+            margin-top: 50px;
+
+            margin-bottom: 40px;
+
+            /* 隐藏元素:*/
+            display: none;
+            visibility: hidden;
+        }
+
+        .inner2 {
+            width: 100px;
+            height: 100px;
+            background-color: blue;
+
+            /* 会被父容器抢走 */
+            margin-bottom: 50px;
+
+            /* 上下之间存在: margin合并, 取最大值, 左右之间不会合并*/
+            margin-top: 60px;
+        }
+
+        .d1 {
+            width: 400px;
+            height: 200px;
+            background-color: aquamarine;
+
+            /* 处理内容溢出, hidden */
+            overflow: scroll;
+        }
+        .d2 {
+            widows: 1000px;
+            background-color: blanchedalmond;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="outer">
+        <div class="inner1"></div>
+        <div class="inner2"></div>
+    </div>
+
+    <div class="d1">Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem optio doloremque quibusdam sequi
+        soluta quisquam assumenda dignissimos, voluptatibus nostrum ipsum rerum quae dicta asperiores eligendi suscipit
+        <div class="d2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab tempore, quos cupiditate voluptatem eum reprehenderit ea sint reiciendis architecto numquam deleniti dolor optio aliquid nisi enim officiis aperiam incidunt cum hic molestiae ullam doloribus. Explicabo voluptate officiis libero rerum minus voluptates voluptas placeat ratione obcaecati sed. Atque vel pariatur nemo!</div>
+        natus, expedita veritatis at dolorem laboriosam aliquam excepturi. Quae quia ex quasi dolores? Dolorem nam
+        dolore eum, vitae quisquam repellendus minus totam ab nihil accusantium aliquid corrupti adipisci atque nobis
+        fuga. Blanditiis, ipsam! Id debitis nulla optio delectus mollitia odio perferendis illo sit voluptas laboriosam,
+        repellendus, ea facere? Pariatur in id deserunt earum iure hic eveniet tenetur tempore sit mollitia modi, totam
+        suscipit repellendus, aliquam autem provident cupiditate. Ipsa assumenda repellat error optio et.</div>
+</body>
+
+</html>

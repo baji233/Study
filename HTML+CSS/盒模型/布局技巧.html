@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+			.outer1 {
+                width: 400px;
+                height: 400px;
+                background-color: gray;
+                overflow: auto;
+            }
+            .inner1 {
+                width: 200px;
+                height: 100px;
+                background-color: orange;
+                /* div居中 */
+                margin: 0 auto;
+                margin-top: 150px;
+                /* 文字居中 */
+                text-align: center;
+                line-height: 100px;
+            }
+
+            .outer2 {
+                width: 400px;
+                height: 400px;
+                background-color: rgb(114, 96, 96);
+                /* 块级元素内的span元素可看成文字处理 */
+                text-align: center;
+                line-height: 400px;
+            }
+            .inner2 {
+                background-color: orange;
+            }
+
+            .outer3 {
+                width: 400px;
+                height: 400px;
+                background-color: greenyellow;
+                text-align: center;
+                line-height: 400px;
+            }
+            .inner3 {
+                background-color: orange;
+                vertical-align: middle;
+                font-size: 40px;
+            }
+            img {
+                width: 100px;
+                height: 100px;
+                /* 指定行内元素的垂直对齐方式 */
+                vertical-align: middle;
+            }
+
+            .outer4 {
+                width: 600px;
+                background-color: rgb(65, 150, 145);
+            }
+            .img2 {
+                height: 200px;
+                vertical-align: bottom;
+            }
+		</style>
+	</head>
+	<body>
+		<div class="outer1">
+            <div class="inner1">inner</div>
+        </div>
+
+        <div class="outer2">
+            <span class="inner2">出来玩?</span>
+        </div>
+
+        <div class="outer3">
+            <span class="inner3">处理完呀</span>
+            <img src="./悟空.webp">
+        </div>
+
+        <div class="outer4">
+            <img class="img2" src="./悟空.webp">xgiL
+        </div>
+	</body>
+</html>

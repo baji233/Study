@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+			.outer {
+                height: 400px;
+                background-color: gray;
+                position: relative;
+            }
+            /* 使里面的div(包括内边距和边框)撑满外层div */
+            .inner {
+                background-color: orange;
+                font-size: 20px;
+                padding: 20px;
+                border: 10px solid blueviolet;
+                position: absolute;
+
+                left: 0;
+                right: 0;
+                top: 0;
+                bottom: 0;
+
+                /* 子div参考父div水平垂直定位 */
+                /* margin: auto; */
+            }
+
+		</style>
+	</head>
+	<body>
+		<div class="outer">
+            <div class="inner">Hello World</div>
+        </div>
+	</body>
+</html>

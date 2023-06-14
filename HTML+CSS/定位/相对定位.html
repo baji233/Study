@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+			.outer {
+                width: 500px;
+                background-color: aquamarine;
+                border: 1px solid blueviolet;
+                padding: 20px;
+            }
+            .box {
+                width: 200px;
+                height: 200px;
+                font-size: 20px;
+            }
+            .box1 {
+                background-color: brown;
+            }
+            .box2 {
+                background-color: gold;
+                /* 开启相对定位 */
+                position: relative;
+                /* 相对于自己原来位置的左边: 与其包含块左边界之间的偏移50px, 并未脱离文档流, 可以超出父容器*/
+                left: 50px;
+                /* 应用场景: 微调元素的位置 */
+                top: -100px;
+            }            
+            .box3 {
+                background-color: rgba(41, 5, 83, 0.534);
+            }
+
+		</style>
+	</head>
+	<body>
+		<div class="outer">
+            <div class="box box1">1</div>
+            <div class="box box2">2</div>
+            <div class="box box3">3</div>
+
+        </div>
+	</body>
+</html>

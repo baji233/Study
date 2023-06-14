@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>伪类是元素特殊状态的一种描述</title>
+		<style>
+			/* 选中没有访问过的a标签 */
+			a:link {
+				color: red;
+			}
+			
+			/* 选中访问过的a标签 */	
+			a:visited {
+				color: darkmagenta;
+			}
+			
+			/* 选中鼠标悬浮状态的a标签 */
+			a:hover {
+				color: red;
+			}
+			
+			/* 选中激化状态的a标签 */
+			a:active {
+				color: indigo;
+			}
+			
+			/* 输入时的状态 */
+			input:focus {
+				color: chartreuse;
+				background-color: coral;
+			}
+		</style>
+	</head>
+	<body>
+		<a href="https://www.baidu.com">百度</a>
+		<a href="https://www.jd.com">京东</a>
+		<input type="text"/>
+	</body>
+</html>
