@@ -1,0 +1,9 @@
+/* 公共样式 */
+view {
+    border: 1px solid yellow;
+}
+
+
+
+
+

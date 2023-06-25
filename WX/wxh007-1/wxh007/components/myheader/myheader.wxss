@@ -1,0 +1,4 @@
+/* components/myheader/myheader.wxss */
+.mybox{
+    background-color: yellow;
+}

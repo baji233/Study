@@ -1,0 +1,15 @@
+
+<!-- <my-header info="特斯拉又降价">
+    <view>这是day4页面</view>
+</my-header> -->
+
+<!-- <tabs list="{{list}}">
+</tabs> -->
+
+<view style="height: 2000px;">
+  <button bindtap="ajaxtest01">Ajax</button>
+  <button bindtap="ajaxtest02" type="warn"> 新请求 </button>
+  <view wx:for="{{jokes}}" wx:key="*this">
+      {{item}}
+  </view>
+</view>

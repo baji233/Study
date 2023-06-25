@@ -1,0 +1,29 @@
+/* pages/orders/orders.wxss */
+
+.orders_item {
+  margin-bottom: 2rpx;
+  background-color: #fff;
+  line-height: 50rpx;
+  border-bottom: 2px solid rgb(128, 128, 128);
+  margin: 0 15rpx;
+}
+.orders_title {
+  text-align: left;
+  color: gray;
+}
+.orders_info {
+  float: right;
+}
+.price {
+  color: red;
+  font-size: 40rpx;
+}
+.date {
+  color: black;
+  font-weight: bold;
+  font-size: 25rpx;
+}
+.orders_item:hover .orders_title {
+  background-color: rgb(245, 255, 252);
+}
+

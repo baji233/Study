@@ -1,0 +1,4 @@
+/* pages/user/user.wxss */
+.user {
+  font-size: 40px;
+}

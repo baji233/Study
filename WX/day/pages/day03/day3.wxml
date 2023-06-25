@@ -1,0 +1,46 @@
+<!--轮播图-->
+<swiper indicator-dots autoplay circular interval="2000">
+    <swiper-item wx:for="{{background}}" wx:key="*this">
+        <image mode="widthFix" src="{{item}}"></image>
+    </swiper-item>
+</swiper>
+
+<!-- 跳转页面 -->
+<navigator url="/pages/logs/logs">日志</navigator>
+<navigator open-type="switchTab" url="/pages/day01/day1">第一天</navigator>
+<navigator open-type="redirect" url="/pages/day02/day2">第二天</navigator>
+
+<!-- 方法跳转 -->
+<button bindtap="jump01">跳首页</button>
+<button bindtap="jump02">跳日志</button>
+
+<!-- 按钮 -->
+<button loading="true" plain="" type="primary">啊</button>
+<button size="mini">的</button>
+<button disabled="true" type="warn">去</button>
+
+<button open-type="contact" type="primary">客服</button>
+<button open-type="share" type="warn">转发</button>
+<button open-type="getPhoneNumber" bindgetphonenumber="phone" type="default">手机号</button>
+<button open-type="getUserInfo" bindgetuserinfo="userInfo" type="warn">用户信息(过时)</button>
+<button bindtap="userInfo02" type="primary">用户信息</button>
+
+<!-- 图标组件 -->
+<icon size="50" wx:for="{{iconType}}" wx:key="*this" type="{{item}}"></icon>
+
+<!-- 单选框 -->
+<radio-group bindchange="radiochange">
+    <radio value="boy">男</radio>
+    <radio value="girl">女</radio>
+</radio-group>
+
+<!-- 复选框 -->
+<checkbox-group bindchange="checkchange">
+    <checkbox value="{{item.value}}" checked="{{item.checked}}" wx:for="{{items}}" wx:key="name">
+    {{item.name}}
+    </checkbox>
+</checkbox-group>
+<view>总价：{{price}}</view>
+
+<!-- 显示网页 -->
+<!-- <rich-text nodes="{{myhtml}}"></rich-text> -->

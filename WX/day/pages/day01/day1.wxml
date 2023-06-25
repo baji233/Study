@@ -1,0 +1,37 @@
+<!--pages/day01/day1.wxml-->
+<text class="mytxt" id="{{price}}">pages/day01/day1.wxml {{ info }} </text>
+<checkbox checked="{{do}}">是否同意?</checkbox>
+<view hidden="{{age < 18 ? true : false}}">能看见吗?</view>
+
+<!-- 循环
+修改指定变量和下标
+ wx:for-item="obj" wx:for-index="key" 
+ -->
+<view wx:for="{{list1}}" wx:key="*this">{{item}}</view>
+<view wx:for="{{list2}}"  wx:for-item="obj" wx:for-index="key"  wx:key="id">{{key}} - {{obj.name}}</view>
+
+<!-- 空标签 -->
+<block wx:for="{{list2}}"  wx:for-item="obj" wx:for-index="key"  wx:key="id">{{key}} - {{obj.name}}</block>
+
+<!-- 条件渲染: if, elif, else -->
+<view wx:if="{{age > 18}}">成年人</view>
+<view wx:elif="{{age < 18}}">小孩</view>
+<view wx:else>外星人</view>
+
+<!-- 隐藏标签: hidden -->
+<view hidden="{{age > 5}}">隐藏</view>
+
+<!-- 事件绑定: bindtap, bindinput, bindchange; 传参数: data-item="param"-->
+<button type="primary" bindtap="test1" data-name="龙龟" data-age="18">测试1</button>
+<view>目前price: {{price}}</view>
+<input  bindinput="test2" value="{{price}}"/>
+
+<!-- 计算器 -->
+<view>简易计算器</view>
+<input bindinput="txt1" />
+<input bindinput="txt2"/>
+<button bindtap="add" type="warn">求和</button>
+
+
+
+

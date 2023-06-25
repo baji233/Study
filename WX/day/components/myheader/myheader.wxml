@@ -1,0 +1,5 @@
+<!--components/myheader/myheader.wxml-->
+<view class="mybox">
+    我的组件: {{info}}
+    <slot></slot>
+</view>

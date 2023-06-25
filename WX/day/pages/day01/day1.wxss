@@ -1,0 +1,9 @@
+/* pages/day01/day1.wxss */
+.mytxt, view {
+    font-size: 20px;
+  }
+
+input {
+    border:  1px solid red;
+    font-size: 20px;
+}

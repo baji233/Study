@@ -1,0 +1,6 @@
+{
+    "usingComponents": {
+        "my-header": "/components/myheader/myheader",
+        "tabs": "/components/tabs/tabs"
+    }
+}

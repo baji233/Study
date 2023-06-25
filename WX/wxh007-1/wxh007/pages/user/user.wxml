@@ -1,0 +1,4 @@
+<!--pages/user/user.wxml-->
+<navigator url="/pages/order/order">我的订单</navigator>
+
+<navigator url="/pages/auth/auth">授权</navigator>

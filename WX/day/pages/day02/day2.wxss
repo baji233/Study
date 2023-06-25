@@ -1,0 +1,32 @@
+/* pages/day02/day2.wxss */
+@import "../../style/common.wxss";
+
+/* page {
+    display: flex;
+} */
+view {
+    background-color: rgb(147, 92, 235);
+}
+.bg {
+    background-color: rgb(255, 255, 255);
+}
+.c1 {
+    background-color: turquoise;
+}
+.c2 {
+    background-color: red;
+}
+.c3 {
+    background-color: rgb(14, 163, 81);
+}
+.container {
+    display: flex;
+    flex-direction: row;
+}
+.box {
+    width: 250rpx;
+    height: 250rpx;
+}
+image {
+    width: 750rpx;
+}

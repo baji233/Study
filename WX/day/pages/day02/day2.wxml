@@ -1,0 +1,14 @@
+<!--pages/day02/day2.wxml-->
+<view class="container">
+    <view class="box c1">一个盒子</view>
+    <view class="box c2" hover-class="bg">一个盒子</view>
+    <view class="box c3">一个盒子</view>
+</view>
+
+<!-- 长按标签可复制 -->
+<text user-select>textetxtetxetxtetxtetxetxetexttxetextexetxt</text>
+
+<!-- 图片 -->
+<image mode="widthFix" src="https://res.wx.qq.com/wxdoc/dist/assets/img/0.4cb08bb4.jpg"></image>
+
+

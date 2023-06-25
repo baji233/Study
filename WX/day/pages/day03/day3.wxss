@@ -1,0 +1,4 @@
+/* pages/day03/day3.wxss */
+swiper image {
+    width: 100%
+}
